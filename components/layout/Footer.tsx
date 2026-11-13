@@ -50,6 +50,7 @@ export function Footer() {
           <h2 className="text-sm font-semibold">Company</h2>
           <ul className="mt-3 space-y-2 text-sm text-background/80">
             <li><Link href="/about">About</Link></li>
+            <li><Link href="/medical-review-team">Medical review team</Link></li>
             <li><Link href="/contact">Contact</Link></li>
             <li><Link href="/editorial-policy">Editorial policy</Link></li>
             <li><Link href="/privacy-policy">Privacy policy</Link></li>

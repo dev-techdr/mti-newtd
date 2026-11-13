@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "tsx scripts/check-repetition.ts && tsx scripts/check-jsonld.ts && next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check:aeo": "tsx scripts/check-repetition.ts && tsx scripts/check-jsonld.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^6.0.2",
@@ -41,6 +42,7 @@
     "prettier": "^3.9.10",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

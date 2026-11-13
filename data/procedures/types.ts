@@ -2,12 +2,31 @@ import type { CostId } from "@/data/costs";
 
 export type Faq = { question: string; answer: string };
 
+export type PageKind = "condition" | "procedure" | "emergency";
+
+export type TranslatedFlags = { ar: boolean; fr: boolean; ru: boolean; bn: boolean };
+
+export type QuoteLine = { item: string; amount: string };
+
+export type PatientJourney = {
+  name: string;
+  country: string;
+  consentOnFile: boolean;
+  summary: string;
+};
+
 export type Procedure = {
   slug: string;
   costId: CostId;
   specialty: string;
   name: string;
   card: string;
+  kind?: PageKind;
+  translated?: TranslatedFlags;
+  alsoKnownAs?: string[];
+  sampleQuote?: { lines: QuoteLine[]; note: string };
+  dataBox?: { cases: string; medianQuote: string; medianStay: string; period: string };
+  journeys?: PatientJourney[];
   description: string;
   answer: string;
   hospitalStay: string;
@@ -43,26 +62,27 @@ export const sharedExcluded = [
 ];
 
 export function journeySteps(procedure: Procedure) {
+  const name = procedure.name;
   return [
     {
       name: "Share your reports",
-      text: `Send recent notes, imaging and a medicine list for ${procedure.name.toLowerCase()}. A case manager checks that the file is complete before a specialist sees it.`,
+      text: `Send recent notes, imaging and a medicine list for ${name} before a specialist sees the file.`,
     },
     {
       name: "Receive opinions and a quote",
-      text: "Within 48 hours you get a written plan and an itemised indicative estimate. You can ask for a second opinion before you book flights.",
+      text: `A written plan for ${name} is an itemised estimate you can question before you book flights.`,
     },
     {
       name: "Get the visa invitation letter",
-      text: "When you accept a plan, the partner hospital issues an invitation letter for your Indian medical visa application. Visa rules still have to be checked on the official portal.",
+      text: `The invitation letter for ${name} supports a medical-visa application. The official portal still decides the visa.`,
     },
     {
       name: "Arrive and be admitted",
-      text: `Airport pickup is arranged. Hospital stay for this plan is usually ${procedure.hospitalStay}. An interpreter joins you if you requested one.`,
+      text: `Airport pickup for ${name} is booked after you accept a plan. Time under care is usually ${procedure.hospitalStay}.`,
     },
     {
       name: "Recover and follow up online",
-      text: `Most travellers remain in India for ${procedure.totalStay}. After you fly home, scheduled video reviews continue with the treating team.`,
+      text: `Most accepted trips for ${name} keep people in India for ${procedure.totalStay}. Video reviews continue after the flight home.`,
     },
   ];
 }

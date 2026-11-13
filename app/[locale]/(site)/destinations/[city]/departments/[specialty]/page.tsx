@@ -34,6 +34,7 @@ export async function generateMetadata({
     path: citySpecialtyPath(city, specialty),
     title: title.length > 60 ? `${specialty.name} in ${city.searchName}` : title,
     description: `${specialty.name} guides for ${city.searchName}. ${specialty.description}`,
+    index: false,
   });
 }
 

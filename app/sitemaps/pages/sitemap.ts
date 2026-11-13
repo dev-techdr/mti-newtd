@@ -18,9 +18,16 @@ const paths = [
   "/terms",
   "/medical-disclaimer",
   "/editorial-policy",
+  "/medical-review-team",
 ];
 
-const items = paths.map((path) => ({ path, lastModified: site.updated }));
+const dates: Record<string, string> = {
+  "/about": "2026-11-13",
+  "/editorial-policy": "2026-11-13",
+  "/medical-review-team": "2026-11-13",
+};
+
+const items = paths.map((path) => ({ path, lastModified: dates[path] ?? site.updated }));
 
 export const lastModified = latestDate(items.map((item) => item.lastModified));
 

@@ -10,7 +10,7 @@ import { primaryProcedures } from "./orthopedic";
 import { otherProcedures } from "./eyes";
 import { transplantProcedures } from "./transplant";
 
-const updated = "2026-11-11";
+const updated = "2026-11-13";
 
 const published = [
   ...primaryProcedures,
@@ -529,6 +529,7 @@ for (const row of libraryRows) {
   const lower = label.toLowerCase();
   const child = specialty === "pediatric-surgery" ? " A parent or legal guardian must travel and consent." : "";
   const advisory = `${profile.note}${child}`;
+  const emergency = base === "cauda-equina-syndrome";
   if (extra.rel) relChecks.push({ from: base, to: extra.rel });
 
   libraryCostRecords.push({
@@ -552,31 +553,43 @@ for (const row of libraryRows) {
           ? ["cancer-treatment-in-india", "is-medical-treatment-in-india-safe"]
           : ["is-medical-treatment-in-india-safe", "flying-home-after-surgery"];
 
+  const caudaAnswer =
+    "Cauda equina syndrome is a surgical emergency. If you have new loss of bladder or bowel control or numbness in the groin, go to the nearest emergency department now — do not wait to travel. Rehabilitation for cauda equina syndrome is planned only after that local operation, and only once a surgeon says travel is safe.";
+
   libraryProcedures.push({
     slug: base,
     costId,
     specialty,
     name: label,
     card: label,
-    description: `${label} in India: a planning range of ${range} ${profile.unit}. ${advisory} The written quote follows your reports.`,
-    answer: `${label} in India is often planned around ${range} ${profile.unit}. Time in hospital is usually ${profile.stayH}, and time in India is usually ${profile.stayT}. ${advisory} ${fact} This is a planning range, not a locked quote.`,
+    kind: emergency ? "emergency" : band === "med" ? "condition" : "procedure",
+    alsoKnownAs: base === "lumbar-disc-herniation" ? ["slipped disc"] : undefined,
+    description: emergency
+      ? "Cauda equina syndrome is a surgical emergency. Go to the nearest emergency department for new bladder, bowel or groin symptoms. Do not wait to travel."
+      : `${label} in India: a planning range of ${range} ${profile.unit}. ${advisory} The written quote for ${label} follows your reports.`,
+    answer: emergency
+      ? caudaAnswer
+      : `${label} in India is a planning figure of ${range} ${profile.unit}. Care usually takes ${profile.stayH}, with ${profile.stayT} in India. A written quote for ${label} follows your reports and can advise against travel. The figure for ${label} is not an invoice.`,
     hospitalStay: profile.stayH,
     totalStay: profile.stayT,
     success: profile.success,
     recovery: profile.recovery,
     anaesthesia: profile.anaesthesia,
-    whatIs: `${fact} ${advisory} TechDr asks a partner team to say whether this is the right plan before any flight is booked.`,
+    whatIs: fact,
     whoNeeds: [
       `People whose reports already point to ${lower}, and who can send those reports before they travel`,
       band === "urgent"
-        ? "Only a patient a specialist has said is stable enough to move. Someone who is unsafe tonight needs the nearest hospital."
-        : "People fit enough for the stay this page describes, with a companion if the operation is major",
+        ? `Only a patient a specialist has said is stable enough to move for ${lower}. Someone who is unsafe tonight needs the nearest hospital.`
+        : `People fit enough for the stay described for ${lower}, with a companion if the operation is major`,
     ],
     types: [
-      { title: "The plan named in the quote", text: fact },
+      {
+        title: "The decision named for this person",
+        text: `For ${label}, the written plan should say whether the next step is treatment in India, care at home, or an emergency locally.`,
+      },
       {
         title: "A different next step",
-        text: "Medicines, a smaller procedure, a larger operation or no travel can all be the right answer. The team should say which, in writing.",
+        text: `Medicines, a smaller procedure, a larger operation or no travel can all be right for ${label}. The team should say which, in writing.`,
       },
     ],
     included: profile.included,
@@ -603,24 +616,27 @@ for (const row of libraryRows) {
       "English notes your doctor at home can follow",
       "A written quote after the reports, with separate lines for drugs, devices and extra days",
     ],
-    faqs: [
-      {
-        question: `How much does ${lower} cost in India?`,
-        answer: `A planning range is ${range} ${profile.unit}. ${advisory} The written quote follows your reports and can move with the stay, the device and any second procedure.`,
-      },
-      {
-        question: `Do I need to travel for ${lower}?`,
-        answer: `${fact} Send the reports before you buy flights. ${advisory}`,
-      },
-      {
-        question: `How long would I stay in India for ${lower}?`,
-        answer: `Plan on ${profile.stayH} in hospital and ${profile.stayT} in India for a typical accepted case. A complication or extra treatment changes that.`,
-      },
-      {
-        question: `Is the outcome of ${lower} guaranteed?`,
-        answer: "No. TechDr does not promise a result, a pregnancy, a cure or a date you will feel normal. The team can also advise that an operation is the wrong next step.",
-      },
-    ],
+    faqs: emergency
+      ? [
+          { question: "Is cauda equina syndrome an emergency?", answer: "Yes. New loss of bladder or bowel control, or numbness in the groin, needs the nearest emergency department the same day." },
+          { question: "Can I fly to India if bladder control has just changed?", answer: "No. A commercial flight is not treatment for cauda equina syndrome, and waiting for a visa can cost nerve function." },
+          { question: "What should I tell the emergency doctor?", answer: "Say when the bladder, bowel or groin symptoms started, list your medicines, and bring any MRI you already have." },
+          { question: "Can TechDr arrange emergency surgery in my own city tonight?", answer: "No. TechDr coordinates planned care in India. It does not dispatch a surgeon to your local emergency department." },
+          { question: "Will a hospital quote help tonight?", answer: "No. A quote, an invitation letter and a flight do not replace emergency decompression for cauda equina syndrome." },
+          { question: "When is rehabilitation discussed?", answer: "Physiotherapy and bladder or bowel care start with the team that did the emergency operation. A later stay in India is a separate plan." },
+          { question: "Can I travel for physiotherapy after the emergency operation?", answer: "Only after the operating surgeon says the spine and the bladder are safe to move. Ask for that in writing." },
+          { question: "Does saddle numbness always mean cauda equina syndrome?", answer: "It is a warning sign until a clinician has examined you. Do not decide from a webpage that you can wait." },
+        ]
+      : [
+          { question: `What does a written quote for ${lower} include?`, answer: `A quote for ${label} should name the consultation or operation, the days under care and any device. Anything unnamed is outside that quote.` },
+          { question: `Do flights sit inside the price for ${lower}?`, answer: `International flights and the visa fee are outside the quote for ${label}. Ask for them to be listed only if a line actually says so.` },
+          { question: `Do I need a medical visa before travel for ${lower}?`, answer: `Check the official e-Medical Visa page for ${label} before you pay for tickets. TechDr can request an invitation letter after you accept a written plan.` },
+          { question: `Should a companion travel for ${lower}?`, answer: `A companion should travel for ${label} if an anaesthetic, a ward stay or help with walking is likely. Ask when the plan is still unsigned.` },
+          { question: `How do I pay a hospital for ${lower}?`, answer: `Pay the hospital for ${label} by the method written on the quote, usually a card or a bank transfer you can document. Do not send cash through an informal broker.` },
+          { question: `Who follows me at home after ${lower}?`, answer: `The doctor at home follows ${label} after you land. The discharge summary is written so that doctor can read the operation, the medicines and the warning symptoms.` },
+          { question: `What if the specialist advises against travel for ${lower}?`, answer: `Then do not book flights for ${label}. A refusal is a result. TechDr will not replace it with a package.` },
+          { question: `Which reports matter most for ${lower}?`, answer: `Send the scans and the clinic notes that already mention ${label}, plus a medicine list. A new opinion without those files is a guess.` },
+        ],
     related: extra.rel ? [extra.rel] : [],
     articles,
     howPerformed: `${fact} The team explains the approach in the consent. TechDr does not publish a step-by-step operative script.`,

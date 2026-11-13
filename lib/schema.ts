@@ -16,6 +16,59 @@ export function crumbList(locale: string, items: Crumb[]) {
   };
 }
 
+export function guideGraph(input: {
+  url: string;
+  name: string;
+  updated: string;
+  kind: "condition" | "procedure" | "emergency" | "cost" | "country";
+  description: string;
+  faqs: { question: string; answer: string }[];
+  procedureType?: string;
+  howPerformed?: string;
+  followup?: string;
+  price?: { min: number; max: number };
+}) {
+  const page: Record<string, unknown> = {
+    "@type": "MedicalWebPage",
+    url: input.url,
+    name: input.name,
+    description: input.description,
+    lastReviewed: input.updated,
+  };
+  const graph: Record<string, unknown>[] = [page];
+  if (input.kind === "condition" || input.kind === "emergency") {
+    graph.push({ "@type": "MedicalCondition", name: input.name, url: input.url });
+  } else if (input.kind === "procedure" && input.howPerformed) {
+    graph.push({
+      "@type": "MedicalProcedure",
+      name: input.name,
+      url: input.url,
+      ...(input.procedureType ? { procedureType: `https://schema.org/${input.procedureType}` } : {}),
+      howPerformed: input.howPerformed,
+      ...(input.followup ? { followup: input.followup } : {}),
+      ...(input.price
+        ? {
+            offers: {
+              "@type": "Offer",
+              url: input.url,
+              priceCurrency: "USD",
+              availability: "https://schema.org/LimitedAvailability",
+              description: "Indicative planning range, not a binding quote.",
+              priceSpecification: {
+                "@type": "PriceSpecification",
+                priceCurrency: "USD",
+                minPrice: input.price.min,
+                maxPrice: input.price.max,
+              },
+            },
+          }
+        : {}),
+    });
+  }
+  if (input.faqs.length) graph.push(faqList(input.faqs));
+  return { "@context": "https://schema.org", "@graph": graph };
+}
+
 export function faqList(faqs: { question: string; answer: string }[]) {
   return {
     "@type": "FAQPage",

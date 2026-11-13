@@ -11,7 +11,6 @@ import { getCost, moneyRange } from "@/data/costs";
 import { procedurePath, type Procedure } from "@/data/procedures";
 import { getSpecialty } from "@/data/specialties";
 import {
-  cityPlace,
   cityTreatmentAnswer,
   cityTreatmentDescription,
   cityTreatmentFaqs,
@@ -35,7 +34,8 @@ export function CityTreatment({
   const specialty = getSpecialty(procedure.specialty);
   const path = cityTreatmentPath(city, procedure);
   const url = absoluteUrl(locale, path);
-  const faqs = cityTreatmentFaqs(city, procedure);
+  const emergency = procedure.kind === "emergency";
+  const faqs = emergency ? [] : cityTreatmentFaqs(city, procedure);
   const description = cityTreatmentDescription(city, procedure);
   const otherCities = treatmentCities().filter((item) => item.path !== city.path);
   const quoteHref = `/get-a-free-quote?procedure=${procedure.slug}&city=${encodeURIComponent(city.searchName)}`;
@@ -49,37 +49,37 @@ export function CityTreatment({
         name: `${procedure.name} in ${city.searchName}`,
         description,
         lastReviewed: procedure.updated,
-        speakable: { "@type": "SpeakableSpecification", cssSelector: ["#quick-answer", "h1"] },
         spatialCoverage: {
           "@type": "City",
           name: city.searchName,
           alternateName: city.name,
           containedInPlace: { "@type": "Country", name: "India" },
         },
-        reviewedBy: { "@type": "Organization", name: "TechDr Medical Panel", url: `${site.url}/editorial-policy` },
       },
-      {
-        "@type": "MedicalProcedure",
-        name: `${procedure.name} in ${city.searchName}`,
-        procedureType: `https://schema.org/${procedure.procedureType}`,
-        howPerformed: procedure.howPerformed,
-        followup: procedure.followup,
-        offers: {
-          "@type": "Offer",
-          url,
-          priceCurrency: "USD",
-          availability: "https://schema.org/LimitedAvailability",
-          areaServed: { "@type": "City", name: city.searchName },
-          description: "Indicative starting estimate for a typical case, not a binding quote.",
-          priceSpecification: {
-            "@type": "PriceSpecification",
-            priceCurrency: "USD",
-            minPrice: cost.india[0],
-            maxPrice: cost.india[1],
+      emergency
+        ? { "@type": "MedicalCondition", name: `${procedure.name} in ${city.searchName}` }
+        : {
+            "@type": "MedicalProcedure",
+            name: `${procedure.name} in ${city.searchName}`,
+            procedureType: `https://schema.org/${procedure.procedureType}`,
+            howPerformed: procedure.howPerformed,
+            followup: procedure.followup,
+            offers: {
+              "@type": "Offer",
+              url,
+              priceCurrency: "USD",
+              availability: "https://schema.org/LimitedAvailability",
+              areaServed: { "@type": "City", name: city.searchName },
+              description: "Indicative starting estimate for a typical case, not a binding quote.",
+              priceSpecification: {
+                "@type": "PriceSpecification",
+                priceCurrency: "USD",
+                minPrice: cost.india[0],
+                maxPrice: cost.india[1],
+              },
+            },
           },
-        },
-      },
-      faqList(faqs),
+      ...(faqs.length ? [faqList(faqs)] : []),
     ],
   };
 
@@ -103,14 +103,21 @@ export function CityTreatment({
             </div>
           </div>
           <h1 className="mt-2 max-w-3xl">{procedure.name} in {city.searchName}</h1>
-          <div className="mt-5 max-w-md">
-            <CostMark size="panel" value={moneyRange(cost.india)} unit={cost.unit} label={`Indicative cost in ${city.searchName}`} note={`${site.year} planning range. Fly into ${city.airportCode}.`} />
-          </div>
-          <p className="mt-4 max-w-3xl text-muted">
-            {procedure.card} in {cityPlace(city)} is an indicative {site.year} plan of <strong className="text-primary-ink">{moneyRange(cost.india)} {cost.unit}</strong>, with arrival at {city.airportCode}.
-          </p>
-          <div className="mt-6"><AnswerBox>{cityTreatmentAnswer(city, procedure)}</AnswerBox></div>
+          {emergency ? null : (
+            <div className="mt-5 max-w-md">
+              <CostMark size="panel" value={moneyRange(cost.india)} unit={cost.unit} label={`Indicative cost in ${city.searchName}`} note={`${site.year} planning range. Fly into ${city.airportCode}.`} />
+            </div>
+          )}
+          <div className="mt-6"><AnswerBox>{emergency ? procedure.answer : cityTreatmentAnswer(city, procedure)}</AnswerBox></div>
 
+          {emergency ? (
+            <section className="mt-10">
+              <h2>What does rehabilitation after emergency surgery involve?</h2>
+              <p className="mt-3">Rehabilitation after {procedure.name.toLowerCase()} starts with the team that operated locally. A later stay in {city.searchName} is discussed only after that team says travel is safe.</p>
+              <p className="mt-3"><Link className="text-primary-ink underline" href={procedurePath(procedure)}>Read the emergency guide</Link></p>
+            </section>
+          ) : (
+          <>
           <section className="mt-10">
             <h2>What should you plan for {city.searchName}?</h2>
             <div className="mt-4 overflow-x-auto">
@@ -181,18 +188,25 @@ export function CityTreatment({
               <Link className="text-primary-ink underline" href={cityPath(city)}>All treatments in {city.searchName}</Link>
             </p>
           </section>
-
+          </>
+          )}
+          {emergency ? null : (
           <section className="mt-10 rounded-2xl bg-secondary p-6 text-background">
             <h2>Get a quote for {procedure.card.toLowerCase()} in {city.searchName}</h2>
             <p className="mt-2 text-background/80">The form opens with this procedure and {city.searchName} selected. A case manager replies with opinions and an itemised estimate within 48 hours of a complete file.</p>
             <Button className="mt-4" href={quoteHref}>Get a free quote</Button>
           </section>
+          )}
           <Byline locale={locale} updated={procedure.updated} />
         </div>
         <aside className="h-max lg:sticky lg:top-24">
-          <CostMark size="panel" value={moneyRange(cost.india)} unit={cost.unit} label={`Indicative cost in ${city.searchName}`} note={`Fly into ${city.airportCode}. Indicative range, not a guarantee.`}>
-            <Button className="mt-4 w-full" href={quoteHref}>Get a free quote</Button>
-          </CostMark>
+          {emergency ? (
+            <p className="rounded-2xl border border-border p-4 text-sm">This is emergency information. It is not a quote for {city.searchName}.</p>
+          ) : (
+            <CostMark size="panel" value={moneyRange(cost.india)} unit={cost.unit} label={`Indicative cost in ${city.searchName}`} note={`Fly into ${city.airportCode}. Indicative range, not a guarantee.`}>
+              <Button className="mt-4 w-full" href={quoteHref}>Get a free quote</Button>
+            </CostMark>
+          )}
         </aside>
       </article>
     </>

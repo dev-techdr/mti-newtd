@@ -20,12 +20,18 @@ export async function generateMetadata({
   const { locale, procedure: slug } = await params;
   const procedure = getProcedure(slug);
   if (!procedure) return {};
-  const title = `${procedure.card} Cost in India ${2026} | TechDr`;
+  const priced = `${procedure.card} Cost in India 2026 | TechDr`;
+  const title = procedure.kind === "emergency"
+    ? `${procedure.card} is an emergency | TechDr`
+    : priced.length > 60
+      ? `${procedure.card} in India 2026 | TechDr`
+      : priced;
   return pageMetadata({
     locale,
     path: `/treatments/${procedure.specialty}/${procedure.slug}`,
-    title: title.length > 60 ? `${procedure.card} in India 2026 | TechDr` : title,
+    title,
     description: procedure.description,
+    translated: procedure.translated,
   });
 }
 
@@ -33,18 +39,18 @@ type ProcedureParams = {
   params: Promise<{ locale: string; specialty: string; procedure: string }>;
 };
 
-export default function Page(props: ProcedureParams) {
+export default async function Page({ params }: ProcedureParams) {
+  const { locale, specialty, procedure: slug } = await params;
+  const procedure = getProcedure(slug);
+  if (!procedure || procedure.specialty !== specialty) notFound();
   return (
     <PageSuspense>
-      <ProcedurePage {...props} />
+      <ProcedurePage locale={locale} procedure={procedure} />
     </PageSuspense>
   );
 }
 
-async function ProcedurePage({ params }: ProcedureParams) {
-  const { locale, specialty, procedure: slug } = await params;
+async function ProcedurePage({ locale, procedure }: { locale: string; procedure: NonNullable<ReturnType<typeof getProcedure>> }) {
   setRequestLocale(locale);
-  const procedure = getProcedure(slug);
-  if (!procedure || procedure.specialty !== specialty) notFound();
   return <ProcedureArticle locale={locale} procedure={procedure} />;
 }

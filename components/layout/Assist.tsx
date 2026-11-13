@@ -29,14 +29,14 @@ export function Assist() {
         <img src="/images/icons/social.svg" alt="" width={56} height={56} className="size-14" />
       </a>
       {pathname === "/get-a-free-quote" ? null : (
-        <a href="/get-a-free-quote" className="fixed end-4 bottom-40 z-40 hidden min-h-11 items-center rounded-full bg-accent px-4 text-sm font-semibold text-accent-ink md:inline-flex">
+        <Link href="/get-a-free-quote" className="fixed end-4 bottom-40 z-40 hidden min-h-11 items-center rounded-full bg-accent px-4 text-sm font-semibold text-accent-ink md:inline-flex">
           {t("nav.quote")}
-        </a>
+        </Link>
       )}
       <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-border bg-background md:hidden" aria-label="Quick contact">
         <a className="flex min-h-14 items-center justify-center text-sm font-medium" href={telHref()}>{t("mobile.call")}</a>
         <a className="flex min-h-14 items-center justify-center text-sm font-medium" href={wa}>{t("mobile.whatsapp")}</a>
-        <a className="flex min-h-14 items-center justify-center text-sm font-semibold text-accent-ink" href="/get-a-free-quote">{t("mobile.quote")}</a>
+        <Link className="flex min-h-14 items-center justify-center text-sm font-semibold text-accent-ink" href="/get-a-free-quote">{t("mobile.quote")}</Link>
       </nav>
       {cookies === "unknown" ? (
         <div className="fixed inset-x-3 bottom-20 z-40 rounded-2xl border border-border bg-card p-4 shadow-lg md:bottom-6 md:end-auto md:start-4 md:max-w-sm" role="dialog" aria-label="Cookies">

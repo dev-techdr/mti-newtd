@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 
 const items = [
   ...cities.map((city) => ({ path: cityPath(city), lastModified: site.updated })),
-  ...countries.map((country) => ({ path: `/patients-from/${country.slug}`, lastModified: site.updated })),
+  ...countries.map((country) => ({ path: `/patients-from/${country.slug}`, lastModified: "2026-11-13" })),
 ];
 
 export const lastModified = latestDate(items.map((item) => item.lastModified));

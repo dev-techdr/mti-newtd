@@ -1,7 +1,8 @@
 import { posts } from "@/data/blog";
+import { cityComboIndexable } from "@/data/city-unique";
 import { cities, cityPath, treatmentCities, type City } from "@/data/cities";
 import { getCost, moneyRange } from "@/data/costs";
-import { procedures, type Procedure } from "@/data/procedures";
+import { procedurePath, procedures, type Procedure } from "@/data/procedures";
 import { specialties } from "@/data/specialties";
 import { absoluteUrl } from "@/lib/seo";
 import { sitemapPaths } from "@/lib/sitemap-entries";
@@ -17,7 +18,9 @@ export function citySpecialtyPath(city: Pick<City, "path">, specialty: { slug: s
 
 export function citySpecialtyEntries() {
   return cities.flatMap((city) =>
-    specialties.map((specialty) => ({ path: citySpecialtyPath(city, specialty), lastModified: site.updated })),
+    specialties
+      .filter((specialty) => cityComboIndexable(city.path, `departments/${specialty.slug}`))
+      .map((specialty) => ({ path: citySpecialtyPath(city, specialty), lastModified: site.updated })),
   );
 }
 
@@ -66,7 +69,7 @@ export function cityTreatmentFaqs(city: City, procedure: Procedure) {
     },
     {
       question: `What is recovery like after ${procedure.card.toLowerCase()} in ${city.searchName}?`,
-      answer: `${procedure.recovery}. ${city.climate}`,
+      answer: `Ask the discharge summary how walking, wounds and medicines should go after ${procedure.card.toLowerCase()} in ${city.searchName}. Weather is not a recovery plan.`,
     },
     {
       question: `Can TechDr arrange ${procedure.card.toLowerCase()} in ${city.searchName}?`,
@@ -76,20 +79,22 @@ export function cityTreatmentFaqs(city: City, procedure: Procedure) {
 }
 
 export function cityTreatmentEntries() {
-  return cityTreatmentPairs().map(({ city, procedure }) => ({
-    path: cityTreatmentPath(city, procedure),
-    lastModified: procedure.updated,
-  }));
+  return cityTreatmentPairs()
+    .filter(({ city, procedure }) => cityComboIndexable(city.path, procedure.slug))
+    .map(({ city, procedure }) => ({
+      path: cityTreatmentPath(city, procedure),
+      lastModified: procedure.updated,
+    }));
 }
 
 export function llmsText() {
-  const cities = treatmentCities()
+  const cityList = treatmentCities()
     .map((city) => `- [${city.searchName}](${absoluteUrl("en", cityPath(city))}): ${city.description}`)
     .join("\n");
-  const treatments = cityTreatmentPairs()
-    .map(({ city, procedure }) => {
+  const treatments = procedures
+    .map((procedure) => {
       const cost = getCost(procedure.costId);
-      return `- [${procedure.name} in ${city.searchName}](${absoluteUrl("en", cityTreatmentPath(city, procedure))}): ${moneyRange(cost.india)} ${cost.unit}. Hospital ${procedure.hospitalStay}. Total stay ${procedure.totalStay}. Airport ${city.airportCode}.`;
+      return `- [${procedure.name}](${absoluteUrl("en", procedurePath(procedure))}): ${moneyRange(cost.india)} ${cost.unit}. Care ${procedure.hospitalStay}. Time in India ${procedure.totalStay}.`;
     })
     .join("\n");
 
@@ -114,11 +119,11 @@ export function llmsText() {
 
 ## Cities
 
-${cities}
+The five city guides below are the indexable destination pages. City × treatment URLs stay out of this list until they have unique copy.
 
-## Treatment in Delhi, Mumbai, Chennai, Hyderabad and Bangalore
+${cityList}
 
-Each URL below is a city page for one treatment. Use these when a question names both a procedure and Delhi, Mumbai, Chennai, Hyderabad or Bangalore.
+## Treatments
 
 ${treatments}
 

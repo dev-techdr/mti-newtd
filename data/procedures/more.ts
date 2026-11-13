@@ -163,11 +163,13 @@ export const moreProcedures: Procedure[] = [
     updated,
   },
   {
-    slug: "brain-tumour-surgery",
+    slug: "brain-tumour-treatment",
     costId: "brain-tumour-surgery",
-    specialty: "neurology",
-    name: "Brain tumour surgery",
-    card: "Brain tumour surgery",
+    specialty: "neurosurgery",
+    name: "Brain tumour treatment",
+    card: "Brain tumour treatment",
+    kind: "condition",
+    alsoKnownAs: ["brain tumour surgery"],
     description:
       "Brain tumour surgery in India is typically USD 6,500–10,000 in 2026 for a straightforward craniotomy. ICU time, tumour type and awake mapping change the quote.",
     answer:

@@ -5,7 +5,7 @@ import { procedurePath, procedures } from "./procedures";
 type RedirectItem = {
   source: string;
   destination: string;
-  permanent: boolean;
+  statusCode: 301;
 };
 
 function cityAliasRedirects(): RedirectItem[] {
@@ -18,12 +18,12 @@ function cityAliasRedirects(): RedirectItem[] {
         [`/destinations/${alias}/:procedure`, `/destinations/${city.path}/:procedure`],
       ] as const;
       return [
-        ...pairs.map(([source, destination]) => ({ source, destination, permanent: true })),
+        ...pairs.map(([source, destination]) => ({ source, destination, statusCode: 301 as const })),
         ...locales.flatMap((locale) =>
           pairs.map(([source, destination]) => ({
             source: `/${locale}${source}`,
             destination: `/${locale}${destination}`,
-            permanent: true,
+            statusCode: 301 as const,
           })),
         ),
       ];
@@ -52,9 +52,16 @@ const procedureAliases: Record<string, string> = {
   "pancreas-transplantation": "pancreas-transplant",
   "kidney-pancreas": "kidney-pancreas-transplant",
   "simultaneous-pancreas-kidney": "kidney-pancreas-transplant",
-  "brain-tumour-removal": "brain-tumour-surgery",
-  "brain-tumor-surgery": "brain-tumour-surgery",
-  "brain-tumor-removal": "brain-tumour-surgery",
+  "brain-tumour-removal": "brain-tumour-treatment",
+  "brain-tumor-surgery": "brain-tumour-treatment",
+  "brain-tumor-removal": "brain-tumour-treatment",
+  "brain-tumour-surgery": "brain-tumour-treatment",
+  "slipped-disc": "lumbar-disc-herniation",
+  "epilepsy-surgery": "epilepsy-treatment",
+  "aneurysm-clipping": "brain-aneurysm-treatment",
+  "colorectal-cancer-surgery": "colorectal-surgery",
+  "pancreatic-cancer-surgery": "whipple-procedure",
+  "liver-cancer-surgery": "liver-resection",
   "paediatric-heart-surgery": "pediatric-heart-surgery",
   "congenital-heart-surgery": "congenital-heart-defect-surgery",
   ivf: "ivf-treatment",
@@ -86,27 +93,56 @@ function procedureAliasRedirects(): RedirectItem[] {
   return Object.entries(procedureAliases).flatMap(([alias, slug]) => {
     const target = procedures.find((item) => item.slug === slug);
     if (!target) return [];
-    return [{ source: `/${alias}`, destination: procedurePath(target), permanent: true }];
+    return [{ source: `/${alias}`, destination: procedurePath(target), statusCode: 301 as const }];
   });
 }
 
+function localizedRedirect(source: string, destination: string): RedirectItem[] {
+  const locales = routing.locales.filter((locale) => locale !== routing.defaultLocale);
+  return [
+    { source, destination, statusCode: 301 as const },
+    ...locales.map((locale) => ({
+      source: `/${locale}${source}`,
+      destination: `/${locale}${destination}`,
+      statusCode: 301 as const,
+    })),
+  ];
+}
+
+const mergedPaths: [string, string][] = [
+  ["/treatments/spine-surgery/slipped-disc", "/treatments/spine-surgery/lumbar-disc-herniation"],
+  ["/treatments/neurosurgery/epilepsy-surgery", "/treatments/neurosurgery/epilepsy-treatment"],
+  ["/treatments/neurosurgery/aneurysm-clipping", "/treatments/neurosurgery/brain-aneurysm-treatment"],
+  ["/treatments/neurology/brain-tumour-surgery", "/treatments/neurosurgery/brain-tumour-treatment"],
+  ["/treatments/oncology/colorectal-cancer-surgery", "/treatments/gastroenterology/colorectal-surgery"],
+  ["/treatments/oncology/pancreatic-cancer-surgery", "/treatments/gastroenterology/whipple-procedure"],
+  ["/treatments/oncology/liver-cancer-surgery", "/treatments/gastroenterology/liver-resection"],
+  ["/cost/colorectal-cancer-surgery-cost-in-india", "/cost/colorectal-surgery-cost-in-india"],
+  ["/cost/pancreatic-cancer-surgery-cost-in-india", "/cost/whipple-procedure-cost-in-india"],
+  ["/cost/liver-cancer-surgery-cost-in-india", "/cost/liver-resection-cost-in-india"],
+  ["/cost/colorectal-cancer-surgery", "/cost/colorectal-surgery-cost-in-india"],
+  ["/cost/pancreatic-cancer-surgery", "/cost/whipple-procedure-cost-in-india"],
+  ["/cost/liver-cancer-surgery", "/cost/liver-resection-cost-in-india"],
+];
+
 export const redirectMap: RedirectItem[] = [
-  { source: "/home", destination: "/", permanent: true },
-  { source: "/doctors", destination: "/about", permanent: true },
-  { source: "/hospitals", destination: "/why-india", permanent: true },
-  { source: "/quote", destination: "/get-a-free-quote", permanent: true },
+  { source: "/home", destination: "/", statusCode: 301 as const },
+  { source: "/doctors", destination: "/about", statusCode: 301 as const },
+  { source: "/hospitals", destination: "/why-india", statusCode: 301 as const },
+  { source: "/quote", destination: "/get-a-free-quote", statusCode: 301 as const },
   ...procedures.flatMap((item) => [
     {
       source: `/${item.slug}`,
       destination: procedurePath(item),
-      permanent: true,
+      statusCode: 301 as const,
     },
     {
       source: `/cost/${item.costId}`,
       destination: `/cost/${item.costId}-cost-in-india`,
-      permanent: true,
+      statusCode: 301 as const,
     },
   ]),
   ...cityAliasRedirects(),
   ...procedureAliasRedirects(),
+  ...mergedPaths.flatMap(([source, destination]) => localizedRedirect(source, destination)),
 ];

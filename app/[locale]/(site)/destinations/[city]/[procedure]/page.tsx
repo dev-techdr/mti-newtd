@@ -30,6 +30,8 @@ export async function generateMetadata({
     path: cityTreatmentPath(city, procedure),
     title: cityTreatmentTitle(city, procedure),
     description: cityTreatmentDescription(city, procedure),
+    index: false,
+    translated: procedure.translated,
   });
 }
 

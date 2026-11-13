@@ -9,6 +9,7 @@ function listFromEnv(value: string | undefined, fallback: readonly string[]) {
 }
 
 const whatsapps = listFromEnv(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER, defaultWhatsapps);
+const phones = listFromEnv(process.env.NEXT_PUBLIC_PHONE, whatsapps);
 
 export const legal = {
   entity: "Gorityala Abhista Sai",
@@ -37,8 +38,8 @@ export const site = {
   entity: `${legal.entity}, trading as ${legal.tradeName}`,
   url: "https://medicaltourism.techdr.in",
   email: process.env.NEXT_PUBLIC_EMAIL || "medicaltourism@techdr.in",
-  phone: process.env.NEXT_PUBLIC_PHONE || whatsapps[0] || "",
-  phones: listFromEnv(process.env.NEXT_PUBLIC_PHONE, whatsapps),
+  phone: phones[0] || "",
+  phones,
   whatsapp: whatsapps[0] || "",
   whatsapps,
   year: 2026,
@@ -69,9 +70,15 @@ export function whatsappHref(text: string, number = site.whatsapp) {
   return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
 }
 
+export function onePhone(number = site.phone) {
+  return number.split(/[,|;]/).map((item) => item.trim()).find(Boolean) ?? "";
+}
+
 export function telHref(number = site.phone) {
-  if (!number) return "/contact";
-  return `tel:+${number.replace(/\D/g, "")}`;
+  const single = onePhone(number);
+  const digits = single.replace(/\D/g, "");
+  if (!digits) return "/contact";
+  return `tel:+${digits}`;
 }
 
 export function socialLinks() {

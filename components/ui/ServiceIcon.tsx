@@ -58,6 +58,8 @@ const procedureIcons: Record<string, string> = {
   "bladder-cancer-surgery": "002-bladder.svg",
   "breast-cancer-surgery": "010-breast-cancer.svg",
   "brain-tumour-surgery": "016-tumor.svg",
+  "brain-tumour-treatment": "016-tumor.svg",
+  "brain-aneurysm-treatment": "016-tumor.svg",
   "spinal-cord-tumour-surgery": "014-spine-tumor.svg",
   "heart-transplant": "007-heart.svg",
   "corneal-transplant": "009-eye.svg",

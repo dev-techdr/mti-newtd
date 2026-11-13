@@ -119,7 +119,6 @@ async function ArticlePage({ params }: ArticleParams) {
         publisher: { "@type": "Organization", name: site.name, url: site.url },
         mainEntityOfPage: url,
         description: article.description,
-        speakable: { "@type": "SpeakableSpecification", cssSelector: ["h1", "#quick-answer"] },
       }} />
       <Breadcrumbs locale={locale} items={[{ name: "Guides", path: "/blog" }, { name: article.title, path: `/blog/${slug}` }]} />
       <article className="mx-auto grid w-full max-w-6xl items-start gap-10 px-4 py-10 lg:grid-cols-[minmax(0,1fr)_17rem]">

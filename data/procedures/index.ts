@@ -11,6 +11,16 @@ import type { Procedure } from "./types";
 export type { Procedure } from "./types";
 export { journeySteps, sharedExcluded } from "./types";
 
+const untranslated = { ar: false, fr: false, ru: false, bn: false } as const;
+
+function stamp(item: Procedure): Procedure {
+  return {
+    ...item,
+    translated: item.translated ?? untranslated,
+    kind: item.kind ?? (item.slug === "cauda-equina-syndrome" ? "emergency" : "procedure"),
+  };
+}
+
 export const procedures: Procedure[] = [
   ...primaryProcedures,
   ...heartProcedures,
@@ -20,7 +30,7 @@ export const procedures: Procedure[] = [
   ...finalProcedures,
   ...catalogProcedures,
   ...libraryProcedures,
-];
+].map(stamp);
 
 const duplicateSlugs = procedures.map((item) => item.slug).filter((slug, index, all) => all.indexOf(slug) !== index);
 if (duplicateSlugs.length) throw new Error(`Duplicate procedure slugs: ${[...new Set(duplicateSlugs)].join(", ")}`);

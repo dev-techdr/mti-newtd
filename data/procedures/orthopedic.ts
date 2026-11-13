@@ -200,7 +200,7 @@ export const primaryProcedures: Procedure[] = [
       { question: "Is minimally invasive fusion cheaper?", answer: "Not always. Smaller incisions can mean a similar implant cost. The technique should be chosen for anatomy, not for a package price." },
       { question: "What records speed up the opinion?", answer: "The MRI files, standing X-rays, previous operation notes and a list of what makes the pain better or worse. A report without images is rarely enough." },
     ],
-    related: ["knee-replacement-surgery", "brain-tumour-surgery"],
+    related: ["knee-replacement-surgery", "brain-tumour-treatment"],
     articles: ["spinal-fusion-cost-india", "flying-home-after-surgery"],
     howPerformed: "Screws and rods stabilise the segment and, in an interbody fusion, a cage is placed between the vertebral bodies so bone can grow across the gap.",
     followup: "Wound check before departure and imaging on the schedule the surgeon sets. New weakness, fever or loss of bladder control needs emergency care.",

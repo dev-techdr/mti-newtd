@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import type { TranslatedFlags } from "@/data/procedures/types";
 import { routing, type Locale } from "@/i18n/routing";
 import { site } from "@/lib/site";
+import { indexableLocales, localeIsIndexable, untranslated } from "@/lib/translation";
 
 const ogLocale: Record<Locale, string> = {
   en: "en_IN",
@@ -20,9 +22,9 @@ export function absoluteUrl(locale: string, path: string) {
   return `${site.url}${localizedPath(locale, path)}`;
 }
 
-export function languageAlternates(path: string) {
+export function languageAlternates(path: string, translated: TranslatedFlags = untranslated) {
   const languages: Record<string, string> = {};
-  for (const locale of routing.locales) {
+  for (const locale of indexableLocales(translated)) {
     languages[locale] = absoluteUrl(locale, path);
   }
   languages["x-default"] = absoluteUrl(routing.defaultLocale, path);
@@ -35,20 +37,25 @@ export function pageMetadata({
   title,
   description,
   type = "website",
+  index = true,
+  translated = untranslated,
 }: {
   locale: string;
   path: string;
   title: string;
   description: string;
   type?: "website" | "article";
+  index?: boolean;
+  translated?: TranslatedFlags;
 }): Metadata {
   const url = absoluteUrl(locale, path);
+  const localeIndex = index && localeIsIndexable(locale, translated);
   return {
     title,
     description,
     alternates: {
-      canonical: url,
-      languages: languageAlternates(path),
+      canonical: index ? absoluteUrl(routing.defaultLocale, path) : url,
+      ...(localeIndex ? { languages: languageAlternates(path, translated) } : {}),
     },
     openGraph: {
       title,
@@ -63,6 +70,6 @@ export function pageMetadata({
       title,
       description,
     },
-    robots: { index: true, follow: true },
+    robots: { index: localeIndex, follow: true },
   };
 }

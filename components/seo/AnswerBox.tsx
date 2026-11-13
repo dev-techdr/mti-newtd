@@ -10,10 +10,12 @@ export function AnswerBox({ children }: { children: string }) {
 }
 
 export function Byline({ updated, locale }: { updated: string; locale: string }) {
+  const reviewed = formatUpdated(updated, locale);
   return (
     <footer className="mt-10 space-y-2 border-t border-border pt-6 text-sm text-muted">
       <p>This content is for information only and is not a substitute for professional medical advice.</p>
-      <p>Medically reviewed by TechDr Medical Panel · Last updated: {formatUpdated(updated, locale)}</p>
+      <p>Medically reviewed by TODO(client): Dr ___, qualification · Reviewed on {reviewed}</p>
+      <p>Last updated: {reviewed}</p>
     </footer>
   );
 }

@@ -56,10 +56,11 @@ const pages = {
       "How TechDr Medical Tourism writes, reviews, and updates treatment guides, who checks medical pages, and how 2026 prices are revised in one table.",
     h1: "Editorial policy",
     body: [
-      "Guides are written by the TechDr editorial team for international patients. They are reviewed by the TechDr Medical Panel, which is an internal review group, not a named individual doctor on this website.",
-      "Each medical page shows a last-updated date. The comparison table is edited in one source file so a price is not changed on a single page and forgotten elsewhere. The current edition date is 15 October 2026.",
-      "We do not copy hospital brochures. We do not invent survival percentages for a procedure when the honest answer is that results vary. We link to public bodies such as the WHO, India’s health ministry, NABH, JCI and the official visa portal.",
-      "Corrections: email medicaltourism@techdr.in with the page address and the sentence you believe is wrong. Material price or visa changes are updated in the same week they are confirmed.",
+      "Guides are written by the TechDr editorial team for international patients. A page shows a named reviewer only after that person has actually read it. Until then the byline says the reviewer is not yet assigned. Names are listed on the medical review team page and are not invented.",
+      "Prices are planning ranges in US dollars, kept in one cost table so a figure is not changed on a single page and forgotten elsewhere. A range is revised when a partner hospital’s written quotes, or a public tariff we rely on, moves enough to change the band. Each page shows the date its own content last changed.",
+      "We do not copy hospital brochures. We do not invent case counts, median quotes or survival percentages. A data box is published only when TechDr supplies the real figures. Sample quotes stay marked TODO until an anonymised invoice replaces them.",
+      "Sources are specific pages: the NABH hospital programme and the 6th-edition hospital standards, and the government e-Medical Visa application. Each source line says what it supports.",
+      "Corrections: email medicaltourism@techdr.in with the page address and the sentence you believe is wrong. Material price or visa changes are updated in the same week they are confirmed. The correction replaces the sentence and the page date moves with it.",
     ],
   },
 } as const;

@@ -83,7 +83,7 @@ async function SpecialtyPage({ params }: SpecialtyParams) {
       <JsonLd data={{
         "@context": "https://schema.org",
         "@graph": [
-          { "@type": "MedicalWebPage", name: specialty.name, url, lastReviewed: site.updated, reviewedBy: { "@type": "Organization", name: "TechDr Medical Panel" }, speakable: { "@type": "SpeakableSpecification", cssSelector: ["#quick-answer", "h1"] } },
+          { "@type": "MedicalWebPage", name: specialty.name, url, lastReviewed: site.updated },
           { "@type": "ItemList", itemListElement: items.map((item, index) => ({ "@type": "ListItem", position: index + 1, name: item.label, url: absoluteUrl(locale, procedurePath(item.procedure)) })) },
           faqList(specialty.faqs),
         ],
