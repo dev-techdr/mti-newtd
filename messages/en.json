@@ -1,0 +1,91 @@
+{
+  "a11y": {
+    "skip": "Skip to content"
+  },
+  "nav": {
+    "treatments": "Treatments",
+    "costs": "Costs",
+    "destinations": "Cities",
+    "how": "How it works",
+    "services": "Patient services",
+    "visa": "Medical visa",
+    "blog": "Guides",
+    "about": "About",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "why": "Why India",
+    "quote": "Get a free quote",
+    "whatsapp": "Talk on WhatsApp",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language",
+    "theme": "Switch colour theme"
+  },
+  "localeNotice": "",
+  "footer": {
+    "blurb": "TechDr Medical Tourism helps international patients plan accredited treatment in India, with written estimates and support from visa to follow-up.",
+    "treatments": "Treatments",
+    "patients": "For patients",
+    "company": "Company",
+    "legal": "Legal",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use",
+    "disclaimer": "Medical disclaimer",
+    "editorial": "Editorial policy",
+    "note": "TechDr coordinates care with independent hospitals. We are not a hospital and we do not provide medical advice or promise an outcome."
+  },
+  "common": {
+    "reviewed": "Medically reviewed by TechDr Medical Panel · Last updated: {date}",
+    "disclaimer": "This content is for information only and is not a substitute for professional medical advice.",
+    "estimate": "Indicative starting estimates in USD. A written quote follows review of your reports. TechDr does not guarantee a price or a clinical outcome.",
+    "planning": "Planning range used to start a quote. It is not from the published comparison table and must be confirmed in writing.",
+    "related": "Related treatments",
+    "sources": "Sources",
+    "alsoAsk": "People also ask",
+    "breadcrumb": "Breadcrumb",
+    "search": "Search a treatment, condition or procedure…",
+    "noResults": "No matching treatment. Try a shorter word, or send a free quote and a case manager will guide you.",
+    "from": "From",
+    "readMore": "Read guide",
+    "viewCost": "See the cost guide",
+    "back": "Back"
+  },
+  "cookie": {
+    "text": "Optional analytics and advertising cookies stay off until you allow them. The site works either way.",
+    "accept": "Allow",
+    "reject": "Reject"
+  },
+  "mobile": {
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "quote": "Free quote"
+  },
+  "form": {
+    "title": "Get a free quote",
+    "step": "Step {current} of {total}",
+    "name": "Patient name",
+    "country": "Country of residence",
+    "phone": "Phone with country code",
+    "whatsapp": "This number is on WhatsApp",
+    "email": "Email",
+    "treatment": "Treatment needed",
+    "condition": "Short description of the condition",
+    "upload": "Upload reports (PDF or image, up to 10 MB each)",
+    "city": "Preferred city",
+    "travel": "Preferred travel month",
+    "attendants": "Number of attendants",
+    "budget": "Budget range (USD)",
+    "consent": "I agree to the privacy policy and to TechDr contacting me about this enquiry.",
+    "next": "Continue",
+    "prev": "Back",
+    "submit": "Send my reports",
+    "sending": "Sending…",
+    "successTitle": "Your request is with our case desk",
+    "successBody": "Our case manager will share expert opinions and estimates within 48 hours.",
+    "honeypot": "Company website",
+    "error": "Please check the highlighted fields.",
+    "config": "The quote desk is not connected yet. Email medicaltourism@techdr.in or use WhatsApp, and we will still help you.",
+    "rate": "Too many requests from this network. Please wait an hour or write to us by email.",
+    "files": "Use PDF, JPG, PNG or WebP files, 10 MB or smaller."
+  }
+}

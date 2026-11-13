@@ -1,0 +1,7 @@
+0000000000000000000000000000000000000000 43cb4730d08482316131f9fa0ac60085261beace techdr <dev@techdr.in> 1793342022 +0530	commit (initial): Initial commit from Create Next App
+43cb4730d08482316131f9fa0ac60085261beace 86df393594dd2cb3975d7229117d9809e10f9056 techdr <dev@techdr.in> 1794402830 +0530	commit: 0.9
+86df393594dd2cb3975d7229117d9809e10f9056 002f834a27afef83c514b7960ab621e3184ac435 techdr <dev@techdr.in> 1794403725 +0530	commit: 0.8.1
+002f834a27afef83c514b7960ab621e3184ac435 96eee31c24e562849a1d23a63415e5b8285d2ddd techdr <dev@techdr.in> 1794460739 +0530	commit: Remove icon property from metadata in layout.tsx
+96eee31c24e562849a1d23a63415e5b8285d2ddd 61968be54e87d7894b028b8293dea8e45bfcdc37 techdr <dev@techdr.in> 1794473284 +0530	commit: Refactor pages to use PageSuspense for improved loading states and remove .env.example file
+61968be54e87d7894b028b8293dea8e45bfcdc37 f91c1a2f672bf3f7650ac4c65391a4c1d7c7b823 techdr <dev@techdr.in> 1794560214 +0530	commit: Refactor sitemap handling to use dynamic paths and improve maintainability
+f91c1a2f672bf3f7650ac4c65391a4c1d7c7b823 5e8ab4d6cf204cb2cf9dd0a2603b4484be6769d5 techdr <dev@techdr.in> 1794561582 +0530	commit: Enhance sitemap generation by introducing lastModified tracking for all sitemap entries, improving accuracy and maintainability.

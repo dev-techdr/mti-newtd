@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" role="img" aria-label="techDr medical tourism">
+  <rect width="48" height="48" rx="13" fill="#0E9F9A"/>
+  <path d="M24 12v24M12 24h24" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  <text x="60" y="24" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" font-weight="700">
+    <tspan fill="#0B2545">tech</tspan><tspan fill="#0E9F9A">Dr</tspan>
+  </text>
+  <text x="60" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="650" letter-spacing="1.6" fill="#3E5166">MEDICAL TOURISM</text>
+</svg>
