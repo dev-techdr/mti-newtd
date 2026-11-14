@@ -30,3 +30,33 @@ export function localizedEntries(
     },
   }));
 }
+
+function xmlText(value: string) {
+  return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+}
+
+export function sitemapXml(entries: MetadataRoute.Sitemap) {
+  if (entries.length === 0) throw new Error("A sitemap urlset needs at least one url.");
+
+  const blocks = entries.map((item) => {
+    const links = Object.entries(item.alternates?.languages ?? {}).flatMap(([language, href]) =>
+      href ? [`    <xhtml:link rel="alternate" hreflang="${xmlText(language)}" href="${xmlText(href)}" />`] : [],
+    );
+    const lastModified = item.lastModified
+      ? xmlText(item.lastModified instanceof Date ? item.lastModified.toISOString() : item.lastModified)
+      : "";
+    return [
+      "  <url>",
+      `    <loc>${xmlText(item.url)}</loc>`,
+      ...links,
+      ...(lastModified ? [`    <lastmod>${lastModified}</lastmod>`] : []),
+      "  </url>",
+    ].join("\n");
+  });
+  const xhtml = blocks.some((block) => block.includes("xhtml:link"));
+  const open = xhtml
+    ? '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">'
+    : '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+  return `<?xml version="1.0" encoding="UTF-8"?>\n${open}\n${blocks.join("\n")}\n</urlset>\n`;
+}

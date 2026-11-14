@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { sitemapPaths } from "@/lib/sitemap-entries";
+import { publishedSitemapPaths } from "@/lib/city-treatments";
 import { site } from "@/lib/site";
 
 const bots = [
@@ -20,7 +20,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "*", allow: "/" },
       { userAgent: bots, allow: "/" },
     ],
-    sitemap: [`${site.url}/sitemap.xml`, ...sitemapPaths.map((path) => `${site.url}${path}`)],
+    sitemap: [`${site.url}/sitemap.xml`, ...publishedSitemapPaths().map((path) => `${site.url}${path}`)],
     host: site.url,
   };
 }

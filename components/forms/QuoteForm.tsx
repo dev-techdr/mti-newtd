@@ -47,6 +47,16 @@ export function QuoteForm({ preset }: { preset?: string }) {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    const form = document.getElementById("quote-form");
+    const fill = (name: string, value: string | null) => {
+      if (!value || !(form instanceof HTMLFormElement)) return;
+      const input = form.elements.namedItem(name);
+      if (input instanceof HTMLInputElement && !input.value) input.value = value;
+    };
+    fill("name", params.get("name"));
+    fill("email", params.get("email"));
+    fill("phone", params.get("phone"));
+    fill("country", params.get("country"));
     const found = procedures.find((item) => item.slug === params.get("procedure"));
     if (found) setTreatment(found.name);
     const cityQuery = params.get("city");
@@ -110,26 +120,26 @@ export function QuoteForm({ preset }: { preset?: string }) {
       {error ? <p className="mb-4 text-sm text-warning" role="alert">{error}</p> : null}
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="text-sm font-medium">Patient name
-          <input required name="name" minLength={2} className={field} autoComplete="name" />
+          <input required name="name" minLength={2} maxLength={80} className={field} autoComplete="name" />
         </label>
         <label className="text-sm font-medium">Country
-          <input required name="country" minLength={2} className={field} autoComplete="country-name" />
+          <input required name="country" minLength={2} maxLength={80} className={field} autoComplete="country-name" />
         </label>
         <label className="text-sm font-medium">Phone
-          <input required name="phone" minLength={6} className={field} autoComplete="tel" placeholder="+234 …" />
+          <input required name="phone" minLength={6} maxLength={40} className={field} autoComplete="tel" placeholder="+234 …" />
         </label>
         <label className="text-sm font-medium">Email
-          <input required type="email" name="email" className={field} autoComplete="email" />
+          <input required type="email" name="email" maxLength={120} className={field} autoComplete="email" />
         </label>
         <label className="flex min-h-11 items-center gap-2 text-sm sm:col-span-2">
           <input type="checkbox" name="whatsapp" className="size-4" /> This number is on WhatsApp
         </label>
         <label className="text-sm font-medium sm:col-span-2">Treatment
-          <input required minLength={2} className={field} list="treatments" name="treatment" value={treatment} onChange={(event) => setTreatment(event.target.value)} placeholder="Knee replacement, bypass, IVF…" />
+          <input required minLength={2} maxLength={140} className={field} list="treatments" name="treatment" value={treatment} onChange={(event) => setTreatment(event.target.value)} placeholder="Knee replacement, bypass, IVF…" />
           <datalist id="treatments">{procedures.map((item) => <option key={item.slug} value={item.name} />)}</datalist>
         </label>
         <label className="text-sm font-medium sm:col-span-2">What should we know?
-          <textarea required minLength={10} name="condition" className={`${field} min-h-28 py-2`} placeholder="A sentence or two about the condition, reports you have, and when you hope to travel." />
+          <textarea required minLength={10} maxLength={2000} name="condition" className={`${field} min-h-28 py-2`} placeholder="A sentence or two about the condition, reports you have, and when you hope to travel." />
         </label>
         <label className="text-sm font-medium">Preferred city <span className="font-normal text-muted">(optional)</span>
           <select name="city" value={preferredCity} onChange={(event) => setPreferredCity(event.target.value)} className={field}>
@@ -200,8 +210,8 @@ export function QuoteForm({ preset }: { preset?: string }) {
         <input required type="checkbox" name="consent" className="mt-1 size-4" />
         <span>I agree to the <a className="underline" href="/privacy-policy">privacy policy</a> and to TechDr contacting me about this enquiry.</span>
       </label>
-      <p className="absolute -left-[9999px]" aria-hidden>
-        <label>Company website<input name="company_website" tabIndex={-1} autoComplete="off" /></label>
+      <p className="absolute -left-[9999px] h-px overflow-hidden" aria-hidden="true">
+        <input name="hp_field" tabIndex={-1} autoComplete="off" defaultValue="" />
       </p>
       <SpamCheck />
       <button disabled={pending} className="mt-5 min-h-11 rounded-full bg-accent px-5 text-sm font-semibold text-accent-ink disabled:opacity-60" type="submit">

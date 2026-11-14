@@ -5,7 +5,7 @@ import { getCost, moneyRange } from "@/data/costs";
 import { procedurePath, procedures, type Procedure } from "@/data/procedures";
 import { specialties } from "@/data/specialties";
 import { absoluteUrl } from "@/lib/seo";
-import { sitemapPaths } from "@/lib/sitemap-entries";
+import { latestDate, sitemapPaths } from "@/lib/sitemap-entries";
 import { legal, site } from "@/lib/site";
 
 export function cityTreatmentPath(city: Pick<City, "path">, procedure: Pick<Procedure, "slug">) {
@@ -87,6 +87,18 @@ export function cityTreatmentEntries() {
     }));
 }
 
+const cityItems = [...citySpecialtyEntries(), ...cityTreatmentEntries()];
+
+export function citySitemapItems() {
+  return cityItems;
+}
+
+export const cityTreatmentSitemapLastModified = latestDate(cityItems.map((item) => item.lastModified));
+
+export function publishedSitemapPaths() {
+  return sitemapPaths.filter((path) => path !== "/sitemaps/city-treatments/sitemap.xml" || cityItems.length > 0);
+}
+
 export function llmsText() {
   const cityList = treatmentCities()
     .map((city) => `- [${city.searchName}](${absoluteUrl("en", cityPath(city))}): ${city.description}`)
@@ -136,7 +148,7 @@ ${posts
 ## Sitemaps
 
 - ${site.url}/sitemap.xml
-${sitemapPaths.map((path) => `- ${site.url}${path}`).join("\n")}
+${publishedSitemapPaths().map((path) => `- ${site.url}${path}`).join("\n")}
 - Full brief: ${site.url}/llms-full.txt
 `;
 }

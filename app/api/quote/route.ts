@@ -26,7 +26,7 @@ export async function POST(request: Request) {
       attendants: form.get("attendants") || "",
       budget: form.get("budget") || "",
       consent: form.get("consent") === "on" || form.get("consent") === "true" ? true : false,
-      company_website: form.get("company_website") || "",
+      hp_field: form.get("hp_field") || "",
       turnstileToken: form.get("cf-turnstile-response") || form.get("turnstileToken") || "",
     },
     files,

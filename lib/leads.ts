@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 const leadSchema = z.object({
   name: z.string().trim().min(2).max(80),
   country: z.string().trim().min(2).max(80),
-  phone: z.string().trim().min(6).max(24),
+  phone: z.string().trim().min(6).max(40),
   whatsapp: z.boolean().default(false),
   email: z.string().trim().email().max(120),
   treatment: z.string().trim().min(2).max(140),
@@ -15,7 +15,6 @@ const leadSchema = z.object({
   attendants: z.string().trim().max(10).optional().default(""),
   budget: z.string().trim().max(40).optional().default(""),
   consent: z.literal(true),
-  company_website: z.string().max(0).optional().default(""),
   turnstileToken: z.string().optional().default(""),
 });
 
@@ -35,13 +34,35 @@ export function rateLimited(ip: string) {
   return false;
 }
 
+const fieldLabels: Record<string, string> = {
+  name: "Patient name",
+  country: "Country",
+  phone: "Phone",
+  email: "Email",
+  treatment: "Treatment",
+  condition: "What should we know",
+};
+
+function validationMessage(error: z.ZodError) {
+  const issue = error.issues[0];
+  const field = String(issue?.path[0] ?? "");
+  if (field === "consent") return "Please agree to the privacy policy before sending.";
+  const label = fieldLabels[field];
+  if (!label) return "Please check the form and try again.";
+  if (issue?.code === "too_big") return `${label} is too long.`;
+  if (issue?.code === "too_small") return `${label} needs a little more detail.`;
+  if (field === "email") return "Enter a valid email address.";
+  return `Check the ${label} field.`;
+}
+
 export async function createLead(input: unknown, files: File[] = []) {
+  const record = input && typeof input === "object" ? (input as Record<string, unknown>) : {};
+  const trap = typeof record.hp_field === "string" ? record.hp_field.trim() : "";
+  if (trap) return { ok: true as const, delivered: true };
+
   const parsed = leadSchema.safeParse(input);
   if (!parsed.success) {
-    return { ok: false as const, status: 400, message: "Please check the highlighted fields." };
-  }
-  if (parsed.data.company_website) {
-    return { ok: true as const, delivered: true };
+    return { ok: false as const, status: 400, message: validationMessage(parsed.error) };
   }
   const fileMessage = quoteFileError(files);
   if (fileMessage) {
@@ -94,7 +115,7 @@ export async function createLead(input: unknown, files: File[] = []) {
         content: Buffer.from(await file.arrayBuffer()),
       })),
     );
-    await resend.emails.send({
+    const sent = await resend.emails.send({
       from: process.env.RESEND_FROM || "TechDr <onboarding@resend.dev>",
       to: leadRecipients,
       subject: `Quote: ${parsed.data.treatment} — ${parsed.data.country}`,
@@ -104,6 +125,14 @@ export async function createLead(input: unknown, files: File[] = []) {
         .join("\n"),
       attachments,
     });
+    if (sent.error) {
+      console.error("Quote email failed:", sent.error.message);
+      return {
+        ok: false as const,
+        status: 503,
+        message: `We could not send this request. Email ${site.email} or use WhatsApp.`,
+      };
+    }
     delivered = true;
   }
 

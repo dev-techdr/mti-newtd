@@ -60,6 +60,16 @@ const nextConfig: NextConfig = {
   async redirects() {
     return redirectMap;
   },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: "/sitemaps/city-treatments/sitemap.xml",
+          destination: "/sitemaps/city-treatment-entries",
+        },
+      ],
+    };
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

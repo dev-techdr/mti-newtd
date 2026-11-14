@@ -1,9 +1,9 @@
 import { lastModified as blogUpdated } from "@/app/sitemaps/blog/sitemap";
-import { lastModified as cityTreatmentsUpdated } from "@/app/sitemaps/city-treatments/sitemap";
 import { lastModified as costsUpdated } from "@/app/sitemaps/costs/sitemap";
 import { lastModified as countriesUpdated } from "@/app/sitemaps/countries/sitemap";
 import { lastModified as pagesUpdated } from "@/app/sitemaps/pages/sitemap";
 import { lastModified as treatmentsUpdated } from "@/app/sitemaps/treatments/sitemap";
+import { cityTreatmentSitemapLastModified, publishedSitemapPaths } from "@/lib/city-treatments";
 import { sitemapPaths } from "@/lib/sitemap-entries";
 import { site } from "@/lib/site";
 
@@ -12,12 +12,12 @@ const lastModified = {
   "/sitemaps/treatments/sitemap.xml": treatmentsUpdated,
   "/sitemaps/costs/sitemap.xml": costsUpdated,
   "/sitemaps/countries/sitemap.xml": countriesUpdated,
-  "/sitemaps/city-treatments/sitemap.xml": cityTreatmentsUpdated,
+  "/sitemaps/city-treatments/sitemap.xml": cityTreatmentSitemapLastModified,
   "/sitemaps/blog/sitemap.xml": blogUpdated,
 } satisfies Record<(typeof sitemapPaths)[number], string>;
 
 export function GET() {
-  const entries = sitemapPaths
+  const entries = publishedSitemapPaths()
     .map(
       (path) => `  <sitemap>
     <loc>${site.url}${path}</loc>
