@@ -19,7 +19,9 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "language": "Language",
-    "theme": "Switch colour theme"
+    "theme": "Switch colour theme",
+    "from": "Patients from",
+    "allDestinations": "All destinations"
   },
   "localeNotice": "",
   "footer": {
@@ -32,7 +34,9 @@
     "terms": "Terms of use",
     "disclaimer": "Medical disclaimer",
     "editorial": "Editorial policy",
-    "note": "TechDr coordinates care with independent hospitals. We are not a hospital and we do not provide medical advice or promise an outcome."
+    "note": "TechDr coordinates care with independent hospitals. We are not a hospital and we do not provide medical advice or promise an outcome.",
+    "allTreatments": "All treatments",
+    "call": "Call"
   },
   "common": {
     "reviewed": "Medically reviewed by TechDr Medical Panel · Last updated: {date}",

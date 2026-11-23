@@ -31,7 +31,7 @@ export default async function SiteLayout({
       <SmoothScroll />
       <Header />
       {notice ? <p className="bg-amber-100 px-4 py-2 text-center text-sm text-amber-950">{notice}</p> : null}
-      <main id="content" className="pb-24 md:pb-0">{children}</main>
+      <main id="content" className="pt-16 pb-24 md:pb-0">{children}</main>
       <Footer />
       <Assist />
     </MotionProvider>

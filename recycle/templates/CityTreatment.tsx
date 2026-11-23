@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { FaqList } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { CostMark } from "@/components/ui/CostMark";
+import { PriceText } from "@/components/ui/PriceText";
 import { ServiceIcon } from "@/components/ui/ServiceIcon";
 import { cityPath, treatmentCities, type City } from "@/data/cities";
 import { getCost, moneyRange } from "@/data/costs";
@@ -84,6 +85,7 @@ export function CityTreatment({
   };
 
   return (
+    <PriceText>
     <>
       <JsonLd data={schema} />
       <Breadcrumbs
@@ -210,5 +212,6 @@ export function CityTreatment({
         </aside>
       </article>
     </>
+    </PriceText>
   );
 }

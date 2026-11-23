@@ -1,5 +1,6 @@
+import { countries, getCountry } from "../data/countries";
 import { procedures } from "../data/procedures";
-import { treatmentModel } from "../lib/page-model";
+import { treatmentModel, countryModel } from "../lib/page-model";
 import { guideGraph, siteGraph } from "../lib/schema";
 
 const banned = new Set(["HowTo", "HowToStep", "Review", "AggregateRating", "SpeakableSpecification"]);
@@ -42,5 +43,20 @@ for (const procedure of [sample, emergency, condition].filter((item) => item !==
     procedureType: procedure.procedureType,
   }));
 }
+
+const nigeria = getCountry("nigeria");
+if (!nigeria) throw new Error("Missing Nigeria");
+const country = countryModel(nigeria);
+check("nigeria", guideGraph({
+  url: "https://medicaltourism.techdr.in/patients-from/nigeria",
+  name: country.h1,
+  updated: country.updated,
+  kind: "country",
+  description: nigeria.description,
+  faqs: country.faqs,
+  reviewed: false,
+  audience: "Nigeria",
+}));
+if (countries.length < 10) throw new Error("Wave 1 country narratives are incomplete");
 
 console.log("JSON-LD check passed.");

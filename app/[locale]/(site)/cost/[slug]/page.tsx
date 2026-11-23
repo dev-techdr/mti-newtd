@@ -1,11 +1,12 @@
 import { setRequestLocale } from "next-intl/server";
 import { PageSuspense } from "@/components/ui/PageFallback";
 import { notFound } from "next/navigation";
+import { PatientsFromLinks, RelatedAnswers } from "@/components/seo/PatientLinks";
 import { GuideArticle } from "@/components/templates/GuideArticle";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getCost, type CostId } from "@/data/costs";
-import { procedures } from "@/data/procedures";
+import { isLibraryProcedure, procedures } from "@/data/procedures";
 import { routing } from "@/i18n/routing";
 import { costModel } from "@/lib/page-model";
 import { guideGraph } from "@/lib/schema";
@@ -34,6 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     path: `/cost/${slug}`,
     title: title.length > 60 ? `${procedure.card} Cost India 2026 | TechDr` : title,
     description: procedure.description,
+    index: !isLibraryProcedure(procedure.slug),
     translated: procedure.translated,
   });
 }
@@ -69,6 +71,8 @@ async function CostPage({ params }: CostParams) {
       <JsonLd data={schema} />
       <Breadcrumbs locale={locale} items={[{ name: "Costs", path: "/treatments" }, { name: `${procedure.card} cost`, path: `/cost/${slug}` }]} />
       <GuideArticle locale={locale} model={model} />
+      <PatientsFromLinks procedureSlug={procedure.slug} />
+      <RelatedAnswers treatment={procedure.slug} />
     </>
   );
 }

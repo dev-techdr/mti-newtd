@@ -33,6 +33,9 @@ export const legal = {
     "Behind Sai Ram Theater, 13-1/37, Sai Ram Theater Road, Sai Puri Colony, Secunderabad, Medchal Malkajgiri, Telangana 500047",
 } as const;
 
+export const positioning =
+  "TechDr Medical Tourism helps patients worldwide compare and plan treatment abroad — in India and other leading medical destinations — with free opinions, transparent estimates and end-to-end travel support. TechDr is a facilitator, not a hospital.";
+
 export const site = {
   name: "TechDr Medical Tourism",
   entity: `${legal.entity}, trading as ${legal.tradeName}`,

@@ -1,0 +1,123 @@
+{
+  "wave": 1,
+  "visa": {
+    "eMedicalEligible": null,
+    "attendantVisa": null,
+    "processingNotes": null,
+    "applyVia": null,
+    "officialUrl": "https://indianvisaonline.gov.in/evisa/tvoa.html",
+    "lastChecked": null,
+    "processingDays": null
+  },
+  "fxRateToUSD": {
+    "value": null,
+    "asOf": null,
+    "source": null
+  },
+  "money": {
+    "paymentMethods": [],
+    "notes": null
+  },
+  "localCareContext": {
+    "commonReasonsPatientsTravel": [],
+    "followUpAtHome": null
+  },
+  "cultural": {
+    "foodNotes": null,
+    "prayerFacilities": null,
+    "otherNotes": null
+  },
+  "techdrContact": {
+    "whatsapp": null,
+    "localRepresentative": null,
+    "hours": null
+  },
+  "localCosts": {},
+  "caseData": {
+    "patientsGuided": null,
+    "period": null
+  },
+  "uniqueContent": null,
+  "translatedTo": [],
+  "reviewed": {
+    "by": null,
+    "date": null
+  },
+  "slug": "iraq",
+  "name": "Iraq",
+  "demonym": "Iraqi",
+  "region": "Middle East",
+  "languages": [
+    "Arabic",
+    "Kurdish"
+  ],
+  "techdrLanguageSupport": [
+    "English",
+    "Arabic"
+  ],
+  "currency": {
+    "code": "IQD",
+    "symbol": "ع.د"
+  },
+  "travel": {
+    "airports": [
+      {
+        "city": "Baghdad",
+        "iata": "BGW"
+      },
+      {
+        "city": "Erbil",
+        "iata": "EBL"
+      },
+      {
+        "city": "Basra",
+        "iata": "BSR"
+      }
+    ],
+    "routesToIndia": [
+      {
+        "from": "BGW",
+        "to": "DEL",
+        "direct": null,
+        "typicalDuration": null,
+        "commonVia": []
+      },
+      {
+        "from": "BGW",
+        "to": "BOM",
+        "direct": null,
+        "typicalDuration": null,
+        "commonVia": []
+      },
+      {
+        "from": "EBL",
+        "to": "DEL",
+        "direct": null,
+        "typicalDuration": null,
+        "commonVia": []
+      },
+      {
+        "from": "EBL",
+        "to": "BOM",
+        "direct": null,
+        "typicalDuration": null,
+        "commonVia": []
+      },
+      {
+        "from": "BSR",
+        "to": "DEL",
+        "direct": null,
+        "typicalDuration": null,
+        "commonVia": []
+      },
+      {
+        "from": "BSR",
+        "to": "BOM",
+        "direct": null,
+        "typicalDuration": null,
+        "commonVia": []
+      }
+    ],
+    "lastChecked": null
+  }
+}

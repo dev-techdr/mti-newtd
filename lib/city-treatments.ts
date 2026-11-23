@@ -2,11 +2,13 @@ import { posts } from "@/data/blog";
 import { cityComboIndexable } from "@/data/city-unique";
 import { cities, cityPath, treatmentCities, type City } from "@/data/cities";
 import { getCost, moneyRange } from "@/data/costs";
-import { procedurePath, procedures, type Procedure } from "@/data/procedures";
+import { fareTreatmentPairs } from "@/data/patients/fare-treatments";
+import { hasAnswerPages, hasCountryTreatmentPages, hasSourceCityPages, listIndexableCountries } from "@/data/patients/publish";
+import { isLibraryProcedure, procedurePath, procedures, type Procedure } from "@/data/procedures";
 import { specialties } from "@/data/specialties";
 import { absoluteUrl } from "@/lib/seo";
 import { latestDate, sitemapPaths } from "@/lib/sitemap-entries";
-import { legal, site } from "@/lib/site";
+import { legal, positioning, site } from "@/lib/site";
 
 export function cityTreatmentPath(city: Pick<City, "path">, procedure: Pick<Procedure, "slug">) {
   return `${cityPath(city)}/${procedure.slug}`;
@@ -96,7 +98,13 @@ export function citySitemapItems() {
 export const cityTreatmentSitemapLastModified = latestDate(cityItems.map((item) => item.lastModified));
 
 export function publishedSitemapPaths() {
-  return sitemapPaths.filter((path) => path !== "/sitemaps/city-treatments/sitemap.xml" || cityItems.length > 0);
+  return sitemapPaths.filter((path) => {
+    if (path === "/sitemaps/city-treatments/sitemap.xml") return cityItems.length > 0;
+    if (path === "/sitemaps/country-treatments/sitemap.xml") return hasCountryTreatmentPages() || fareTreatmentPairs().length > 0;
+    if (path === "/sitemaps/source-cities/sitemap.xml") return hasSourceCityPages();
+    if (path === "/sitemaps/answers/sitemap.xml") return hasAnswerPages();
+    return true;
+  });
 }
 
 export function llmsText() {
@@ -104,6 +112,7 @@ export function llmsText() {
     .map((city) => `- [${city.searchName}](${absoluteUrl("en", cityPath(city))}): ${city.description}`)
     .join("\n");
   const treatments = procedures
+    .filter((procedure) => !isLibraryProcedure(procedure.slug))
     .map((procedure) => {
       const cost = getCost(procedure.costId);
       return `- [${procedure.name}](${absoluteUrl("en", procedurePath(procedure))}): ${moneyRange(cost.india)} ${cost.unit}. Care ${procedure.hospitalStay}. Time in India ${procedure.totalStay}.`;
@@ -112,7 +121,7 @@ export function llmsText() {
 
   return `# ${site.name}
 
-> ${site.name} (${site.url.replace("https://", "")}) helps international patients plan affordable treatment in India with JCI and NABH-accredited partner hospitals. It is a medical travel service, not a hospital, and it does not publish the names of individual doctors.
+> ${positioning} It does not publish the names of individual doctors. India is the destination with coordinated care today. Other countries stay out of this list until partner and source data exist.
 
 - Canonical site: ${site.url}
 - Email: ${site.email}
@@ -129,9 +138,16 @@ export function llmsText() {
 - Visa rules change. Confirm them on the official Indian visa portal.
 - Google Ads and Meta (Facebook and Instagram) advertisements are marketing. They are not medical advice, a personal quote, or a promised outcome. Advertising cookies load only after the visitor allows them.
 
+## Patients from other countries
+
+Country corridors are omitted until visa eligibility, a checked route and a sourced local price are on the record. The directory is ${absoluteUrl("en", "/patients-from")}.
+${listIndexableCountries()
+  .map((country) => `- [${country.name}](${absoluteUrl("en", `/patients-from/${country.slug}`)})`)
+  .join("\n")}
+
 ## Cities
 
-The five city guides below are the indexable destination pages. City × treatment URLs stay out of this list until they have unique copy.
+The city guides below are the indexable Indian city pages. A city × treatment address redirects to that treatment's own guide.
 
 ${cityList}
 

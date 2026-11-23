@@ -1,6 +1,9 @@
 import { decisionGuides, prioritySlugs } from "@/data/decision-guides";
-import { getCost, moneyRange } from "@/data/costs";
+import { getCost, money, moneyRange } from "@/data/costs";
 import type { CountryPage } from "@/data/countries";
+import { costFilled, fxFilled, routeFilled } from "@/data/patients/assess";
+import { marketTreatments } from "@/data/patients/catalog";
+import { getPatientCountry } from "@/data/patients/load";
 import { costPath, getProcedure, procedurePath, type Procedure } from "@/data/procedures";
 import type { Faq } from "@/data/procedures/types";
 import { site } from "@/lib/site";
@@ -28,6 +31,7 @@ export type PageModel = {
   dataNote?: string;
   journeys?: { name: string; country: string; summary: string }[];
   related: { href: string; label: string }[];
+  reviewNote?: string;
 };
 
 const priority = new Set(prioritySlugs);
@@ -462,7 +466,13 @@ export function costModel(procedure: Procedure): PageModel {
   };
 }
 
+function localFromUsd(usd: number, rate: number, symbol: string) {
+  return `${symbol}${Math.round(usd * rate).toLocaleString("en-US")}`;
+}
+
 export function countryModel(country: CountryPage): PageModel {
+  const record = getPatientCountry(country.slug);
+  if (!record) throw new Error(`No patient record for ${country.slug}`);
   const seen = new Set<string>();
   const quickAnswer = boundQuickAnswer(country.name, country.answer);
   remember(seen, quickAnswer);
@@ -470,62 +480,105 @@ export function countryModel(country: CountryPage): PageModel {
   const blocks: [string, string, string][] = [
     ["flights", `Which flights do people from ${country.name} actually use?`, country.flights],
     ["visa", `What visa should a ${country.adjective} passport holder check?`, country.visa],
-    ["visa-experience", `What is the usual visa-processing experience from ${country.name}?`, `TODO(client): add the visa-processing experience your desk actually sees for ${country.adjective} passports. This page does not invent a number of days.`],
     ["language", `Which languages can the case team use for patients from ${country.name}?`, country.language],
     ["money", `Which currency and payment methods work from ${country.name}?`, country.money],
-    ["bring", `What should a traveller from ${country.name} pack besides clothes?`, `Pack the passport, recent reports, a medicine list and enough regular medicines for a delay when travelling from ${country.name}. Keep scans on a drive as well as a link.`],
     ["treatments", `Which treatments do families from ${country.name} usually ask about?`, country.treatments],
     ["culture", `What practical arrangements matter for patients from ${country.name}?`, country.culture],
   ];
   for (const [id, heading, body] of blocks) {
     addSection(seen, sections, country.name, { id, heading, paragraphs: [body] });
   }
-  const extra: Faq[] = [
-    { question: `Does TechDr book the flight from ${country.name}?`, answer: `TechDr plans the hospital file for patients from ${country.name}. You buy the ticket after the clinical plan and the visa step are clear.` },
-    { question: `Can a child travel from ${country.name} for treatment?`, answer: `A child travelling from ${country.name} needs a parent or legal guardian and a specialist who says the child is fit to fly.` },
-    { question: `Who meets passengers from ${country.name} on arrival?`, answer: `Pickup for patients from ${country.name} is booked against the flight number after a plan is accepted. Send delays on the same WhatsApp thread.` },
-    { question: `Is an emergency in ${country.name} handled on this page?`, answer: `No. An emergency in ${country.name} needs local services. This page is for planned treatment in India.` },
-  ];
+  if (record.uniqueContent) {
+    addSection(seen, sections, country.name, {
+      id: "country-notes",
+      heading: `What else is specific to patients from ${country.name}?`,
+      paragraphs: [record.uniqueContent],
+    });
+  }
+  const readyRoutes = record.travel.routesToIndia.filter((route) => routeFilled(route));
+  if (readyRoutes.length && record.travel.lastChecked) {
+    addSection(seen, sections, country.name, {
+      id: "routes",
+      heading: `Which checked routes run from ${country.name} to India?`,
+      paragraphs: readyRoutes.map(
+        (route) =>
+          `${route.from} to ${route.to} is ${route.direct ? "nonstop" : "a connection"} and is filed as ${route.typicalDuration}. Checked ${record.travel.lastChecked}.`,
+      ),
+    });
+  }
+  if (record.localCareContext.commonReasonsPatientsTravel.length && record.localCareContext.followUpAtHome) {
+    addSection(seen, sections, country.name, {
+      id: "why-travel",
+      heading: `Why do patients from ${country.name} plan treatment away from home?`,
+      paragraphs: [record.localCareContext.followUpAtHome],
+      items: record.localCareContext.commonReasonsPatientsTravel,
+    });
+  }
+  const readyCosts = Object.entries(record.localCosts).filter(([, cost]) => costFilled(cost));
+  let comparison: PageModel["comparison"];
+  if (readyCosts.length && fxFilled(record.fxRateToUSD) && record.fxRateToUSD.value && record.fxRateToUSD.asOf) {
+    const rate = record.fxRateToUSD.value;
+    const rows = readyCosts.flatMap(([slug, cost]) => {
+      const procedure = getProcedure(slug);
+      if (!procedure || cost.minUSD === null || cost.maxUSD === null) return [];
+      const india = getCost(procedure.costId).india;
+      const local = `${money(cost.minUSD)}–${money(cost.maxUSD)} (${localFromUsd(cost.minUSD, rate, record.currency.symbol)}–${localFromUsd(cost.maxUSD, rate, record.currency.symbol)})`;
+      return [[marketTreatments.find((item) => item.slug === slug)?.label ?? procedure.name, moneyRange(india), local]];
+    });
+    if (rows.length) {
+      comparison = {
+        caption: `Sourced private ranges in ${country.name} against the India planning range. FX ${record.fxRateToUSD.asOf}. Not a quote.`,
+        headers: ["Treatment", "India planning range", `${country.name} private`],
+        rows,
+      };
+    }
+  }
   const faqs: Faq[] = [];
-  for (const faq of [...country.faqs, ...extra]) {
+  for (const faq of [...country.faqs, ...record.faqs]) {
     if (faqs.length >= 12) break;
     const answer = absorb(seen, faq.answer);
     if (!answer) continue;
     faqs.push({ question: faq.question, answer });
   }
+  const visaValue =
+    record.visa.eMedicalEligible === null
+      ? "Not checked"
+      : `${record.visa.eMedicalEligible ? "e-Medical route listed" : "e-Medical route not listed"}${record.visa.lastChecked ? `, checked ${record.visa.lastChecked}` : ""}`;
+  const facts = [
+    { label: "Languages", value: record.techdrLanguageSupport.join(", ") },
+    { label: "Currency", value: `${record.currency.code} (${record.currency.symbol})` },
+    { label: "Visa eligibility", value: visaValue },
+  ];
+  if (record.travel.airports.length) {
+    facts.unshift({ label: "Airports", value: record.travel.airports.map((item) => `${item.iata} ${item.city}`).join(", ") });
+  }
+  if (record.money.paymentMethods.length) facts.push({ label: "Payment", value: record.money.paymentMethods.join(", ") });
   return {
     kind: "country",
     h1: `Treatment in India for patients from ${country.name}`,
     quickAnswer,
-    updated: "2026-11-13",
+    updated: record.reviewed.date ?? "2026-11-13",
     showPrice: false,
     showQuote: false,
     alsoKnownAs: [],
-    facts: [
-      { label: "Corridor", value: `${country.name} to India` },
-      { label: "Visa check", value: "Current e-Medical Visa rules" },
-      { label: "Payment", value: "See the currency section" },
-    ],
+    facts,
+    comparison,
     sections,
     faqs,
-    followups: [
-      { question: "How does a medical visa work?", href: "/medical-visa-india", answer: `The visa guide sits beside this ${country.name} page. The government site is still the source of the rule.` },
-      { question: "How do I ask for a quote?", href: "/get-a-free-quote", answer: `The quote form is the same desk for patients writing from ${country.name}.` },
-    ],
+    followups: [],
     todos: [],
+    reviewNote: record.reviewed.by
+      ? `Reviewed by ${record.reviewed.by}${record.reviewed.date ? ` on ${record.reviewed.date}` : ""}.`
+      : "This country page has no named medical reviewer on file.",
     sources: [
-      {
-        href: "https://indianvisaonline.gov.in/evisa/tvoa.html",
-        label: "Indian e-Visa application",
-        supports: `For travellers from ${country.name}, this is the government page that takes an e-Medical Visa application.`,
-      },
-      {
-        href: "https://indianvisaonline.gov.in/evisa/",
-        label: "Official e-Visa categories",
-        supports: `For ${country.adjective} passports, this page lists e-Medical Visa and e-Medical Attendant Visa among the official categories.`,
-      },
+      { href: record.visa.officialUrl, label: "Indian e-Visa application", supports: "Official application and current fee." },
+      { href: "https://indianvisaonline.gov.in/evisa/", label: "Official e-Visa categories", supports: "Official category list." },
     ],
-    related: [],
+    related: [
+      { href: "/patients-from", label: "All patient countries" },
+      { href: "/medical-visa-india", label: "India medical visa guide" },
+      { href: "/get-a-free-quote", label: "Request a written quote" },
+    ],
   };
 }
 

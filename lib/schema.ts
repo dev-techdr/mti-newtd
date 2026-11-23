@@ -1,6 +1,6 @@
-import { treatmentCities } from "@/data/cities";
 import { absoluteUrl } from "@/lib/seo";
-import { coordinatorLanguages, legal, site, socialLinks } from "@/lib/site";
+import { specialties } from "@/data/specialties";
+import { coordinatorLanguages, legal, positioning, site, socialLinks } from "@/lib/site";
 
 export type Crumb = { name: string; path: string };
 
@@ -27,14 +27,21 @@ export function guideGraph(input: {
   howPerformed?: string;
   followup?: string;
   price?: { min: number; max: number };
+  reviewed?: boolean;
+  audience?: string;
 }) {
   const page: Record<string, unknown> = {
     "@type": "MedicalWebPage",
     url: input.url,
     name: input.name,
     description: input.description,
-    lastReviewed: input.updated,
   };
+  if (input.reviewed !== false) page.lastReviewed = input.updated;
+  if (input.audience) {
+    page.about = input.name;
+    page.audience = { "@type": "Patient", geographicArea: { "@type": "Country", name: input.audience } };
+    page.publisher = { "@id": `${site.url}/#organization` };
+  }
   const graph: Record<string, unknown>[] = [page];
   if (input.kind === "condition" || input.kind === "emergency") {
     graph.push({ "@type": "MedicalCondition", name: input.name, url: input.url });
@@ -106,8 +113,8 @@ export function siteGraph(locale: string) {
         taxID: legal.pan,
         vatID: legal.gstin,
         address,
-        description:
-          "TechDr Medical Tourism coordinates affordable treatment in India for international patients. It is a medical travel service, not a hospital.",
+        description: positioning,
+        knowsAbout: specialties.map((item) => item.name),
         ...(sameAs.length ? { sameAs } : {}),
       },
       {
@@ -122,28 +129,10 @@ export function siteGraph(locale: string) {
         vatID: legal.gstin,
         address,
         parentOrganization: { "@id": orgId },
-        description:
-          "Medical tourism facilitation: treatment plans, indicative cost estimates, visa invitation letters and travel support with independent JCI and NABH-accredited partner hospitals.",
+        description: positioning,
         currenciesAccepted: "USD",
-        areaServed: [
-          "Nigeria",
-          "Kenya",
-          "Bangladesh",
-          "Iraq",
-          "Oman",
-          "Uzbekistan",
-          "Ethiopia",
-          "Tanzania",
-          "Afghanistan",
-          "Yemen",
-          "United Kingdom",
-          "United States",
-          ...treatmentCities().map((city) => ({
-            "@type": "City",
-            name: city.searchName,
-            containedInPlace: { "@type": "Country", name: "India" },
-          })),
-        ],
+        areaServed: { "@type": "Place", name: "Worldwide" },
+        knowsAbout: specialties.map((item) => item.name),
         contactPoint: site.whatsapps.map((telephone) => ({
           "@type": "ContactPoint",
           contactType: "patient support",

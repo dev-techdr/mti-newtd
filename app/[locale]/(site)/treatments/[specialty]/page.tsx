@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { FaqList } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { CostMark } from "@/components/ui/CostMark";
+import { PriceText } from "@/components/ui/PriceText";
 import { ServiceIcon } from "@/components/ui/ServiceIcon";
 import { getCost, moneyRange } from "@/data/costs";
 import { guidesForSpecialty, procedurePath, type Procedure } from "@/data/procedures";
@@ -89,6 +90,7 @@ async function SpecialtyPage({ params }: SpecialtyParams) {
         ],
       }} />
       <Breadcrumbs locale={locale} items={[{ name: "Treatments", path: "/treatments" }, { name: specialty.name, path: `/treatments/${slug}` }]} />
+      <PriceText>
       <article className="mx-auto w-full max-w-6xl px-4 py-10">
         <header className="grid items-start gap-8 md:grid-cols-[minmax(0,1fr)_minmax(240px,320px)]">
           <div className="min-w-0">
@@ -176,6 +178,7 @@ async function SpecialtyPage({ params }: SpecialtyParams) {
           </aside>
         </div>
       </article>
+      </PriceText>
     </>
   );
 }

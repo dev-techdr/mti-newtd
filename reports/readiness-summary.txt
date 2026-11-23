@@ -1,0 +1,44 @@
+Patient-page readiness 2026-11-23
+Country hubs built: 10. Indexable: 0.
+Country × treatment built: 0 of 150.
+Source cities built: 0. Question pages built: 0.
+
+Shared gaps on every Wave 1 country hub:
+- visa.eMedicalEligible
+- visa.attendantVisa
+- visa.processingNotes
+- visa.applyVia
+- visa.lastChecked (within 180 days)
+- travel.lastChecked (within 180 days)
+- money.paymentMethods
+- money.notes
+- localCareContext.commonReasonsPatientsTravel
+- localCareContext.followUpAtHome
+- cultural.foodNotes
+- cultural.prayerFacilities
+- fxRateToUSD (local units per 1 USD, asOf, source)
+- localCosts: sourced private minUSD, maxUSD, setting, source and asOf for at least one treatment
+- reviewed.by
+- reviewed.date
+
+Per country:
+- /patients-from/nigeria: 330 words, uniqueness 100%. faqs: 4 of 8, each answer must be true only for Nigeria; travel.routesToIndia: LOS-DEL needs direct yes/no and typical duration; LOS-BOM needs direct yes/no and typical duration; ABV-DEL needs direct yes/no and typical duration; ABV-BOM needs direct yes/no and typical duration
+- /patients-from/kenya: 235 words, uniqueness 100%. uniqueContent: 235 words in the country narrative, need 300; faqs: 4 of 8, each answer must be true only for Kenya; travel.routesToIndia: NBO-BOM needs direct yes/no and typical duration
+- /patients-from/ethiopia: 235 words, uniqueness 100%. uniqueContent: 235 words in the country narrative, need 300; faqs: 4 of 8, each answer must be true only for Ethiopia; travel.routesToIndia: ADD-DEL needs direct yes/no and typical duration
+- /patients-from/tanzania: 208 words, uniqueness 100%. uniqueContent: 208 words in the country narrative, need 300; faqs: 4 of 8, each answer must be true only for Tanzania; travel.routesToIndia: DAR-BOM needs direct yes/no and typical duration; DAR-DEL needs direct yes/no and typical duration
+- /patients-from/bangladesh: 247 words, uniqueness 100%. uniqueContent: 247 words in the country narrative, need 300; faqs: 4 of 8, each answer must be true only for Bangladesh; travel.routesToIndia: DAC-CCU needs direct yes/no and typical duration; DAC-DEL needs direct yes/no and typical duration
+- /patients-from/iraq: 248 words, uniqueness 100%. uniqueContent: 248 words in the country narrative, need 300; faqs: 4 of 8, each answer must be true only for Iraq; travel.routesToIndia: BGW-DEL needs direct yes/no and typical duration; BGW-BOM needs direct yes/no and typical duration; EBL-DEL needs direct yes/no and typical duration; EBL-BOM needs direct yes/no and typical duration; BSR-DEL needs direct yes/no and typical duration; BSR-BOM needs direct yes/no and typical duration
+- /patients-from/oman: 277 words, uniqueness 100%. uniqueContent: 277 words in the country narrative, need 300; faqs: 4 of 8, each answer must be true only for Oman; travel.routesToIndia: MCT-BOM needs direct yes/no and typical duration
+- /patients-from/yemen: 232 words, uniqueness 100%. uniqueContent: 232 words in the country narrative, need 300; faqs: 4 of 8, each answer must be true only for Yemen; travel.routesToIndia
+- /patients-from/uzbekistan: 242 words, uniqueness 100%. uniqueContent: 242 words in the country narrative, need 300; faqs: 4 of 8, each answer must be true only for Uzbekistan; travel.routesToIndia: TAS-DEL needs direct yes/no and typical duration
+- /patients-from/afghanistan: 229 words, uniqueness 100%. uniqueContent: 229 words in the country narrative, need 300; faqs: 4 of 8, each answer must be true only for Afghanistan; travel.airports; travel.routesToIndia
+
+Afghanistan is in Wave 1 only as a draft. The visa route is not marked active or closed.
+Case counts and country WhatsApp numbers were left blank on purpose.
+fxRateToUSD.value means local currency units for 1 USD.
+IndexNow was not called. No newly indexable corridor URL exists.
+Search Console was not queried. Resubmit the sitemap index after deploy: the 10 country URLs left /sitemaps/countries/sitemap.xml.
+Do not open Wave 2 until at least 70% of Wave 1 pages are indexed. That share is 0% today.
+
+Type B and type C route files are copied into app/ only when at least one of those pages is indexable. An empty generateStaticParams list breaks this Next.js build.
+A source city also needs an indexable treatment corridor for the same country, so three internal links exist.

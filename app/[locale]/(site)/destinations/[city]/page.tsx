@@ -9,11 +9,11 @@ import { TreatmentSearch } from "@/components/sections/TreatmentSearch";
 import { FaqList } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { cities, cityPath, cityRouteParams, getCity, treatmentCities } from "@/data/cities";
+import { IndiaCityMap } from "@/components/maps/IndiaCityMap";
 import { ServiceIcon } from "@/components/ui/ServiceIcon";
 import { guidesForSpecialty, treatmentSearchItems } from "@/data/procedures";
 import { specialties } from "@/data/specialties";
 import { routing } from "@/i18n/routing";
-import { citySpecialtyPath } from "@/lib/city-treatments";
 import { absoluteUrl, localizedPath, pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -83,7 +83,7 @@ async function CityPage({ params }: CityParams) {
               "@type": "ListItem",
               position: index + 1,
               name: `${specialty.name} in ${city.searchName}`,
-              url: absoluteUrl(locale, citySpecialtyPath(city, specialty)),
+              url: absoluteUrl(locale, `/treatments/${specialty.slug}`),
             })),
           },
         ],
@@ -95,17 +95,20 @@ async function CityPage({ params }: CityParams) {
             <div className="mesh-blob -start-10 top-0 size-72 bg-primary/30" />
             <div className="mesh-blob mesh-blob-b end-0 top-16 size-56 bg-accent/20" />
           </div>
-          <div className="relative mx-auto max-w-6xl px-4 py-12">
-            <p className="text-sm font-semibold text-primary-ink">{city.airportCode} · India</p>
-            <h1 className="mt-2 max-w-3xl">Medical treatment in {city.searchName}</h1>
-            {city.searchName !== city.name ? <p className="mt-3 text-muted">Hospital letters for this city use the name {city.name}.</p> : null}
-            <div className="mt-6 max-w-3xl"><AnswerBox>{city.answer}</AnswerBox></div>
-            <p className="mt-6 max-w-3xl">{city.overview}</p>
-            <div className="mt-6 flex max-w-xl flex-col gap-3 sm:flex-row sm:items-center">
-              <div className="min-w-0 flex-1"><TreatmentSearch items={searchItems} /></div>
-              <Button href={quoteHref}>Get a free quote</Button>
+          <div className="relative mx-auto grid max-w-6xl items-start gap-8 px-4 py-12 lg:grid-cols-[minmax(0,1fr)_minmax(320px,460px)]">
+            <div>
+              <p className="text-sm font-semibold text-primary-ink">{city.airportCode} · India</p>
+              <h1 className="mt-2 max-w-3xl">Medical treatment in {city.searchName}</h1>
+              {city.searchName !== city.name ? <p className="mt-3 text-muted">Hospital letters for this city use the name {city.name}.</p> : null}
+              <div className="mt-6 max-w-3xl"><AnswerBox>{city.answer}</AnswerBox></div>
+              <p className="mt-6 max-w-3xl">{city.overview}</p>
+              <div className="mt-6 flex max-w-xl flex-col gap-3 sm:flex-row sm:items-center">
+                <div className="min-w-0 flex-1"><TreatmentSearch items={searchItems} /></div>
+                <Button href={quoteHref}>Get a free quote</Button>
+              </div>
             </div>
-            <nav className="mt-8 flex gap-2 overflow-x-auto pb-1" aria-label="Cities">
+            <IndiaCityMap slug={city.slug} label={city.searchName} code={city.airportCode} />
+            <nav className="flex gap-2 overflow-x-auto pb-1 lg:col-span-2" aria-label="Cities">
               {cities.map((item) => (
                 <Link
                   key={item.path}
@@ -145,11 +148,11 @@ async function CityPage({ params }: CityParams) {
 
         <section className="mx-auto max-w-6xl px-4 py-10">
           <h2>Departments in {city.searchName}</h2>
-          <p className="mt-3 max-w-3xl">Choose a department. Each department lists its guides for {city.searchName}. Search still finds a single guide.</p>
+          <p className="mt-3 max-w-3xl">Choose a department. The guides are the same treatment pages used for every Indian city. The written quote names the campus in {city.searchName}.</p>
           <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {groups.map(({ specialty, count }) => (
               <li key={specialty.slug}>
-                <Link href={citySpecialtyPath(city, specialty)} className="flex h-full items-start gap-3 rounded-2xl border border-border bg-card p-4 hover:bg-surface">
+                <Link href={`/treatments/${specialty.slug}`} className="flex h-full items-start gap-3 rounded-2xl border border-border bg-card p-4 hover:bg-surface">
                   <ServiceIcon specialty={specialty.slug} size={40} />
                   <span>
                     <span className="block font-semibold text-primary-ink">{specialty.name}</span>

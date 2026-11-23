@@ -3,6 +3,7 @@ import { AnswerBox, Byline } from "@/components/seo/AnswerBox";
 import { FaqList } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { CostMark } from "@/components/ui/CostMark";
+import { PriceText } from "@/components/ui/PriceText";
 import type { PageModel } from "@/lib/page-model";
 
 export function GuideArticle({
@@ -15,6 +16,7 @@ export function GuideArticle({
   eyebrow?: string;
 }) {
   return (
+    <PriceText>
     <article className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 lg:grid-cols-[1fr_280px]">
       <div>
         {eyebrow ? <p className="text-sm font-semibold text-primary-ink">{eyebrow}</p> : null}
@@ -208,7 +210,7 @@ export function GuideArticle({
             <Button className="mt-4" href={model.quoteHref}>Get a free quote</Button>
           </section>
         ) : null}
-        <Byline locale={locale} updated={model.updated} />
+        <Byline locale={locale} updated={model.updated} note={model.reviewNote} />
       </div>
       <aside className="h-max lg:sticky lg:top-24">
         {model.price ? (
@@ -218,9 +220,14 @@ export function GuideArticle({
             ) : null}
           </CostMark>
         ) : (
-          <p className="rounded-2xl border border-border p-4 text-sm">This page is information for an emergency. It is not a quote.</p>
+          <p className="rounded-2xl border border-border p-4 text-sm">
+            {model.kind === "country"
+              ? "Visa rules and prices appear here only with a date and a source. Ask for a written quote before you pay for flights."
+              : "This page is information for an emergency. It is not a quote."}
+          </p>
         )}
       </aside>
     </article>
+    </PriceText>
   );
 }

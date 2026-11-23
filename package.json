@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "tsx scripts/check-repetition.ts && tsx scripts/check-jsonld.ts && next build",
+    "build": "tsx scripts/readiness.ts && tsx scripts/check-repetition.ts && tsx scripts/check-jsonld.ts && next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "check:aeo": "tsx scripts/check-repetition.ts && tsx scripts/check-jsonld.ts"
+    "readiness": "tsx scripts/readiness.ts",
+    "check:aeo": "tsx scripts/readiness.ts && tsx scripts/check-repetition.ts && tsx scripts/check-jsonld.ts",
+    "import:data": "tsx scripts/import-data.ts",
+    "review-queue": "tsx scripts/review-queue.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^6.0.2",

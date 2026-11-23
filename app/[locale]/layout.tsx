@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { routing } from "@/i18n/routing";
 import { siteGraph } from "@/lib/schema";
-import { site } from "@/lib/site";
+import { positioning, site } from "@/lib/site";
 import "../globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -33,11 +33,10 @@ const kufi = Noto_Kufi_Arabic({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Treatment in India, Up to 80% Less | TechDr",
+    default: "Find the Right Treatment Abroad | TechDr",
     template: "%s",
   },
-  description:
-    "TechDr plans accredited hospital care in India for international patients, with free quotes, visa support and transparent USD estimates.",
+  description: positioning,
 };
 
 export function generateStaticParams() {

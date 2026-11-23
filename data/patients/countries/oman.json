@@ -1,0 +1,80 @@
+{
+  "wave": 1,
+  "visa": {
+    "eMedicalEligible": null,
+    "attendantVisa": null,
+    "processingNotes": null,
+    "applyVia": null,
+    "officialUrl": "https://indianvisaonline.gov.in/evisa/tvoa.html",
+    "lastChecked": null,
+    "processingDays": null
+  },
+  "fxRateToUSD": {
+    "value": null,
+    "asOf": null,
+    "source": null
+  },
+  "money": {
+    "paymentMethods": [],
+    "notes": null
+  },
+  "localCareContext": {
+    "commonReasonsPatientsTravel": [],
+    "followUpAtHome": null
+  },
+  "cultural": {
+    "foodNotes": null,
+    "prayerFacilities": null,
+    "otherNotes": null
+  },
+  "techdrContact": {
+    "whatsapp": null,
+    "localRepresentative": null,
+    "hours": null
+  },
+  "localCosts": {},
+  "caseData": {
+    "patientsGuided": null,
+    "period": null
+  },
+  "uniqueContent": null,
+  "translatedTo": [],
+  "reviewed": {
+    "by": null,
+    "date": null
+  },
+  "slug": "oman",
+  "name": "Oman",
+  "demonym": "Omani",
+  "region": "Middle East",
+  "languages": [
+    "Arabic",
+    "English"
+  ],
+  "techdrLanguageSupport": [
+    "English",
+    "Arabic"
+  ],
+  "currency": {
+    "code": "OMR",
+    "symbol": "ر.ع."
+  },
+  "travel": {
+    "airports": [
+      {
+        "city": "Muscat",
+        "iata": "MCT"
+      }
+    ],
+    "routesToIndia": [
+      {
+        "from": "MCT",
+        "to": "BOM",
+        "direct": null,
+        "typicalDuration": null,
+        "commonVia": []
+      }
+    ],
+    "lastChecked": null
+  }
+}

@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { getArticles } from "@/lib/articles";
 import { pageMetadata } from "@/lib/seo";
+import { PriceText } from "@/components/ui/PriceText";
 import { formatUpdated } from "@/lib/utils";
 
 const categoryOrder = [
@@ -57,6 +58,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   });
 
   return (
+    <PriceText>
     <>
       <Breadcrumbs locale={locale} items={[{ name: "Guides", path: "/blog" }]} />
       <div className="mx-auto w-full max-w-6xl px-4 py-10">
@@ -92,5 +94,6 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </div>
       </div>
     </>
+    </PriceText>
   );
 }

@@ -1,3 +1,4 @@
+import { PatientsFromLinks, RelatedAnswers } from "@/components/seo/PatientLinks";
 import { GuideArticle } from "@/components/templates/GuideArticle";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -43,6 +44,8 @@ export function ProcedureArticle({ locale, procedure }: { locale: string; proced
         {specialty ? <p className="text-sm font-semibold text-primary-ink">{specialty.name}</p> : null}
       </div>
       <GuideArticle locale={locale} model={model} />
+      <PatientsFromLinks procedureSlug={procedure.slug} />
+      <RelatedAnswers treatment={procedure.slug} />
     </>
   );
 }

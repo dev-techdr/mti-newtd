@@ -123,6 +123,10 @@ const mergedPaths: [string, string][] = [
   ["/cost/colorectal-cancer-surgery", "/cost/colorectal-surgery-cost-in-india"],
   ["/cost/pancreatic-cancer-surgery", "/cost/whipple-procedure-cost-in-india"],
   ["/cost/liver-cancer-surgery", "/cost/liver-resection-cost-in-india"],
+  ["/cost/cauda-equina-syndrome", "/treatments/spine-surgery/cauda-equina-syndrome"],
+  ["/cost/cauda-equina-syndrome-cost-in-india", "/treatments/spine-surgery/cauda-equina-syndrome"],
+  ["/countries/india", "/why-india"],
+  ["/countries/india/visa-and-travel", "/medical-visa-india"],
 ];
 
 export const redirectMap: RedirectItem[] = [
@@ -136,11 +140,15 @@ export const redirectMap: RedirectItem[] = [
       destination: procedurePath(item),
       statusCode: 301 as const,
     },
-    {
-      source: `/cost/${item.costId}`,
-      destination: `/cost/${item.costId}-cost-in-india`,
-      statusCode: 301 as const,
-    },
+    ...(item.slug === "cauda-equina-syndrome"
+      ? []
+      : [
+          {
+            source: `/cost/${item.costId}`,
+            destination: `/cost/${item.costId}-cost-in-india`,
+            statusCode: 301 as const,
+          },
+        ]),
   ]),
   ...cityAliasRedirects(),
   ...procedureAliasRedirects(),

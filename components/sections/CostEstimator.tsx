@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { costs, midpointSavings, moneyRange } from "@/data/costs";
 import { CostMark } from "@/components/ui/CostMark";
+import { PriceText } from "@/components/ui/PriceText";
 
 export function CostEstimator() {
   const [id, setId] = useState(costs[0]?.id ?? "knee-replacement");
@@ -13,6 +14,7 @@ export function CostEstimator() {
   const label = home === "usa" ? row.usaLabel : row.ukLabel;
   const savings = midpointSavings(row.india, other, Boolean(label));
   return (
+    <PriceText>
     <form className="rounded-2xl border border-border bg-card p-5" onSubmit={(event) => event.preventDefault()}>
       <h2 className="text-xl">Compare an indicative saving</h2>
       <label className="mt-4 block text-sm">Procedure
@@ -28,5 +30,6 @@ export function CostEstimator() {
       </label>
       <p className="mt-4 flex flex-wrap items-center gap-2">India <CostMark value={moneyRange(row.india)} /> versus {moneyRange(other, label)}. The midpoint gap is about {savings}%. This is not your quote.</p>
     </form>
+    </PriceText>
   );
 }

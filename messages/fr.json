@@ -17,7 +17,9 @@
     "openMenu": "Ouvrir le menu",
     "closeMenu": "Fermer le menu",
     "language": "Langue",
-    "theme": "Changer le thème"
+    "theme": "Changer le thème",
+    "from": "Patients venant de",
+    "allDestinations": "Toutes les destinations"
   },
   "localeNotice": "La traduction complète de cette page est en cours. Le contenu médical ci-dessous reste en anglais le temps de la relecture.",
   "footer": {
@@ -30,7 +32,9 @@
     "terms": "Conditions",
     "disclaimer": "Avertissement médical",
     "editorial": "Politique éditoriale",
-    "note": "TechDr coordonne des soins avec des hôpitaux indépendants. Nous ne sommes pas un hôpital et nous ne promettons pas de résultat."
+    "note": "TechDr coordonne des soins avec des hôpitaux indépendants. Nous ne sommes pas un hôpital et nous ne promettons pas de résultat.",
+    "allTreatments": "Tous les traitements",
+    "call": "Appeler"
   },
   "common": {
     "reviewed": "Relu par le panel médical TechDr · Dernière mise à jour : {date}",

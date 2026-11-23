@@ -2,6 +2,7 @@
 
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
+import { highlightPrices } from "@/components/ui/PriceText";
 
 export function FaqList({
   items,
@@ -21,7 +22,7 @@ export function FaqList({
             </Accordion.Trigger>
           </Accordion.Header>
           <Accordion.Content forceMount className="px-4 pb-4 text-muted data-[state=closed]:hidden">
-            <p>{item.answer}</p>
+            <p>{highlightPrices(item.answer)}</p>
           </Accordion.Content>
         </Accordion.Item>
       ))}

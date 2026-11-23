@@ -1,0 +1,91 @@
+{
+  "wave": 1,
+  "visa": {
+    "eMedicalEligible": null,
+    "attendantVisa": null,
+    "processingNotes": null,
+    "applyVia": null,
+    "officialUrl": "https://indianvisaonline.gov.in/evisa/tvoa.html",
+    "lastChecked": null,
+    "processingDays": null
+  },
+  "fxRateToUSD": {
+    "value": null,
+    "asOf": null,
+    "source": null
+  },
+  "money": {
+    "paymentMethods": [],
+    "notes": null
+  },
+  "localCareContext": {
+    "commonReasonsPatientsTravel": [],
+    "followUpAtHome": null
+  },
+  "cultural": {
+    "foodNotes": null,
+    "prayerFacilities": null,
+    "otherNotes": null
+  },
+  "techdrContact": {
+    "whatsapp": null,
+    "localRepresentative": null,
+    "hours": null
+  },
+  "localCosts": {},
+  "caseData": {
+    "patientsGuided": null,
+    "period": null
+  },
+  "uniqueContent": null,
+  "translatedTo": [],
+  "reviewed": {
+    "by": null,
+    "date": null
+  },
+  "slug": "tanzania",
+  "name": "Tanzania",
+  "demonym": "Tanzanian",
+  "region": "East Africa",
+  "languages": [
+    "Swahili",
+    "English"
+  ],
+  "techdrLanguageSupport": [
+    "English",
+    "Swahili"
+  ],
+  "currency": {
+    "code": "TZS",
+    "symbol": "TSh"
+  },
+  "travel": {
+    "airports": [
+      {
+        "city": "Dar es Salaam",
+        "iata": "DAR"
+      },
+      {
+        "city": "Kilimanjaro",
+        "iata": "JRO"
+      }
+    ],
+    "routesToIndia": [
+      {
+        "from": "DAR",
+        "to": "BOM",
+        "direct": null,
+        "typicalDuration": null,
+        "commonVia": []
+      },
+      {
+        "from": "DAR",
+        "to": "DEL",
+        "direct": null,
+        "typicalDuration": null,
+        "commonVia": []
+      }
+    ],
+    "lastChecked": null
+  }
+}

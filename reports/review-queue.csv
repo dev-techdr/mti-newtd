@@ -1,0 +1,290 @@
+url,cluster,status,index,primary
+/,page,indexable,yes,treatment abroad
+/treatments,page,indexable,yes,treatments
+/how-it-works,page,indexable,yes,how medical travel works
+/patient-services,page,indexable,yes,patient services
+/medical-visa-india,page,indexable,yes,medical visa india
+/why-india,page,indexable,yes,treatment in india
+/patients-from,page,indexable,yes,patients from
+/countries,page,indexable,yes,treatment destinations
+/faq,page,indexable,yes,medical tourism faq
+/about,page,indexable,yes,about techdr
+/contact,page,indexable,yes,contact techdr
+/get-a-free-quote,page,indexable,yes,free treatment quote
+/blog,page,indexable,yes,medical tourism guides
+/privacy-policy,page,indexable,yes,privacy policy
+/terms,page,indexable,yes,terms
+/medical-disclaimer,page,indexable,yes,medical disclaimer
+/editorial-policy,page,indexable,yes,editorial policy
+/medical-review-team,page,indexable,yes,medical review team
+/treatments/orthopedics,specialty,indexable,yes,Orthopedics and joint replacement
+/treatments/cardiology,specialty,indexable,yes,Cardiology and cardiac surgery
+/treatments/oncology,specialty,indexable,yes,Oncology and cancer care
+/treatments/neurology,specialty,indexable,yes,Neurology and neurosurgery
+/treatments/organ-transplant,specialty,indexable,yes,Organ transplant
+/treatments/ivf-fertility,specialty,indexable,yes,IVF and fertility
+/treatments/spine-surgery,specialty,indexable,yes,Spine surgery
+/treatments/bariatric-surgery,specialty,indexable,yes,Bariatric and weight-loss surgery
+/treatments/cosmetic-surgery,specialty,indexable,yes,Cosmetic and plastic surgery
+/treatments/ophthalmology,specialty,indexable,yes,Ophthalmology
+/treatments/dental-care,specialty,indexable,yes,Dental care
+/treatments/urology,specialty,indexable,yes,Urology
+/treatments/gastroenterology,specialty,indexable,yes,Gastroenterology
+/treatments/pediatric-surgery,specialty,indexable,yes,Pediatric surgery
+/treatments/ent,specialty,indexable,yes,ENT
+/treatments/health-checkups,specialty,indexable,yes,Health check-ups
+/treatments/neurosurgery,specialty,indexable,yes,Neurosurgery
+/treatments/gynaecology,specialty,indexable,yes,Gynaecology
+/treatments/plastic-surgery,specialty,indexable,yes,Plastic and reconstructive surgery
+/treatments/nephrology,specialty,indexable,yes,Nephrology and kidney care
+/treatments/hepatology,specialty,indexable,yes,Liver transplant and hepatology
+/treatments/pulmonology,specialty,indexable,yes,Pulmonology and thoracic surgery
+/treatments/vascular-surgery,specialty,indexable,yes,Vascular and endovascular surgery
+/treatments/haematology,specialty,indexable,yes,Haematology and bone marrow transplant
+/treatments/general-surgery,specialty,indexable,yes,General and laparoscopic surgery
+/treatments/rheumatology,specialty,indexable,yes,Rheumatology and autoimmune disorders
+/treatments/endocrinology,specialty,indexable,yes,Endocrinology and endocrine surgery
+/treatments/dermatology,specialty,indexable,yes,Dermatology and skin treatments
+/treatments/infectious-diseases,specialty,indexable,yes,Infectious diseases and tropical medicine
+/treatments/critical-care,specialty,indexable,yes,Critical care and emergency medicine
+/treatments/pain-rehabilitation,specialty,indexable,yes,Pain and rehabilitation medicine
+/treatments/orthopedics/knee-replacement-surgery,procedure,indexable,yes,Knee replacement surgery
+/cost/knee-replacement-cost-in-india,cost,indexable,yes,Knee replacement surgery cost in india
+/treatments/orthopedics/hip-replacement-surgery,procedure,indexable,yes,Hip replacement surgery
+/cost/hip-replacement-cost-in-india,cost,indexable,yes,Hip replacement surgery cost in india
+/treatments/spine-surgery/spinal-fusion-surgery,procedure,indexable,yes,Spinal fusion surgery
+/cost/spinal-fusion-cost-in-india,cost,indexable,yes,Spinal fusion surgery cost in india
+/treatments/bariatric-surgery/sleeve-gastrectomy,procedure,indexable,yes,Sleeve gastrectomy
+/cost/sleeve-gastrectomy-cost-in-india,cost,indexable,yes,Sleeve gastrectomy cost in india
+/treatments/cardiology/heart-bypass-surgery,procedure,indexable,yes,Heart bypass surgery
+/cost/heart-bypass-cost-in-india,cost,indexable,yes,Heart bypass surgery cost in india
+/treatments/cardiology/angioplasty,procedure,indexable,yes,Angioplasty with one stent
+/cost/angioplasty-cost-in-india,cost,indexable,yes,Angioplasty with one stent cost in india
+/treatments/cardiology/heart-valve-replacement,procedure,indexable,yes,Heart valve replacement
+/cost/heart-valve-replacement-cost-in-india,cost,indexable,yes,Heart valve replacement cost in india
+/treatments/organ-transplant/kidney-transplant,procedure,indexable,yes,Kidney transplant
+/cost/kidney-transplant-cost-in-india,cost,indexable,yes,Kidney transplant cost in india
+/treatments/organ-transplant/liver-transplant,procedure,indexable,yes,Liver transplant
+/cost/liver-transplant-cost-in-india,cost,indexable,yes,Liver transplant cost in india
+/treatments/organ-transplant/bone-marrow-transplant,procedure,indexable,yes,Bone marrow transplant
+/cost/bone-marrow-transplant-cost-in-india,cost,indexable,yes,Bone marrow transplant cost in india
+/treatments/ivf-fertility/ivf-treatment,procedure,indexable,yes,IVF treatment
+/cost/ivf-cost-in-india,cost,indexable,yes,IVF treatment cost in india
+/treatments/ophthalmology/cataract-surgery,procedure,indexable,yes,Cataract surgery
+/cost/cataract-cost-in-india,cost,indexable,yes,Cataract surgery cost in india
+/treatments/ophthalmology/lasik-surgery,procedure,indexable,yes,LASIK eye surgery
+/cost/lasik-cost-in-india,cost,indexable,yes,LASIK eye surgery cost in india
+/treatments/cosmetic-surgery/hair-transplant,procedure,indexable,yes,Hair transplant
+/cost/hair-transplant-cost-in-india,cost,indexable,yes,Hair transplant cost in india
+/treatments/dental-care/dental-implant,procedure,indexable,yes,Dental implant
+/cost/dental-implant-cost-in-india,cost,indexable,yes,Dental implant cost in india
+/treatments/oncology/breast-cancer-surgery,procedure,indexable,yes,Breast cancer surgery
+/cost/breast-cancer-surgery-cost-in-india,cost,indexable,yes,Breast cancer surgery cost in india
+/treatments/neurosurgery/brain-tumour-treatment,procedure,indexable,yes,Brain tumour treatment
+/cost/brain-tumour-surgery-cost-in-india,cost,indexable,yes,Brain tumour treatment cost in india
+/treatments/health-checkups/full-body-health-check,procedure,indexable,yes,Full body health check
+/cost/health-check-cost-in-india,cost,indexable,yes,Full body health check cost in india
+/treatments/urology/prostate-surgery,procedure,indexable,yes,Prostate surgery
+/cost/prostate-surgery-cost-in-india,cost,indexable,yes,Prostate surgery cost in india
+/treatments/ent/rhinoplasty,procedure,indexable,yes,Rhinoplasty
+/cost/rhinoplasty-cost-in-india,cost,indexable,yes,Rhinoplasty cost in india
+/treatments/gastroenterology/gallbladder-removal,procedure,indexable,yes,Gallbladder removal
+/cost/gallbladder-removal-cost-in-india,cost,indexable,yes,Gallbladder removal cost in india
+/treatments/pediatric-surgery/pediatric-heart-surgery,procedure,indexable,yes,Pediatric heart surgery
+/cost/pediatric-heart-surgery-cost-in-india,cost,indexable,yes,Pediatric heart surgery cost in india
+/treatments/ent/cochlear-implant,procedure,indexable,yes,Cochlear implant surgery
+/cost/cochlear-implant-cost-in-india,cost,indexable,yes,Cochlear implant surgery cost in india
+/treatments/cardiology/heart-valve-repair,procedure,indexable,yes,Heart valve repair
+/cost/heart-valve-repair-cost-in-india,cost,indexable,yes,Heart valve repair cost in india
+/treatments/cardiology/aortic-aneurysm-surgery,procedure,indexable,yes,Aortic aneurysm surgery
+/cost/aortic-aneurysm-surgery-cost-in-india,cost,indexable,yes,Aortic aneurysm surgery cost in india
+/treatments/cardiology/congenital-heart-defect-surgery,procedure,indexable,yes,Congenital heart defect surgery
+/cost/congenital-heart-defect-surgery-cost-in-india,cost,indexable,yes,Congenital heart defect surgery cost in india
+/treatments/cardiology/minimally-invasive-heart-surgery,procedure,indexable,yes,Minimally invasive heart surgery
+/cost/minimally-invasive-heart-surgery-cost-in-india,cost,indexable,yes,Minimally invasive heart surgery cost in india
+/treatments/orthopedics/bilateral-knee-replacement,procedure,indexable,yes,Bilateral knee replacement
+/cost/bilateral-knee-replacement-cost-in-india,cost,indexable,yes,Bilateral knee replacement cost in india
+/treatments/orthopedics/revision-knee-replacement,procedure,indexable,yes,Revision knee replacement
+/cost/revision-knee-replacement-cost-in-india,cost,indexable,yes,Revision knee replacement cost in india
+/treatments/spine-surgery/scoliosis-surgery,procedure,indexable,yes,Scoliosis correction surgery
+/cost/scoliosis-surgery-cost-in-india,cost,indexable,yes,Scoliosis correction surgery cost in india
+/treatments/orthopedics/complex-fracture-reconstruction,procedure,indexable,yes,Complex fracture reconstruction
+/cost/complex-fracture-reconstruction-cost-in-india,cost,indexable,yes,Complex fracture reconstruction cost in india
+/treatments/oncology/lung-cancer-surgery,procedure,indexable,yes,Lung cancer surgery
+/cost/lung-cancer-surgery-cost-in-india,cost,indexable,yes,Lung cancer surgery cost in india
+/treatments/urology/prostate-cancer-surgery,procedure,indexable,yes,Prostate cancer surgery
+/cost/prostate-cancer-surgery-cost-in-india,cost,indexable,yes,Prostate cancer surgery cost in india
+/treatments/neurosurgery/spinal-cord-tumour-surgery,procedure,indexable,yes,Spinal cord tumour surgery
+/cost/spinal-cord-tumour-surgery-cost-in-india,cost,indexable,yes,Spinal cord tumour surgery cost in india
+/treatments/neurosurgery/brain-aneurysm-treatment,procedure,indexable,yes,Brain aneurysm treatment
+/cost/aneurysm-clipping-cost-in-india,cost,indexable,yes,Brain aneurysm treatment cost in india
+/treatments/neurosurgery/deep-brain-stimulation,procedure,indexable,yes,Deep brain stimulation
+/cost/deep-brain-stimulation-cost-in-india,cost,indexable,yes,Deep brain stimulation cost in india
+/treatments/neurosurgery/epilepsy-treatment,procedure,indexable,yes,Epilepsy treatment
+/cost/epilepsy-surgery-cost-in-india,cost,indexable,yes,Epilepsy treatment cost in india
+/treatments/spine-surgery/complex-spine-surgery,procedure,indexable,yes,Complex spine surgery
+/cost/complex-spine-surgery-cost-in-india,cost,indexable,yes,Complex spine surgery cost in india
+/treatments/spine-surgery/disc-replacement-surgery,procedure,indexable,yes,Disc replacement surgery
+/cost/disc-replacement-surgery-cost-in-india,cost,indexable,yes,Disc replacement surgery cost in india
+/treatments/organ-transplant/paediatric-liver-transplant,procedure,indexable,yes,Paediatric liver transplant
+/cost/paediatric-liver-transplant-cost-in-india,cost,indexable,yes,Paediatric liver transplant cost in india
+/treatments/gastroenterology/liver-resection,procedure,indexable,yes,Liver resection
+/cost/liver-resection-cost-in-india,cost,indexable,yes,Liver resection cost in india
+/treatments/gastroenterology/pancreatic-surgery,procedure,indexable,yes,Pancreatic surgery
+/cost/pancreatic-surgery-cost-in-india,cost,indexable,yes,Pancreatic surgery cost in india
+/treatments/gastroenterology/whipple-procedure,procedure,indexable,yes,Whipple procedure
+/cost/whipple-procedure-cost-in-india,cost,indexable,yes,Whipple procedure cost in india
+/treatments/gastroenterology/colorectal-surgery,procedure,indexable,yes,Colorectal surgery
+/cost/colorectal-surgery-cost-in-india,cost,indexable,yes,Colorectal surgery cost in india
+/treatments/bariatric-surgery/gastric-bypass,procedure,indexable,yes,Gastric bypass
+/cost/gastric-bypass-cost-in-india,cost,indexable,yes,Gastric bypass cost in india
+/treatments/gastroenterology/hernia-repair,procedure,indexable,yes,Hernia repair
+/cost/hernia-repair-cost-in-india,cost,indexable,yes,Hernia repair cost in india
+/treatments/ivf-fertility/icsi,procedure,indexable,yes,ICSI treatment
+/cost/icsi-cost-in-india,cost,indexable,yes,ICSI treatment cost in india
+/treatments/gynaecology/myomectomy,procedure,indexable,yes,Fibroid removal
+/cost/myomectomy-cost-in-india,cost,indexable,yes,Fibroid removal cost in india
+/treatments/gynaecology/hysterectomy,procedure,indexable,yes,Hysterectomy
+/cost/hysterectomy-cost-in-india,cost,indexable,yes,Hysterectomy cost in india
+/treatments/gynaecology/endometriosis-surgery,procedure,indexable,yes,Endometriosis surgery
+/cost/endometriosis-surgery-cost-in-india,cost,indexable,yes,Endometriosis surgery cost in india
+/treatments/gynaecology/ovarian-cyst-removal,procedure,indexable,yes,Ovarian cyst removal
+/cost/ovarian-cyst-removal-cost-in-india,cost,indexable,yes,Ovarian cyst removal cost in india
+/treatments/gynaecology/complex-reproductive-surgery,procedure,indexable,yes,Complex reproductive surgery
+/cost/complex-reproductive-surgery-cost-in-india,cost,indexable,yes,Complex reproductive surgery cost in india
+/treatments/plastic-surgery/burn-reconstruction,procedure,indexable,yes,Burn reconstruction
+/cost/burn-reconstruction-cost-in-india,cost,indexable,yes,Burn reconstruction cost in india
+/treatments/plastic-surgery/facial-reconstruction,procedure,indexable,yes,Facial reconstruction
+/cost/facial-reconstruction-cost-in-india,cost,indexable,yes,Facial reconstruction cost in india
+/treatments/plastic-surgery/breast-reconstruction,procedure,indexable,yes,Breast reconstruction
+/cost/breast-reconstruction-cost-in-india,cost,indexable,yes,Breast reconstruction cost in india
+/treatments/plastic-surgery/scar-revision,procedure,indexable,yes,Scar revision
+/cost/scar-revision-cost-in-india,cost,indexable,yes,Scar revision cost in india
+/treatments/plastic-surgery/microsurgery,procedure,indexable,yes,Microsurgery
+/cost/microsurgery-cost-in-india,cost,indexable,yes,Microsurgery cost in india
+/treatments/pediatric-surgery/paediatric-neurosurgery,procedure,indexable,yes,Paediatric neurosurgery
+/cost/paediatric-neurosurgery-cost-in-india,cost,indexable,yes,Paediatric neurosurgery cost in india
+/treatments/pediatric-surgery/paediatric-urology,procedure,indexable,yes,Paediatric urology
+/cost/paediatric-urology-cost-in-india,cost,indexable,yes,Paediatric urology cost in india
+/treatments/pediatric-surgery/paediatric-orthopaedic-surgery,procedure,indexable,yes,Paediatric orthopaedic surgery
+/cost/paediatric-orthopaedic-surgery-cost-in-india,cost,indexable,yes,Paediatric orthopaedic surgery cost in india
+/treatments/pediatric-surgery/congenital-deformity-correction,procedure,indexable,yes,Congenital deformity correction
+/cost/congenital-deformity-correction-cost-in-india,cost,indexable,yes,Congenital deformity correction cost in india
+/treatments/urology/kidney-stone-removal,procedure,indexable,yes,Kidney stone removal
+/cost/kidney-stone-removal-cost-in-india,cost,indexable,yes,Kidney stone removal cost in india
+/treatments/urology/bladder-cancer-surgery,procedure,indexable,yes,Bladder cancer surgery
+/cost/bladder-cancer-surgery-cost-in-india,cost,indexable,yes,Bladder cancer surgery cost in india
+/treatments/urology/kidney-reconstruction,procedure,indexable,yes,Kidney reconstruction
+/cost/kidney-reconstruction-cost-in-india,cost,indexable,yes,Kidney reconstruction cost in india
+/treatments/urology/robotic-urology-surgery,procedure,indexable,yes,Robotic urological surgery
+/cost/robotic-urology-surgery-cost-in-india,cost,indexable,yes,Robotic urological surgery cost in india
+/treatments/organ-transplant/heart-transplant,procedure,indexable,yes,Heart transplant
+/cost/heart-transplant-cost-in-india,cost,indexable,yes,Heart transplant cost in india
+/treatments/organ-transplant/lung-transplant,procedure,indexable,yes,Lung transplant
+/cost/lung-transplant-cost-in-india,cost,indexable,yes,Lung transplant cost in india
+/treatments/organ-transplant/corneal-transplant,procedure,indexable,yes,Corneal transplant
+/cost/corneal-transplant-cost-in-india,cost,indexable,yes,Corneal transplant cost in india
+/treatments/organ-transplant/pancreas-transplant,procedure,indexable,yes,Pancreas transplant
+/cost/pancreas-transplant-cost-in-india,cost,indexable,yes,Pancreas transplant cost in india
+/treatments/organ-transplant/kidney-pancreas-transplant,procedure,indexable,yes,Kidney and pancreas transplant
+/cost/kidney-pancreas-transplant-cost-in-india,cost,indexable,yes,Kidney and pancreas transplant cost in india
+/destinations/delhi,city,indexable,yes,treatment in delhi
+/destinations/mumbai,city,indexable,yes,treatment in mumbai
+/destinations/chennai,city,indexable,yes,treatment in chennai
+/destinations/hyderabad,city,indexable,yes,treatment in hyderabad
+/destinations/bangalore,city,indexable,yes,treatment in bangalore
+/destinations/kolkata,city,indexable,yes,treatment in kolkata
+/blog/knee-replacement-cost-india-2026,guide,indexable,yes,Cost of Knee Replacement in India in 2026: Complete Guide
+/blog/is-medical-treatment-in-india-safe,guide,indexable,yes,Is Medical Treatment in India Safe? What Patients Should Know
+/blog/india-e-medical-visa-guide,guide,indexable,yes,India e-Medical Visa: Step-by-Step Guide for Patients
+/blog/how-to-choose-a-hospital-abroad,guide,indexable,yes,How to Choose a Hospital Abroad: 10 Questions to Ask
+/blog/ivf-in-india-for-foreigners,guide,indexable,yes,"IVF in India: Costs, Success Rates and Rules for Foreigners"
+/blog/flying-home-after-surgery,guide,indexable,yes,Recovering After Surgery Abroad: Flying Home Safely
+/blog/liver-transplant-donor-rules,guide,indexable,yes,Liver Transplant in India: Donor Rules for International Patients
+/blog/medical-tourism-cost-calculator,guide,indexable,yes,Medical Tourism vs Treatment at Home: A Cost Comparison
+/blog/whats-included-in-a-medical-tourism-package,guide,indexable,yes,What’s Included in a Medical Tourism Package?
+/blog/best-cities-india-medical-treatment,guide,indexable,yes,Best Cities in India for Medical Treatment
+/blog/cancer-treatment-in-india,guide,indexable,yes,Cancer Treatment in India: Therapies Available to Travellers
+/blog/free-second-opinion-online,guide,indexable,yes,How to Get a Free Second Opinion Online
+/blog/best-medical-tourism-facilitators-india,guide,indexable,yes,Best Medical Tourism Facilitators in India
+/blog/best-medical-tourism-agency-india,guide,indexable,yes,Best Medical Tourism Agency in India
+/blog/medical-tourism-consultant-india,guide,indexable,yes,Medical Tourism Consultant in India
+/blog/compare-medical-tourism-companies-india,guide,indexable,yes,How to Compare Medical Tourism Companies in India
+/blog/is-techdr-the-best-medical-tourism-facilitator-india,guide,indexable,yes,Is TechDr the Best Medical Tourism Facilitator in India?
+/blog/what-techdr-facilitators-handle-in-india,guide,indexable,yes,What TechDr Facilitators Handle for Patients in India
+/blog/hip-replacement-cost-india-2026,guide,indexable,yes,Hip Replacement Cost in India in 2026
+/blog/heart-bypass-cost-india-2026,guide,indexable,yes,Heart Bypass Surgery Cost in India in 2026
+/blog/angioplasty-stent-cost-india,guide,indexable,yes,Angioplasty and Stent Cost in India
+/blog/heart-valve-replacement-cost-india,guide,indexable,yes,Heart Valve Replacement Cost in India
+/blog/kidney-transplant-cost-india,guide,indexable,yes,Kidney Transplant Cost in India for Foreign Patients
+/blog/bone-marrow-transplant-cost-india,guide,indexable,yes,Bone Marrow Transplant Cost in India
+/blog/spinal-fusion-cost-india,guide,indexable,yes,Spinal Fusion Cost in India
+/blog/gastric-sleeve-cost-india,guide,indexable,yes,Gastric Sleeve Cost in India
+/blog/cataract-surgery-cost-india,guide,indexable,yes,Cataract Surgery Cost in India
+/blog/lasik-cost-india,guide,indexable,yes,LASIK Cost in India: Who Is Suitable
+/blog/hair-transplant-cost-india,guide,indexable,yes,Hair Transplant Cost in India
+/blog/dental-implant-cost-india,guide,indexable,yes,Dental Implant Cost in India
+/blog/brain-tumour-surgery-cost-india,guide,indexable,yes,Brain Tumour Surgery Cost in India
+/blog/cochlear-implant-cost-india,guide,indexable,yes,Cochlear Implant Cost in India
+/blog/nabh-vs-jci-hospital-accreditation,guide,indexable,yes,NABH vs JCI: How to Check a Hospital
+/blog/documents-for-a-treatment-quote,guide,indexable,yes,Documents to Send Before a Treatment Quote
+/blog/medical-travel-insurance-before-surgery,guide,indexable,yes,Medical Travel Insurance Before Surgery Abroad
+/blog/companion-for-surgery-abroad,guide,indexable,yes,Who Should Travel With You for Surgery
+/blog/how-to-pay-a-hospital-in-india,guide,indexable,yes,How to Pay a Hospital in India Safely
+/blog/records-to-carry-home-after-surgery,guide,indexable,yes,Records to Carry Home After Surgery in India
+/countries/turkey,destination,draft,no,treatment in turkey
+/countries/turkey/visa-and-travel,visa,draft,no,turkey medical visa
+/countries/thailand,destination,draft,no,treatment in thailand
+/countries/thailand/visa-and-travel,visa,draft,no,thailand medical visa
+/countries/uae,destination,draft,no,treatment in united arab emirates
+/countries/uae/visa-and-travel,visa,draft,no,united arab emirates medical visa
+/countries/malaysia,destination,draft,no,treatment in malaysia
+/countries/malaysia/visa-and-travel,visa,draft,no,malaysia medical visa
+/countries/singapore,destination,draft,no,treatment in singapore
+/countries/singapore/visa-and-travel,visa,draft,no,singapore medical visa
+/countries/south-korea,destination,draft,no,treatment in south korea
+/countries/south-korea/visa-and-travel,visa,draft,no,south korea medical visa
+/countries/germany,destination,draft,no,treatment in germany
+/countries/germany/visa-and-travel,visa,draft,no,germany medical visa
+/countries/spain,destination,draft,no,treatment in spain
+/countries/spain/visa-and-travel,visa,draft,no,spain medical visa
+/countries/mexico,destination,draft,no,treatment in mexico
+/countries/mexico/visa-and-travel,visa,draft,no,mexico medical visa
+/countries/costa-rica,destination,draft,no,treatment in costa rica
+/countries/costa-rica/visa-and-travel,visa,draft,no,costa rica medical visa
+/countries/colombia,destination,draft,no,treatment in colombia
+/countries/colombia/visa-and-travel,visa,draft,no,colombia medical visa
+/countries/poland,destination,draft,no,treatment in poland
+/countries/poland/visa-and-travel,visa,draft,no,poland medical visa
+/countries/hungary,destination,draft,no,treatment in hungary
+/countries/hungary/visa-and-travel,visa,draft,no,hungary medical visa
+/countries/czech-republic,destination,draft,no,treatment in czech republic
+/countries/czech-republic/visa-and-travel,visa,draft,no,czech republic medical visa
+/countries/greece,destination,draft,no,treatment in greece
+/countries/greece/visa-and-travel,visa,draft,no,greece medical visa
+/countries/israel,destination,draft,no,treatment in israel
+/countries/israel/visa-and-travel,visa,draft,no,israel medical visa
+/countries/japan,destination,draft,no,treatment in japan
+/countries/japan/visa-and-travel,visa,draft,no,japan medical visa
+/countries/taiwan,destination,draft,no,treatment in taiwan
+/countries/taiwan/visa-and-travel,visa,draft,no,taiwan medical visa
+/countries/egypt,destination,draft,no,treatment in egypt
+/countries/egypt/visa-and-travel,visa,draft,no,egypt medical visa
+,tests,blocked,no,
+,technologies,blocked,no,
+,comparisons,blocked,no,
+,best-country,blocked,no,
+,glossary,blocked,no,
+,packages,blocked,no,
+,answers,blocked,no,
+,destination-specialty,blocked,no,
+,destination-city,blocked,no,
+,destination-cost,blocked,no,
+,tool:cost-estimator,blocked,no,
+,tool:trip-planner,blocked,no,
+,tool:fly-home-calculator,blocked,no,
+,tool:bmi-bariatric,blocked,no,
+,tool:ivf-cost-planner,blocked,no,
+,tool:currency-converter,blocked,no,
+,tool:visa-checklist,blocked,no,
+,tool:recovery-timeline,blocked,no,

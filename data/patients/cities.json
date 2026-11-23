@@ -1,0 +1,393 @@
+[
+  {
+    "slug": "lagos",
+    "country": "nigeria",
+    "name": "Lagos",
+    "airports": [
+      {
+        "city": "Lagos",
+        "iata": "LOS"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "abuja",
+    "country": "nigeria",
+    "name": "Abuja",
+    "airports": [
+      {
+        "city": "Abuja",
+        "iata": "ABV"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "port-harcourt",
+    "country": "nigeria",
+    "name": "Port Harcourt",
+    "airports": [
+      {
+        "city": "Port Harcourt",
+        "iata": "PHC"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "kano",
+    "country": "nigeria",
+    "name": "Kano",
+    "airports": [
+      {
+        "city": "Kano",
+        "iata": "KAN"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "nairobi",
+    "country": "kenya",
+    "name": "Nairobi",
+    "airports": [
+      {
+        "city": "Nairobi",
+        "iata": "NBO"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "mombasa",
+    "country": "kenya",
+    "name": "Mombasa",
+    "airports": [
+      {
+        "city": "Mombasa",
+        "iata": "MBA"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "addis-ababa",
+    "country": "ethiopia",
+    "name": "Addis Ababa",
+    "airports": [
+      {
+        "city": "Addis Ababa",
+        "iata": "ADD"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "dar-es-salaam",
+    "country": "tanzania",
+    "name": "Dar es Salaam",
+    "airports": [
+      {
+        "city": "Dar es Salaam",
+        "iata": "DAR"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "zanzibar",
+    "country": "tanzania",
+    "name": "Zanzibar",
+    "airports": [
+      {
+        "city": "Zanzibar",
+        "iata": "ZNZ"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "dhaka",
+    "country": "bangladesh",
+    "name": "Dhaka",
+    "airports": [
+      {
+        "city": "Dhaka",
+        "iata": "DAC"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "chattogram",
+    "country": "bangladesh",
+    "name": "Chattogram",
+    "airports": [
+      {
+        "city": "Chattogram",
+        "iata": "CGP"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "sylhet",
+    "country": "bangladesh",
+    "name": "Sylhet",
+    "airports": [
+      {
+        "city": "Sylhet",
+        "iata": "ZYL"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "baghdad",
+    "country": "iraq",
+    "name": "Baghdad",
+    "airports": [
+      {
+        "city": "Baghdad",
+        "iata": "BGW"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "erbil",
+    "country": "iraq",
+    "name": "Erbil",
+    "airports": [
+      {
+        "city": "Erbil",
+        "iata": "EBL"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "basra",
+    "country": "iraq",
+    "name": "Basra",
+    "airports": [
+      {
+        "city": "Basra",
+        "iata": "BSR"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "najaf",
+    "country": "iraq",
+    "name": "Najaf",
+    "airports": [
+      {
+        "city": "Najaf",
+        "iata": "NJF"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "muscat",
+    "country": "oman",
+    "name": "Muscat",
+    "airports": [
+      {
+        "city": "Muscat",
+        "iata": "MCT"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "salalah",
+    "country": "oman",
+    "name": "Salalah",
+    "airports": [
+      {
+        "city": "Salalah",
+        "iata": "SLL"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "sanaa",
+    "country": "yemen",
+    "name": "Sana'a",
+    "airports": [
+      {
+        "city": "Sana'a",
+        "iata": "SAH"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "aden",
+    "country": "yemen",
+    "name": "Aden",
+    "airports": [
+      {
+        "city": "Aden",
+        "iata": "ADE"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "tashkent",
+    "country": "uzbekistan",
+    "name": "Tashkent",
+    "airports": [
+      {
+        "city": "Tashkent",
+        "iata": "TAS"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "samarkand",
+    "country": "uzbekistan",
+    "name": "Samarkand",
+    "airports": [
+      {
+        "city": "Samarkand",
+        "iata": "SKD"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  },
+  {
+    "slug": "kabul",
+    "country": "afghanistan",
+    "name": "Kabul",
+    "airports": [
+      {
+        "city": "Kabul",
+        "iata": "KBL"
+      }
+    ],
+    "routesToIndia": [],
+    "visaCentre": null,
+    "localSupport": null,
+    "populationNote": null,
+    "uniqueContent": null,
+    "lastChecked": null
+  }
+]

@@ -7,10 +7,12 @@ import { FaqList } from "@/components/ui/accordion";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { costs, getCost, moneyRange } from "@/data/costs";
 import { CostMark } from "@/components/ui/CostMark";
+import { PriceText } from "@/components/ui/PriceText";
 import { ServiceIcon, serviceIcon } from "@/components/ui/ServiceIcon";
 import { homeFaqs } from "@/data/faqs";
 import { posts } from "@/data/blog";
 import { cities } from "@/data/cities";
+import { activeDestinations, destinationHref } from "@/data/destinations";
 import { procedurePath, procedures, treatmentSearchItems } from "@/data/procedures";
 import { faqList } from "@/lib/schema";
 import { site, whatsappHref } from "@/lib/site";
@@ -45,12 +47,21 @@ const indiaReasons: { icon: LucideIcon; label: string }[] = [
   { icon: ShieldBan, label: "No paid-donor or guaranteed-outcome cases" },
 ];
 
-const words = "World-Class Medical Treatment in India — At Up to 80% Less Cost".split(" ");
+const words = "Find the Right Treatment Abroad — Compare Countries, Costs and Care".split(" ");
+
+const trustPoints = [
+  "JCI & NABH partners",
+  "24/7 patient care",
+  "Free second opinion",
+  "No hidden fees",
+  "Support in 6 languages",
+];
 
 export function HomeView() {
   const searchItems = treatmentSearchItems();
 
   return (
+    <PriceText>
     <>
       <JsonLd data={{ "@context": "https://schema.org", ...faqList([...homeFaqs]) }} />
       <section className="relative overflow-hidden">
@@ -58,22 +69,31 @@ export function HomeView() {
           <div className="mesh-blob -start-10 top-0 size-72 bg-primary/40" />
           <div className="mesh-blob mesh-blob-b end-0 top-24 size-64 bg-accent/30" />
         </div>
-        <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-24">
+        <div className="relative mx-auto grid max-w-6xl gap-10 px-4 pt-8 pb-16 lg:grid-cols-[1.15fr_0.85fr] lg:pt-12 lg:pb-24">
           <div>
             <p className="text-sm font-semibold text-primary-ink">TechDr Medical Tourism</p>
-            <h1 className="mt-3 max-w-3xl text-balance">
+            <h1 className="mt-3 max-w-3xl text-balance leading-[1.18]">
               {words.map((word, index) => (
-                <span key={`${word}-${index}`} className="word" style={{ animationDelay: `${index * 40}ms` }}>{word} </span>
+                <span key={`${word}-${index}`} className={word === "Abroad" ? "word text-accent" : "word"} style={{ animationDelay: `${index * 40}ms` }}>{word}</span>
               ))}
             </h1>
             <p className="mt-5 max-w-2xl text-lg text-muted">
-              TechDr connects international patients with accredited hospitals and experienced specialists in India. Free treatment plans, transparent cost estimates, and end-to-end support — from your visa to your flight home.
+              Compare countries, costs and care. India is the destination TechDr coordinates today. Free opinions, written estimates, and travel support. TechDr is a facilitator, not a hospital.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button href="/get-a-free-quote">Get a Free Quote</Button>
               <Button variant="outline" href={whatsappHref("Hello TechDr, I would like to discuss treatment in India.")} external>Talk on WhatsApp</Button>
             </div>
             <div className="mt-6 max-w-xl"><TreatmentSearch items={searchItems} /></div>
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-sm">
+              <span className="font-medium">Destination</span>
+              {activeDestinations().map((item) => (
+                <Link key={item.slug} className="rounded-full border border-border bg-card px-3 py-1.5 font-medium text-primary-ink" href={destinationHref(item)}>
+                  {item.name}
+                </Link>
+              ))}
+              <Link className="rounded-full border border-border px-3 py-1.5 font-medium" href="/countries">All destinations</Link>
+            </div>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             {[
@@ -82,20 +102,23 @@ export function HomeView() {
               ["60–80%", "Average savings"],
               ["24h", "Quote turnaround"],
             ].map(([value, label], index) => (
-              <p key={label} className="parallax-card rounded-2xl border border-white/40 bg-card/80 p-5 shadow-sm backdrop-blur" style={{ animationDelay: `${index * 60}ms` }}>
-                <span className="block font-heading text-3xl font-bold">{value}</span>
-                <span className="text-sm text-muted">{label}</span>
+              <p key={label} className="parallax-card rounded-2xl border border-border bg-card p-5 shadow-sm" style={{ animationDelay: `${index * 60}ms` }}>
+                <span className="block font-heading text-3xl font-bold tracking-tight">{value}</span>
+                <span className="mt-1 block text-sm text-muted">{label}</span>
               </p>
             ))}
-            <p className="sm:col-span-2 text-xs text-muted">Planning placeholders — confirm audited totals before publishing them as facts.</p>
+            <p className="sm:col-span-2 text-xs leading-snug text-muted">Planning figures. A written quote after your reports replaces these totals.</p>
           </div>
         </div>
       </section>
-      <p className="border-y border-border bg-surface px-4 py-3 text-center text-sm">
-        JCI & NABH-accredited partners · 24/7 patient care · Free second opinion · No hidden fees · Support in 6 languages
-      </p>
+      <ul className="flex flex-wrap justify-center gap-2 border-y border-border bg-surface px-4 py-4">
+        {trustPoints.map((point) => (
+          <li key={point} className="rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium">{point}</li>
+        ))}
+      </ul>
       <section className="mx-auto max-w-6xl px-4 py-16">
         <h2>Popular treatments</h2>
+        <p className="mt-2 max-w-2xl text-muted">Indicative 2026 ranges at partner hospitals. A written quote uses your reports.</p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {procedures.slice(0, 12).map((item, index) => {
             const cost = getCost(item.costId);
@@ -115,9 +138,10 @@ export function HomeView() {
       <section className="bg-surface py-16">
         <div className="mx-auto max-w-6xl px-4">
           <h2>How TechDr works</h2>
+          <p className="mt-2 max-w-2xl text-muted">Five steps, from your reports to follow-up after you fly home.</p>
           <ol className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {journey.map(({ icon: Icon, label }, index) => (
-              <li key={label} className="rounded-2xl bg-card p-4">
+              <li key={label} className="rounded-2xl border border-border bg-card p-4 shadow-sm">
                 <span className="flex items-center justify-between gap-2">
                   <span className="font-heading text-2xl text-primary-ink">0{index + 1}</span>
                   <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
@@ -137,28 +161,30 @@ export function HomeView() {
       </section>
       <section className="mx-auto max-w-6xl px-4 py-16">
         <h2>How do India, the USA, the UK and Thailand compare?</h2>
-        <p className="mt-2 max-w-3xl text-muted">Bars show each country’s top-of-range as a share of the highest figure for that procedure. Numbers are indicative starting estimates for {site.year}.</p>
-        <div className="mt-6 space-y-6">
+        <p className="mt-2 max-w-3xl text-muted">A longer bar is a higher top-of-range price. These are indicative starting estimates for {site.year}.</p>
+        <div className="mt-6 grid gap-4 lg:grid-cols-2">
           {chartIds.map((id) => {
             const row = costs.find((item) => item.id === id)!;
             const series = [
-              ["India", row.india[1], "bg-primary"],
-              ["USA", row.usa[1], "bg-secondary"],
-              ["UK", row.uk[1], "bg-accent"],
-              ["Thailand", row.thailand?.[1] ?? 0, "bg-warning"],
+              ["India", row.india[1], moneyRange(row.india), "bg-primary"],
+              ["USA", row.usa[1], moneyRange(row.usa, row.usaLabel), "bg-[#0b2545] dark:bg-[#9bb6d0]"],
+              ["UK", row.uk[1], moneyRange(row.uk, row.ukLabel), "bg-accent"],
+              ["Thailand", row.thailand?.[1] ?? 0, row.thailand ? moneyRange(row.thailand) : "—", "bg-[#c2410c]"],
             ] as const;
             const max = Math.max(...series.map((item) => item[1]));
             return (
-              <div key={id}>
+              <div key={id} className="rounded-2xl border border-border bg-card p-5 shadow-sm">
                 <h3>{row.name}</h3>
-                <div className="mt-2 space-y-2" aria-hidden>
-                  {series.map(([label, value, color], index) => (
-                    <div key={label} className="grid grid-cols-[6rem_1fr_auto] items-center gap-3 text-sm">
-                      <span>{label}</span>
-                      <span className="block h-3 overflow-hidden rounded-full bg-border">
-                        <span className={`bar block h-full ${color}`} style={{ width: `${(value / max) * 100}%`, animationDelay: `${index * 80}ms` }} />
+                <div className="mt-4 space-y-3" aria-hidden>
+                  {series.map(([label, value, price, color], index) => (
+                    <div key={label}>
+                      <div className="flex items-baseline justify-between gap-3 text-sm">
+                        <span className={label === "India" ? "font-semibold text-primary-ink" : undefined}>{label}</span>
+                        <span className={label === "India" ? "font-semibold text-primary-ink" : "text-muted"}>{price}</span>
+                      </div>
+                      <span className="mt-1.5 block h-2.5 overflow-hidden rounded-full bg-border">
+                        <span className={`bar block h-full ${color}`} style={{ width: `${max ? (value / max) * 100 : 0}%`, animationDelay: `${index * 80}ms` }} />
                       </span>
-                      <span className={label === "India" ? "font-semibold text-primary-ink" : undefined}>{label === "USA" && row.usaLabel ? row.usaLabel : moneyRange(label === "India" ? row.india : label === "USA" ? row.usa : label === "UK" ? row.uk : row.thailand ?? row.uk)}</span>
                     </div>
                   ))}
                 </div>
@@ -166,7 +192,7 @@ export function HomeView() {
             );
           })}
         </div>
-        <div className="mt-6 overflow-x-auto">
+        <div className="mt-6 overflow-x-auto rounded-2xl border border-border bg-card px-4">
           <table className="data-table">
             <caption>Indicative ranges behind the chart, in USD</caption>
             <thead><tr><th scope="col">Procedure</th><th scope="col">India</th><th scope="col">USA</th><th scope="col">UK</th><th scope="col">Thailand</th></tr></thead>
@@ -187,28 +213,33 @@ export function HomeView() {
           </table>
         </div>
       </section>
-      <section className="bg-secondary py-16 text-background">
-        <div className="mx-auto grid max-w-6xl gap-6 px-4 md:grid-cols-3">
-          {indiaReasons.map(({ icon: Icon, label }) => (
-            <h3 key={label} className="flex items-start gap-3 text-lg font-medium">
-              <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
-                <Icon className="size-5" aria-hidden />
-              </span>
-              <span className="pt-2">{label}</span>
-            </h3>
-          ))}
+      <section className="bg-secondary py-16 text-background dark:bg-[#10243a] dark:text-foreground">
+        <div className="mx-auto max-w-6xl px-4">
+          <h2>Why patients choose India</h2>
+          <p className="mt-2 max-w-2xl text-background/80 dark:text-muted">Accredited hospitals, a written plan, and the trip arranged around the campus.</p>
+          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {indiaReasons.map(({ icon: Icon, label }) => (
+              <h3 key={label} className="flex items-start gap-3 rounded-2xl bg-background/10 p-4 text-lg font-medium dark:border dark:border-border dark:bg-card">
+                <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
+                  <Icon className="size-5" aria-hidden />
+                </span>
+                <span className="pt-2">{label}</span>
+              </h3>
+            ))}
+          </div>
+          <p className="mt-6">
+            <Link className="inline-flex items-center gap-1 underline" href="/why-india">
+              Read the reasons <ArrowRight className="size-4" aria-hidden />
+            </Link>
+          </p>
         </div>
-        <p className="mx-auto mt-6 max-w-6xl px-4">
-          <Link className="inline-flex items-center gap-1 underline" href="/why-india">
-            Why patients choose India <ArrowRight className="size-4" aria-hidden />
-          </Link>
-        </p>
       </section>
       <section className="mx-auto max-w-6xl px-4 py-16">
         <h2>Patient services</h2>
+        <p className="mt-2 max-w-2xl text-muted">The practical side of the trip, arranged with the treatment plan.</p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {patientServices.map(({ icon: Icon, label }) => (
-            <p key={label} className="flex items-start gap-3 rounded-2xl border border-border p-4">
+            <p key={label} className="flex items-start gap-3 rounded-2xl border border-border bg-card p-4 shadow-sm">
               <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
                 <Icon className="size-5" aria-hidden />
               </span>
@@ -225,19 +256,26 @@ export function HomeView() {
       <section className="bg-surface py-16">
         <div className="mx-auto max-w-6xl px-4">
           <h2>Cities patients fly into</h2>
-          <ul className="mt-6 flex gap-3 overflow-x-auto pb-2">
+          <p className="mt-2 max-w-2xl text-muted">The quote names the hospital campus, not only the arrival city.</p>
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {cities.map((city) => (
-              <li key={city.path}><Link className="inline-flex min-h-11 items-center rounded-full bg-card px-4" href={`/destinations/${city.path}`}>{city.searchName}</Link></li>
+              <li key={city.path}>
+                <Link className="flex min-h-16 items-center justify-between gap-3 rounded-2xl border border-border bg-card px-5 shadow-sm transition-transform duration-200 hover:-translate-y-0.5" href={`/destinations/${city.path}`}>
+                  <span className="font-heading text-lg font-semibold">{city.searchName}</span>
+                  <span className="text-sm font-medium text-muted">{city.airportCode}</span>
+                </Link>
+              </li>
             ))}
           </ul>
         </div>
       </section>
       <section className="mx-auto max-w-6xl px-4 py-16">
         <h2>Guides</h2>
+        <p className="mt-2 max-w-2xl text-muted">Cost, safety and the medical visa, written in plain language.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {posts.slice(0, 3).map((post) => (
-            <article key={post.slug} className="rounded-2xl border border-border p-5">
-              <p className="text-sm text-primary-ink">{post.category}</p>
+            <article key={post.slug} className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+              <p className="text-sm font-semibold text-primary-ink">{post.category}</p>
               <h3 className="mt-2"><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
               <p className="mt-2 text-sm text-muted">{post.excerpt}</p>
             </article>
@@ -248,19 +286,20 @@ export function HomeView() {
         <h2>Questions patients ask first</h2>
         <div className="mt-4"><FaqList items={[...homeFaqs]} /></div>
       </section>
-      <section className="bg-primary-ink py-14 text-background">
-        <div className="mx-auto grid max-w-6xl gap-6 px-4 md:grid-cols-2 md:items-center">
+      <section className="plan-band py-14">
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 md:grid-cols-2 md:items-center">
           <div>
             <h2>Ask for a written plan</h2>
-            <p className="mt-2 text-background/80">Share your name, country and the treatment you need. A case manager replies within 48 hours of a complete file.</p>
+            <p className="mt-2 max-w-md text-white/85">Share your name, country and the treatment you need. A case manager replies within 48 hours of a complete file.</p>
           </div>
-          <form className="grid gap-3" action="/get-a-free-quote">
-            <label className="text-sm">Name<input name="name" className="mt-1 min-h-11 w-full rounded-xl px-3 text-foreground" /></label>
-            <label className="text-sm">Email<input name="email" type="email" className="mt-1 min-h-11 w-full rounded-xl px-3 text-foreground" /></label>
+          <form className="grid gap-3 rounded-2xl border border-white/25 bg-white/10 p-4 shadow-lg backdrop-blur-sm" action="/get-a-free-quote">
+            <label className="text-sm font-medium">Name<input name="name" autoComplete="name" className="mt-1 min-h-11 w-full rounded-xl border border-white bg-white px-3 text-[#0b2545] shadow-sm" /></label>
+            <label className="text-sm font-medium">Email<input name="email" type="email" autoComplete="email" className="mt-1 min-h-11 w-full rounded-xl border border-white bg-white px-3 text-[#0b2545] shadow-sm" /></label>
             <button className="min-h-11 rounded-full bg-accent px-5 font-semibold text-accent-ink" type="submit">Continue to the full form</button>
           </form>
         </div>
       </section>
     </>
+    </PriceText>
   );
 }

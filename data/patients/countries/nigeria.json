@@ -1,0 +1,106 @@
+{
+  "wave": 1,
+  "visa": {
+    "eMedicalEligible": null,
+    "attendantVisa": null,
+    "processingNotes": null,
+    "applyVia": null,
+    "officialUrl": "https://indianvisaonline.gov.in/evisa/tvoa.html",
+    "lastChecked": null,
+    "processingDays": null
+  },
+  "fxRateToUSD": {
+    "value": null,
+    "asOf": null,
+    "source": null
+  },
+  "money": {
+    "paymentMethods": [],
+    "notes": null
+  },
+  "localCareContext": {
+    "commonReasonsPatientsTravel": [],
+    "followUpAtHome": null
+  },
+  "cultural": {
+    "foodNotes": null,
+    "prayerFacilities": null,
+    "otherNotes": null
+  },
+  "techdrContact": {
+    "whatsapp": null,
+    "localRepresentative": null,
+    "hours": null
+  },
+  "localCosts": {},
+  "caseData": {
+    "patientsGuided": null,
+    "period": null
+  },
+  "uniqueContent": null,
+  "translatedTo": [],
+  "reviewed": {
+    "by": null,
+    "date": null
+  },
+  "slug": "nigeria",
+  "name": "Nigeria",
+  "demonym": "Nigerian",
+  "region": "West Africa",
+  "languages": [
+    "English",
+    "Hausa",
+    "Yoruba",
+    "Igbo"
+  ],
+  "techdrLanguageSupport": [
+    "English"
+  ],
+  "currency": {
+    "code": "NGN",
+    "symbol": "₦"
+  },
+  "travel": {
+    "airports": [
+      {
+        "city": "Lagos",
+        "iata": "LOS"
+      },
+      {
+        "city": "Abuja",
+        "iata": "ABV"
+      }
+    ],
+    "routesToIndia": [
+      {
+        "from": "LOS",
+        "to": "DEL",
+        "direct": null,
+        "typicalDuration": null,
+        "commonVia": []
+      },
+      {
+        "from": "LOS",
+        "to": "BOM",
+        "direct": null,
+        "typicalDuration": null,
+        "commonVia": []
+      },
+      {
+        "from": "ABV",
+        "to": "DEL",
+        "direct": null,
+        "typicalDuration": null,
+        "commonVia": []
+      },
+      {
+        "from": "ABV",
+        "to": "BOM",
+        "direct": null,
+        "typicalDuration": null,
+        "commonVia": []
+      }
+    ],
+    "lastChecked": null
+  }
+}

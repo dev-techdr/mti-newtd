@@ -9,6 +9,9 @@ export const sitemapPaths = [
   "/sitemaps/treatments/sitemap.xml",
   "/sitemaps/costs/sitemap.xml",
   "/sitemaps/countries/sitemap.xml",
+  "/sitemaps/country-treatments/sitemap.xml",
+  "/sitemaps/source-cities/sitemap.xml",
+  "/sitemaps/answers/sitemap.xml",
   "/sitemaps/city-treatments/sitemap.xml",
   "/sitemaps/blog/sitemap.xml",
 ] as const;

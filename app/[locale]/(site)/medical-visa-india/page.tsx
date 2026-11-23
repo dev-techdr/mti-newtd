@@ -4,6 +4,7 @@ import { AnswerBox, Byline } from "@/components/seo/AnswerBox";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { FaqList } from "@/components/ui/accordion";
+import { countries } from "@/data/countries";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -60,7 +61,12 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <p className="mt-3">Many applications are decided in a few working days. Some take longer, and some are refused. Validity, the number of entries and the length of each stay are on your grant letter. A treatment that needs eight weeks in India may not fit a short stay. Tell the case manager your expected length of stay before the letter is requested, so the hospital can state it.</p>
         <h2 className="mt-10">What does the invitation letter contain?</h2>
         <p className="mt-3">It identifies the patient, the planned treatment in general terms, and the partner hospital. It does not promise a bed on a date the surgeon has not confirmed, and it does not override a committee decision on a transplant donor.</p>
-        <p className="mt-3">Apply at <a className="text-primary-ink underline" href="https://indianvisaonline.gov.in/">indianvisaonline.gov.in</a>. Country notes are on each <Link className="text-primary-ink underline" href="/patients-from/nigeria">patients-from page</Link>.</p>
+        <p className="mt-3">Apply at <a className="text-primary-ink underline" href="https://indianvisaonline.gov.in/">indianvisaonline.gov.in</a>.</p>
+        <ul className="mt-3 list-disc space-y-2 ps-5">
+          {countries.map((country) => (
+            <li key={country.slug}><Link className="text-primary-ink underline" href={`/patients-from/${country.slug}`}>{country.name}</Link></li>
+          ))}
+        </ul>
         <h2 className="mt-10">Visa questions</h2>
         <div className="mt-4"><FaqList items={faqs} /></div>
         <Byline locale={locale} updated={site.updated} />

@@ -2,7 +2,7 @@ import { setRequestLocale } from "next-intl/server";
 import { PageSuspense } from "@/components/ui/PageFallback";
 import { notFound } from "next/navigation";
 import { ProcedureArticle } from "@/components/templates/ProcedureArticle";
-import { getProcedure, procedures } from "@/data/procedures";
+import { getProcedure, isLibraryProcedure, procedures } from "@/data/procedures";
 import { routing } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
 
@@ -31,6 +31,7 @@ export async function generateMetadata({
     path: `/treatments/${procedure.specialty}/${procedure.slug}`,
     title,
     description: procedure.description,
+    index: !isLibraryProcedure(procedure.slug),
     translated: procedure.translated,
   });
 }
@@ -39,18 +40,18 @@ type ProcedureParams = {
   params: Promise<{ locale: string; specialty: string; procedure: string }>;
 };
 
-export default async function Page({ params }: ProcedureParams) {
-  const { locale, specialty, procedure: slug } = await params;
-  const procedure = getProcedure(slug);
-  if (!procedure || procedure.specialty !== specialty) notFound();
+export default function Page(props: ProcedureParams) {
   return (
     <PageSuspense>
-      <ProcedurePage locale={locale} procedure={procedure} />
+      <ProcedurePage {...props} />
     </PageSuspense>
   );
 }
 
-async function ProcedurePage({ locale, procedure }: { locale: string; procedure: NonNullable<ReturnType<typeof getProcedure>> }) {
+async function ProcedurePage({ params }: ProcedureParams) {
+  const { locale, specialty, procedure: slug } = await params;
+  const procedure = getProcedure(slug);
+  if (!procedure || procedure.specialty !== specialty) notFound();
   setRequestLocale(locale);
   return <ProcedureArticle locale={locale} procedure={procedure} />;
 }

@@ -24,18 +24,18 @@
   color-scheme: dark;
   --background: #071422;
   --foreground: #e7eef5;
-  --card: #0e1c30;
+  --card: #16304a;
   --primary: #2dd4bf;
   --primary-ink: #8ef0e6;
   --secondary: #e7eef5;
   --accent: #ff7a59;
   --accent-ink: #1a120f;
-  --border: #24384c;
-  --muted: #c5d0dc;
+  --border: #3d5a76;
+  --muted: #d2deea;
   --success: #4ade80;
   --warning: #fbbf24;
   --ring: #8ef0e6;
-  --surface: #0c1a2b;
+  --surface: #0e2033;
 }
 
 @theme inline {
@@ -124,6 +124,21 @@ html[lang="ar"] :is(h1, h2, h3, .h1, .h2, .h3) {
   top: 1rem;
 }
 
+.plan-band {
+  color: #f7fafc;
+  background:
+    radial-gradient(900px 420px at 8% -10%, rgba(255, 122, 89, 0.38), transparent 58%),
+    radial-gradient(820px 460px at 100% 110%, rgba(45, 212, 191, 0.42), transparent 52%),
+    linear-gradient(128deg, #0b2545 0%, #0c4a55 46%, #128f88 100%);
+}
+
+.dark .plan-band {
+  background:
+    radial-gradient(860px 380px at 0% 0%, rgba(255, 122, 89, 0.28), transparent 56%),
+    radial-gradient(760px 420px at 100% 100%, rgba(45, 212, 191, 0.32), transparent 54%),
+    linear-gradient(128deg, #071422 0%, #0c3348 48%, #0d5c58 100%);
+}
+
 .mesh-blob {
   position: absolute;
   border-radius: 999px;
@@ -154,6 +169,7 @@ html[lang="ar"] :is(h1, h2, h3, .h1, .h2, .h3) {
 
 .word {
   display: inline-block;
+  margin-inline-end: 0.28em;
   animation: word-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 

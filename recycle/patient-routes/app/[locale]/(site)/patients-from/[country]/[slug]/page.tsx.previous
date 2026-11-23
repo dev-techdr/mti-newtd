@@ -1,0 +1,81 @@
+import { setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { PageSuspense } from "@/components/ui/PageFallback";
+import { GuideArticle } from "@/components/templates/GuideArticle";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { getCountry } from "@/data/countries";
+import { builtCountryChildPaths } from "@/data/patients/publish";
+import { routing } from "@/i18n/routing";
+import { cityCorridorModel, treatmentCorridorModel } from "@/lib/patient-pages";
+import { guideGraph } from "@/lib/schema";
+import { absoluteUrl, pageMetadata } from "@/lib/seo";
+
+export function generateStaticParams() {
+  const paths = builtCountryChildPaths();
+  if (paths.length) {
+    return routing.locales.flatMap((locale) => paths.map((item) => ({ locale, country: item.country, slug: item.slug })));
+  }
+  return [{ locale: routing.defaultLocale, country: "nigeria", slug: "draft" }];
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; country: string; slug: string }> }) {
+  const { locale, country: countrySlug, slug } = await params;
+  const country = getCountry(countrySlug);
+  const match = builtCountryChildPaths().find((item) => item.country === countrySlug && item.slug === slug);
+  if (!country || !match) return {};
+  const model = match.kind === "treatment" ? treatmentCorridorModel(countrySlug, slug) : cityCorridorModel(countrySlug, slug);
+  const title = `${model.h1} | TechDr`;
+  return pageMetadata({
+    locale,
+    path: `/patients-from/${countrySlug}/${slug}`,
+    title: title.length > 60 ? model.h1.slice(0, 60) : title,
+    description: model.quickAnswer,
+  });
+}
+
+export default async function Page({ params }: { params: Promise<{ locale: string; country: string; slug: string }> }) {
+  const { country: countrySlug, slug } = await params;
+  const match = builtCountryChildPaths().find((item) => item.country === countrySlug && item.slug === slug);
+  if (!getCountry(countrySlug) || !match) notFound();
+  return (
+    <PageSuspense>
+      <ChildPage params={params} />
+    </PageSuspense>
+  );
+}
+
+async function ChildPage({ params }: { params: Promise<{ locale: string; country: string; slug: string }> }) {
+  const { locale, country: countrySlug, slug } = await params;
+  setRequestLocale(locale);
+  const country = getCountry(countrySlug);
+  const match = builtCountryChildPaths().find((item) => item.country === countrySlug && item.slug === slug);
+  if (!country || !match) notFound();
+  const model = match.kind === "treatment" ? treatmentCorridorModel(countrySlug, slug) : cityCorridorModel(countrySlug, slug);
+  const path = `/patients-from/${countrySlug}/${slug}`;
+  return (
+    <>
+      <JsonLd
+        data={guideGraph({
+          url: absoluteUrl(locale, path),
+          name: model.h1,
+          updated: model.updated,
+          kind: "country",
+          description: model.quickAnswer,
+          faqs: model.faqs,
+          reviewed: false,
+          audience: country.name,
+        })}
+      />
+      <Breadcrumbs
+        locale={locale}
+        items={[
+          { name: "Patients from", path: "/patients-from" },
+          { name: country.name, path: `/patients-from/${countrySlug}` },
+          { name: model.h1, path },
+        ]}
+      />
+      <GuideArticle locale={locale} model={model} />
+    </>
+  );
+}

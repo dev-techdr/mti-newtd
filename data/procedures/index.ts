@@ -35,6 +35,13 @@ export const procedures: Procedure[] = [
 const duplicateSlugs = procedures.map((item) => item.slug).filter((slug, index, all) => all.indexOf(slug) !== index);
 if (duplicateSlugs.length) throw new Error(`Duplicate procedure slugs: ${[...new Set(duplicateSlugs)].join(", ")}`);
 
+const librarySlugs = new Set(libraryProcedures.map((item) => item.slug));
+
+/** Library rows share one template. They stay reachable and out of the index until each record has its own facts. */
+export function isLibraryProcedure(slug: string) {
+  return librarySlugs.has(slug);
+}
+
 const bySlug = new Map(procedures.map((item) => [item.slug, item]));
 
 export function getProcedure(slug: string) {

@@ -1,7 +1,9 @@
 import { cities } from "../data/cities";
 import { countries } from "../data/countries";
+import { directoryQuickAnswer, directoryText } from "../data/patients/directory";
+import { isCountryIndexable } from "../data/patients/publish";
 import { prioritySlugs } from "../data/decision-guides";
-import { procedures } from "../data/procedures";
+import { isLibraryProcedure, procedures } from "../data/procedures";
 import { costModel, countryModel, longSentences, pageText, treatmentModel, wordCount } from "../lib/page-model";
 
 type Page = { id: string; indexable: boolean; text: string; quick?: string; faqs?: number; facts?: number };
@@ -16,7 +18,7 @@ for (const procedure of procedures) {
   const model = treatmentModel(procedure);
   pages.push({
     id: `treatment:${procedure.slug}`,
-    indexable: true,
+    indexable: !isLibraryProcedure(procedure.slug),
     text: pageText(model),
     quick: model.quickAnswer,
     faqs: model.faqs.length,
@@ -26,7 +28,7 @@ for (const procedure of procedures) {
     const cost = costModel(procedure);
     pages.push({
       id: `cost:${procedure.costId}`,
-      indexable: true,
+      indexable: !isLibraryProcedure(procedure.slug),
       text: pageText(cost),
       quick: cost.quickAnswer,
       faqs: cost.faqs.length,
@@ -39,13 +41,20 @@ for (const country of countries) {
   const model = countryModel(country);
   pages.push({
     id: `country:${country.slug}`,
-    indexable: true,
+    indexable: isCountryIndexable(country.slug),
     text: pageText(model),
     quick: model.quickAnswer,
     faqs: model.faqs.length,
     facts: model.facts.length,
   });
 }
+
+pages.push({
+  id: "directory:patients-from",
+  indexable: true,
+  text: directoryText(),
+  quick: directoryQuickAnswer,
+});
 
 for (const city of cities) {
   const text = [city.answer, city.overview, city.stay, city.climate, ...city.practical, ...city.faqs.flatMap((item) => [item.question, item.answer])].join("\n");
@@ -70,6 +79,7 @@ for (const page of pages) {
   if (page.quick && (wordCount(page.quick) < 40 || wordCount(page.quick) > 60)) {
     errors.push(`${page.id} quick answer is ${wordCount(page.quick)} words`);
   }
+  if (!page.indexable) continue;
   if (page.faqs !== undefined && page.faqs < 8) errors.push(`${page.id} has ${page.faqs} FAQs`);
   if (page.facts !== undefined && page.facts < 3) errors.push(`${page.id} has ${page.facts} facts`);
 }

@@ -1,11 +1,19 @@
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/brand/Logo";
 import { ServiceIcon } from "@/components/ui/ServiceIcon";
-import { cityPath, treatmentCities } from "@/data/cities";
+import { cities, cityPath } from "@/data/cities";
 import { specialties } from "@/data/specialties";
-import { formatPhone, legal, site, whatsappHref } from "@/lib/site";
+import { listIndexableCountries } from "@/data/patients/publish";
+import { formatPhone, legal, site, socialLinks, telHref, whatsappHref } from "@/lib/site";
 
-export function Footer() {
+const link = "hover:underline";
+
+export async function Footer() {
+  const t = await getTranslations("footer");
+  const nav = await getTranslations("nav");
+  const socials = socialLinks().map((href) => ({ href, label: hostLabel(href) }));
+
   return (
     <footer className="mt-20 border-t border-border bg-secondary text-background">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-4">
@@ -13,54 +21,69 @@ export function Footer() {
           <Link href="/" aria-label="techDr medical tourism" className="inline-flex w-fit text-background">
             <Logo markClassName="size-11" />
           </Link>
-          <p className="mt-3 text-sm text-background/80">
-            TechDr Medical Tourism helps international patients plan accredited treatment in India, with written estimates and support from visa to follow-up.
-          </p>
+          <p className="mt-3 text-sm text-background/80">{t("blurb")}</p>
           <ul className="mt-4 space-y-2 text-sm text-background/80">
-            {treatmentCities().map((city) => (
-              <li key={city.path}><Link className="hover:underline" href={cityPath(city)}>Treatment in {city.searchName}</Link></li>
+            {cities.map((city) => (
+              <li key={city.path}>
+                <Link className={link} href={cityPath(city)}>Treatment in {city.searchName}</Link>
+              </li>
             ))}
+            <li><Link className={link} href="/countries">{nav("allDestinations")}</Link></li>
           </ul>
         </div>
         <div>
-          <h2 className="text-sm font-semibold">Treatments</h2>
+          <h2 className="text-sm font-semibold">{t("treatments")}</h2>
           <ul className="mt-3 space-y-2 text-sm text-background/80">
             {specialties.slice(0, 6).map((item) => (
               <li key={item.slug}>
-                <Link className="inline-flex items-center gap-2 hover:underline" href={`/treatments/${item.slug}`}>
+                <Link className={`inline-flex items-center gap-2 ${link}`} href={`/treatments/${item.slug}`}>
                   <ServiceIcon specialty={item.slug} size={28} />
                   {item.name}
                 </Link>
               </li>
             ))}
+            <li><Link className={link} href="/treatments">{t("allTreatments")}</Link></li>
           </ul>
         </div>
         <div>
-          <h2 className="text-sm font-semibold">For patients</h2>
+          <h2 className="text-sm font-semibold">{t("patients")}</h2>
           <ul className="mt-3 space-y-2 text-sm text-background/80">
-            <li><Link href="/how-it-works">How it works</Link></li>
-            <li><Link href="/patient-services">Patient services</Link></li>
-            <li><Link href="/medical-visa-india">Medical visa</Link></li>
-            <li><Link href="/why-india">Why India</Link></li>
-            <li><Link href="/patients-from/nigeria">Patients from Nigeria</Link></li>
-            <li><Link href="/faq">FAQ</Link></li>
+            <li><Link className={link} href="/how-it-works">{nav("how")}</Link></li>
+            <li><Link className={link} href="/patient-services">{nav("services")}</Link></li>
+            <li><Link className={link} href="/medical-visa-india">{nav("visa")}</Link></li>
+            <li><Link className={link} href="/why-india">{nav("why")}</Link></li>
+            <li><Link className={link} href="/patients-from">{nav("from")}</Link></li>
+            {listIndexableCountries().map((country) => (
+              <li key={country.slug}><Link className={link} href={`/patients-from/${country.slug}`}>Patients from {country.name}</Link></li>
+            ))}
+            <li><Link className={link} href="/faq">{nav("faq")}</Link></li>
+            <li><Link className={link} href="/blog">{nav("blog")}</Link></li>
+            <li><Link className={link} href="/get-a-free-quote">{nav("quote")}</Link></li>
           </ul>
         </div>
         <div>
-          <h2 className="text-sm font-semibold">Company</h2>
+          <h2 className="text-sm font-semibold">{t("company")}</h2>
           <ul className="mt-3 space-y-2 text-sm text-background/80">
-            <li><Link href="/about">About</Link></li>
-            <li><Link href="/medical-review-team">Medical review team</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
-            <li><Link href="/editorial-policy">Editorial policy</Link></li>
-            <li><Link href="/privacy-policy">Privacy policy</Link></li>
-            <li><Link href="/terms">Terms of use</Link></li>
-            <li><Link href="/medical-disclaimer">Medical disclaimer</Link></li>
-            <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-            {site.whatsapps.map((number) => (
-              <li key={number}>
-                <a href={whatsappHref("Hello TechDr, I would like to discuss treatment in India.", number)}>WhatsApp {formatPhone(number)}</a>
+            <li><Link className={link} href="/about">{nav("about")}</Link></li>
+            <li><Link className={link} href="/medical-review-team">Medical review team</Link></li>
+            <li><Link className={link} href="/contact">{nav("contact")}</Link></li>
+            <li><Link className={link} href="/editorial-policy">{t("editorial")}</Link></li>
+            <li><Link className={link} href="/privacy-policy">{t("privacy")}</Link></li>
+            <li><Link className={link} href="/terms">{t("terms")}</Link></li>
+            <li><Link className={link} href="/medical-disclaimer">{t("disclaimer")}</Link></li>
+            <li><a className={link} href={`mailto:${site.email}`}>{site.email}</a></li>
+            {site.phones.map((number) => (
+              <li key={`tel-${number}`}>
+                <a className={link} href={telHref(number)}>{t("call")} {formatPhone(number)}</a>
               </li>
+            ))}
+            {site.whatsapps.map((number) => (
+              <li key={`wa-${number}`}>
+                <a className={link} href={whatsappHref("Hello TechDr, I would like to discuss treatment in India.", number)}>WhatsApp {formatPhone(number)}</a>
+              </li>
+            ))}
+            {socials.map((item) => (
+              <li key={item.href}><a className={link} href={item.href}>{item.label}</a></li>
             ))}
           </ul>
         </div>
@@ -69,9 +92,17 @@ export function Footer() {
         <div className="mx-auto max-w-6xl space-y-2 px-4 py-6 text-xs text-background/70">
           <p>© {site.year} {legal.entity}, a sole proprietorship trading as {legal.tradeName}. {legal.brand}. GSTIN {legal.gstin}.</p>
           <p>{legal.address}</p>
-          <p>TechDr coordinates care with independent hospitals. We are not a hospital and we do not provide medical advice or promise an outcome.</p>
+          <p>{t("note")}</p>
         </div>
       </div>
     </footer>
   );
+}
+
+function hostLabel(href: string) {
+  try {
+    return new URL(href).hostname.replace(/^www\./, "");
+  } catch {
+    return href;
+  }
 }

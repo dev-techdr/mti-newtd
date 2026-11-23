@@ -11,6 +11,7 @@ import { getArticle, getArticles } from "@/lib/articles";
 import { routing } from "@/i18n/routing";
 import { absoluteUrl, pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
+import { priceMdx, PriceText } from "@/components/ui/PriceText";
 import { formatUpdated, readingMinutes } from "@/lib/utils";
 
 function headingText(node: ReactNode): string {
@@ -121,6 +122,7 @@ async function ArticlePage({ params }: ArticleParams) {
         description: article.description,
       }} />
       <Breadcrumbs locale={locale} items={[{ name: "Guides", path: "/blog" }, { name: article.title, path: `/blog/${slug}` }]} />
+      <PriceText>
       <article className="mx-auto grid w-full max-w-6xl items-start gap-10 px-4 py-10 lg:grid-cols-[minmax(0,1fr)_17rem]">
         <div className="min-w-0">
           <p className="text-sm font-medium text-primary-ink">{article.category}</p>
@@ -133,7 +135,7 @@ async function ArticlePage({ params }: ArticleParams) {
             <nav aria-label="On this page" className="mt-3"><Contents items={headings} /></nav>
           </details>
           <div className="richtext">
-            <MDXRemote source={withQuickAnswer(article.content)} components={{ h2: GuideHeading, QuickAnswer }} />
+            <MDXRemote source={withQuickAnswer(article.content)} components={{ ...priceMdx, h2: GuideHeading, QuickAnswer }} />
           </div>
           <Byline locale={locale} updated={article.updated} />
           {related.length ? (
@@ -159,6 +161,7 @@ async function ArticlePage({ params }: ArticleParams) {
           </div>
         </aside>
       </article>
+      </PriceText>
     </>
   );
 }
