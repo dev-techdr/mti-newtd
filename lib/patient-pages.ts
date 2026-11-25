@@ -15,7 +15,7 @@ export function limitWords(text: string, min = 40, max = 60) {
 
 function localAmount(usd: number, record: PatientCountry) {
   const rate = record.fxRateToUSD.value;
-  if (!rate) return "";
+  if (!rate || !record.currency) return "";
   return ` (${record.currency.symbol}${Math.round(usd * rate).toLocaleString("en-US")})`;
 }
 

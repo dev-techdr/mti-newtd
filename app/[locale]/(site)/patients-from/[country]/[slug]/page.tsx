@@ -10,7 +10,8 @@ import { getCost, moneyRange } from "@/data/costs";
 import { getCountry } from "@/data/countries";
 import { fareLine, fareTreatmentAnswer, fareTreatmentPairs } from "@/data/patients/fare-treatments";
 import { fareSource, indiaFareFor, type IndiaFare } from "@/data/patients/india-fares";
-import { builtCountryChildPaths } from "@/data/patients/publish";
+import { builtCountryChildPaths, isCityIndexable, isTreatmentIndexable } from "@/data/patients/publish";
+import { getSourceCity } from "@/data/patients/load";
 import { costPath, getProcedure, isLibraryProcedure, procedurePath, type Procedure } from "@/data/procedures";
 import { routing } from "@/i18n/routing";
 import { cityCorridorModel, treatmentCorridorModel } from "@/lib/patient-pages";
@@ -52,13 +53,14 @@ export async function generateMetadata({ params }: ChildParams) {
   const corridor = corridorFor(country, slug);
   if (corridor && getCountry(country)) {
     const model = corridor.kind === "treatment" ? treatmentCorridorModel(country, slug) : cityCorridorModel(country, slug);
+    const city = getSourceCity(country, slug);
     const title = `${model.h1} | TechDr`;
     return pageMetadata({
       locale,
       path,
       title: title.length > 60 ? model.h1.slice(0, 60) : title,
       description: model.quickAnswer,
-      index: false,
+      index: corridor.kind === "treatment" ? isTreatmentIndexable(country, slug) : Boolean(city && isCityIndexable(city)),
     });
   }
   const fare = fareFor(country, slug);

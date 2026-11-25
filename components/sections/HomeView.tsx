@@ -12,6 +12,7 @@ import { ServiceIcon, serviceIcon } from "@/components/ui/ServiceIcon";
 import { homeFaqs } from "@/data/faqs";
 import { posts } from "@/data/blog";
 import { cities } from "@/data/cities";
+import { countries } from "@/data/countries";
 import { procedurePath, procedures, treatmentSearchItems } from "@/data/procedures";
 import { faqList } from "@/lib/schema";
 import { WhatsAppLink } from "@/components/contact/WhatsAppLink";
@@ -263,6 +264,19 @@ export function HomeView() {
             ))}
           </ul>
         </div>
+      </section>
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <h2>Patients from</h2>
+        <p className="mt-2 max-w-2xl text-muted">Each page is written for one passport. Visa and flight times stay off the page until they have a source.</p>
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {countries.map((country) => (
+            <li key={country.slug}>
+              <Link className="flex min-h-16 items-center rounded-2xl border border-border bg-card px-5 font-heading text-lg font-semibold shadow-sm" href={`/patients-from/${country.slug}`}>
+                Patients from {country.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
       <section className="mx-auto max-w-6xl px-4 py-16">
         <h2>Guides</h2>

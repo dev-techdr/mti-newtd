@@ -4,13 +4,13 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 import Script from "next/script";
 import { Link, usePathname } from "@/i18n/navigation";
-import { topicFromPath } from "@/components/contact/WhatsAppLink";
-import { telHref, whatsappHref, whatsappMessage } from "@/lib/site";
+import { messageFromPath } from "@/components/contact/WhatsAppLink";
+import { telHref, whatsappHref } from "@/lib/site";
 
 export function Assist() {
   const t = useTranslations();
   const pathname = usePathname();
-  const wa = whatsappHref(whatsappMessage(topicFromPath(pathname)));
+  const wa = whatsappHref(messageFromPath(pathname));
   const cookies = useSyncExternalStore(subscribeConsent, consentSnapshot, () => "unknown" as const);
 
   function choose(value: "accepted" | "rejected") {

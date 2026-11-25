@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { assessCity, assessCountry, assessTreatment } from "../data/patients/assess";
 import { marketTreatments, sourceCityCandidates, treatmentPool, unmappedTreatments, waveCountries } from "../data/patients/catalog";
+import { fareTreatmentPairs } from "../data/patients/fare-treatments";
 import { getSourceCity, patientCountries } from "../data/patients/load";
 import { answerGaps, loadAnswerFiles } from "../lib/answers";
 import { computeApproved, uniquenessPercent } from "../lib/patient-readiness";
@@ -44,7 +45,8 @@ function installRoute(template: string, destination: string, enabled: boolean) {
 }
 
 const childRoutes = approved.treatments.length + approved.cities.length > 0;
-installRoute("country-child-page.tsx", "app/[locale]/(site)/patients-from/[country]/[slug]/page.tsx", childRoutes);
+const fareRoutes = fareTreatmentPairs().length > 0;
+installRoute("country-child-page.tsx", "app/[locale]/(site)/patients-from/[country]/[slug]/page.tsx", childRoutes || fareRoutes);
 installRoute("answers-index-page.tsx", "app/[locale]/(site)/answers/page.tsx", approved.answers.length > 0);
 installRoute("answer-page.tsx", "app/[locale]/(site)/answers/[question]/page.tsx", approved.answers.length > 0);
 
@@ -119,7 +121,7 @@ for (const candidate of sourceCityCandidates) {
 }
 
 for (const country of waveCountries) {
-  if (country.wave === 1) continue;
+  if (patientCountries.some((record) => record.slug === country.slug)) continue;
   rows.push({
     type: "country",
     wave: String(country.wave),
@@ -225,7 +227,7 @@ const lines = [
   "Search Console was not queried. Resubmit the sitemap index after deploy: the 10 country URLs left /sitemaps/countries/sitemap.xml.",
   "Do not open Wave 2 until at least 70% of Wave 1 pages are indexed. That share is 0% today.",
   "",
-  "Type B and type C route files are copied into app/ only when at least one of those pages is indexable. An empty generateStaticParams list breaks this Next.js build.",
+  "Answer routes are copied into app/ only when at least one answer is indexable. The country treatment route stays installed while a fare page or an indexable corridor exists. An empty generateStaticParams list breaks this Next.js build.",
   "A source city also needs an indexable treatment corridor for the same country, so three internal links exist.",
 ];
 fs.writeFileSync(path.join(reports, "readiness-summary.txt"), `${lines.join("\n")}\n`);

@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { cities } from "@/data/cities";
 import { answerGaps, loadAnswerFiles } from "@/lib/answers";
-import { assessCity, assessCountry, assessTreatment } from "@/data/patients/assess";
+import { assessCity, assessCountry, assessTreatment, soughtSlugs } from "@/data/patients/assess";
 import { marketTreatments, treatmentPool } from "@/data/patients/catalog";
 import { directoryText } from "@/data/patients/directory";
 import { patientCountries, sourceCities } from "@/data/patients/load";
@@ -97,12 +97,13 @@ export function computeApproved() {
   const answers: string[] = [];
   for (const record of patientCountries) {
     const assessment = assessCountry(record);
-    const score = uniquenessPercent(`country:${record.slug}`);
-    if (assessment.complete && assessment.fresh && score !== null && score >= 60) countriesApproved.push(record.slug);
+    if (record.status === "verified" && assessment.complete && assessment.fresh) countriesApproved.push(record.slug);
   }
   for (const record of patientCountries) {
     if (!countriesApproved.includes(record.slug)) continue;
+    const allowed = new Set(soughtSlugs(record));
     for (const treatment of marketTreatments) {
+      if (!allowed.has(treatment.slug)) continue;
       const assessment = assessTreatment(record, treatment.slug);
       const score = uniquenessPercent(`corridor:${record.slug}/${treatment.slug}`);
       if (assessment.complete && assessment.fresh && score !== null && score >= 60) {

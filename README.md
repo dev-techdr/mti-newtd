@@ -56,4 +56,4 @@ Do not add a named doctor or a named hospital. Do not promise an outcome. Keep t
 
 ## Sitemaps and crawlers
 
-`app/robots.ts` allows major search and AI crawlers. Sitemaps are split under `/sitemaps/pages`, `/treatments`, `/costs`, `/countries`, and `/blog`. A short brief for answer engines is at `/llms.txt`, with a longer brief at `/llms-full.txt`.
+`app/robots.txt` allows search and AI answer engines, blocks crawlers that do not bring patients, and points at the sitemap index. Sitemaps are split under `/sitemaps/pages`, `/treatments`, `/costs`, `/countries`, and `/blog`. A short brief for answer engines is at `/llms.txt`, with a longer brief at `/llms-full.txt`.

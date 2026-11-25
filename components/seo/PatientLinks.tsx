@@ -1,5 +1,5 @@
 import { Link } from "@/i18n/navigation";
-import { childLinksForCountry, corridorsForProcedure, getApprovedAnswerSlugs } from "@/data/patients/publish";
+import { childLinksForCountry, corridorsForProcedure, getApprovedAnswerSlugs, hubsForProcedure } from "@/data/patients/publish";
 import { loadAnswerFiles } from "@/lib/answers";
 
 function LinkList({ title, links }: { title: string; links: { href: string; label: string }[] }) {
@@ -19,7 +19,7 @@ function LinkList({ title, links }: { title: string; links: { href: string; labe
 }
 
 export function PatientsFromLinks({ procedureSlug }: { procedureSlug: string }) {
-  return <LinkList title="Patients from" links={corridorsForProcedure(procedureSlug)} />;
+  return <LinkList title="Patients from" links={[...corridorsForProcedure(procedureSlug), ...hubsForProcedure(procedureSlug)]} />;
 }
 
 export function CountryChildLinks({ country }: { country: string }) {

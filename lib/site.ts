@@ -61,6 +61,11 @@ export function whatsappMessage(topic = "treatment") {
   return `Hello TechDr, I need help with ${subject} in India. I am from ___.`;
 }
 
+export function whatsappCountryMessage(countryName: string, topic = "treatment") {
+  const subject = topic.trim() || "treatment";
+  return `Hello TechDr, I am from ${countryName} and need help with ${subject}.`;
+}
+
 export function whatsappHref(text = whatsappMessage(), number = site.whatsapp) {
   const digits = (number || site.whatsapp).replace(/\D/g, "");
   return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;

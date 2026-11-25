@@ -1,7 +1,7 @@
 import { decisionGuides } from "@/data/decision-guides";
 import { getCost, money, moneyRange } from "@/data/costs";
 import type { CountryPage } from "@/data/countries";
-import { costFilled, fxFilled, routeFilled } from "@/data/patients/assess";
+import { costFilled, countryQuickAnswer, fxFilled, routeFilled } from "@/data/patients/assess";
 import { marketTreatments } from "@/data/patients/catalog";
 import { getPatientCountry } from "@/data/patients/load";
 import { costPath, getProcedure, procedurePath, type Procedure } from "@/data/procedures";
@@ -469,7 +469,7 @@ export function countryModel(country: CountryPage): PageModel {
   const record = getPatientCountry(country.slug);
   if (!record) throw new Error(`No patient record for ${country.slug}`);
   const seen = new Set<string>();
-  const quickAnswer = boundQuickAnswer(country.name, country.answer);
+  const quickAnswer = boundQuickAnswer(country.name, countryQuickAnswer(record));
   remember(seen, quickAnswer);
   const sections: Section[] = [];
   const blocks: [string, string, string][] = [
@@ -511,13 +511,14 @@ export function countryModel(country: CountryPage): PageModel {
   }
   const readyCosts = Object.entries(record.localCosts).filter(([, cost]) => costFilled(cost));
   let comparison: PageModel["comparison"];
-  if (readyCosts.length && fxFilled(record.fxRateToUSD) && record.fxRateToUSD.value && record.fxRateToUSD.asOf) {
+  const currency = record.currency;
+  if (readyCosts.length && currency && fxFilled(record.fxRateToUSD) && record.fxRateToUSD.value && record.fxRateToUSD.asOf) {
     const rate = record.fxRateToUSD.value;
     const rows = readyCosts.flatMap(([slug, cost]) => {
       const procedure = getProcedure(slug);
       if (!procedure || cost.minUSD === null || cost.maxUSD === null) return [];
       const india = getCost(procedure.costId).india;
-      const local = `${money(cost.minUSD)}–${money(cost.maxUSD)} (${localFromUsd(cost.minUSD, rate, record.currency.symbol)}–${localFromUsd(cost.maxUSD, rate, record.currency.symbol)})`;
+      const local = `${money(cost.minUSD)}–${money(cost.maxUSD)} (${localFromUsd(cost.minUSD, rate, currency.symbol)}–${localFromUsd(cost.maxUSD, rate, currency.symbol)})`;
       return [[marketTreatments.find((item) => item.slug === slug)?.label ?? procedure.name, moneyRange(india), local]];
     });
     if (rows.length) {
@@ -537,7 +538,7 @@ export function countryModel(country: CountryPage): PageModel {
   }
   const facts = [
     { label: "Languages", value: record.techdrLanguageSupport.join(", ") },
-    { label: "Currency", value: `${record.currency.code} (${record.currency.symbol})` },
+    ...(record.currency ? [{ label: "Currency", value: `${record.currency.code} (${record.currency.symbol})` }] : []),
   ];
   if (record.visa.eMedicalEligible !== null) {
     facts.push({
@@ -551,7 +552,7 @@ export function countryModel(country: CountryPage): PageModel {
   if (record.money.paymentMethods.length) facts.push({ label: "Payment", value: record.money.paymentMethods.join(", ") });
   return {
     kind: "country",
-    h1: `Treatment in India for patients from ${country.name}`,
+    h1: `Medical Treatment in India for Patients from ${country.name}`,
     quickAnswer,
     updated: record.reviewed.date ?? "2026-11-13",
     showPrice: false,
@@ -567,8 +568,11 @@ export function countryModel(country: CountryPage): PageModel {
       ? { reviewNote: `Reviewed by ${record.reviewed.by}${record.reviewed.date ? ` on ${record.reviewed.date}` : ""}.` }
       : {}),
     sources: [
-      { href: record.visa.officialUrl, label: "Indian e-Visa application", supports: "Official application and current fee." },
-      { href: "https://indianvisaonline.gov.in/evisa/", label: "Official e-Visa categories", supports: "Official category list." },
+      { href: record.visa.officialUrl, label: "Indian e-Visa application", supports: "How to apply and the current fee on the form." },
+      ...(record.visa.source
+        ? [{ href: record.visa.source, label: "e-Visa fee table", supports: `Eligibility checked ${record.visa.lastChecked ?? "on the file"}.` }]
+        : []),
+      ...(record.embassy ? [{ href: record.embassy.url, label: record.embassy.name, supports: `Mission page checked ${record.embassy.lastChecked}.` }] : []),
     ],
     related: [
       { href: "/patients-from", label: "All patient countries" },

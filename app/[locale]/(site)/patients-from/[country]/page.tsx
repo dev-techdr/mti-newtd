@@ -10,15 +10,21 @@ import { countries, getCountry } from "@/data/countries";
 import { FareTreatmentLinks } from "@/components/patients/FareTreatments";
 import { fareLine } from "@/data/patients/fare-treatments";
 import { fareSource, indiaFareFor, indiaFares } from "@/data/patients/india-fares";
-import { getPatientCountry } from "@/data/patients/load";
+import { getPatientCountry, patientCountries } from "@/data/patients/load";
+import { countryQuickAnswer } from "@/data/patients/assess";
 import { isCountryIndexable } from "@/data/patients/publish";
+import { whatsappCountryMessage, whatsappHref } from "@/lib/site";
 import { routing } from "@/i18n/routing";
 import { countryModel } from "@/lib/page-model";
 import { guideGraph } from "@/lib/schema";
 import { absoluteUrl, pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
-  const slugs = new Set([...countries.map((country) => country.slug), ...indiaFares.map((fare) => fare.slug)]);
+  const slugs = new Set([
+    ...countries.map((country) => country.slug),
+    ...indiaFares.map((fare) => fare.slug),
+    ...patientCountries.map((country) => country.slug),
+  ]);
   return routing.locales.flatMap((locale) => [...slugs].map((country) => ({ locale, country })));
 }
 
@@ -26,19 +32,22 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale, country: slug } = await params;
   const country = getCountry(slug);
   const fare = indiaFareFor(slug);
-  if (!country && fare) {
+  const record = getPatientCountry(slug);
+  if (!country && (fare || record)) {
+    const name = record?.name ?? fare?.name ?? slug;
     return pageMetadata({
       locale,
       path: `/patients-from/${slug}`,
-      title: `Treatment in India from ${fare.name} | TechDr`,
-      description: `Patients from ${fare.name}: India treatment guides and the Skyscanner economy fare to Mumbai or New Delhi.`,
+      title: `Treatment in India from ${name} | Visa, Cost & Travel | TechDr`,
+      description: record ? countryQuickAnswer(record) : `Patients from ${name}: visa check, journey notes, and how to send reports to TechDr on WhatsApp.`,
+      index: isCountryIndexable(slug),
     });
   }
   if (!country) return {};
   return pageMetadata({
     locale,
     path: `/patients-from/${slug}`,
-    title: `Treatment in India from ${country.name} | TechDr`.slice(0, 60),
+    title: `Treatment in India from ${country.name} | Visa, Cost & Travel | TechDr`,
     description: country.description,
     index: isCountryIndexable(slug),
   });
@@ -59,15 +68,30 @@ async function CountryPage({ params }: CountryParams) {
   setRequestLocale(locale);
   const country = getCountry(slug);
   const fare = indiaFareFor(slug);
-  if (!country && fare) {
+  const bare = getPatientCountry(slug);
+  if (!country && (fare || bare)) {
+    const name = bare?.name ?? fare?.name ?? slug;
+    const answer = bare
+      ? countryQuickAnswer(bare)
+      : `Send your reports on WhatsApp to start a plan from ${name}. Visa eligibility and journey time are published here only after a sourced check.`;
     return (
       <>
-        <Breadcrumbs locale={locale} items={[{ name: "Patients from", path: "/patients-from" }, { name: fare.name, path: `/patients-from/${slug}` }]} />
+        <Breadcrumbs locale={locale} items={[{ name: "Patients from", path: "/patients-from" }, { name, path: `/patients-from/${slug}` }]} />
         <article className="mx-auto max-w-3xl px-4 py-10">
-          <h1>Treatment in India for patients from {fare.name}</h1>
+          <h1>Medical Treatment in India for Patients from {name}</h1>
           <div className="mt-6">
-            <AnswerBox>{`Patients leaving ${fare.name} use the India treatment guides below. A recent economy fare to ${fare.arrivals ?? "Mumbai or New Delhi"} is ${fareLine(fare)}. ${fareSource(fare)}`}</AnswerBox>
+            <AnswerBox>{fare ? `${answer} A recent economy fare to ${fare.arrivals ?? "Mumbai or New Delhi"} is ${fareLine(fare)}. ${fareSource(fare)}` : answer}</AnswerBox>
           </div>
+          {bare?.visa.processingNotes ? <p className="mt-4">{bare.visa.processingNotes}</p> : null}
+          {bare?.visa.source ? (
+            <p className="mt-4 text-sm">
+              Visa source: <a className="text-primary-ink underline" href={bare.visa.source}>{bare.visa.source}</a>
+              {bare.visa.lastChecked ? `, checked ${bare.visa.lastChecked}.` : "."}
+            </p>
+          ) : null}
+          <p className="mt-4">
+            <a className="inline-flex min-h-11 items-center rounded-full bg-accent px-5 text-sm font-semibold text-accent-ink" href={whatsappHref(whatsappCountryMessage(name))}>WhatsApp TechDr</a>
+          </p>
         </article>
         <FareTreatmentLinks country={slug} />
       </>
@@ -97,6 +121,9 @@ async function CountryPage({ params }: CountryParams) {
           { name: country.name, path: `/patients-from/${slug}` },
         ]}
       />
+      <p className="mx-auto max-w-3xl px-4 pt-6">
+        <a className="inline-flex min-h-11 items-center rounded-full bg-accent px-5 text-sm font-semibold text-accent-ink" href={whatsappHref(whatsappCountryMessage(country.name))}>WhatsApp TechDr</a>
+      </p>
       <GuideArticle locale={locale} model={model} />
       {fare ? <IndiaFareNote slug={slug} /> : null}
       {fare ? <FareTreatmentLinks country={slug} /> : null}

@@ -4,7 +4,7 @@ import { Logo } from "@/components/brand/Logo";
 import { ServiceIcon } from "@/components/ui/ServiceIcon";
 import { cities, cityPath } from "@/data/cities";
 import { specialties } from "@/data/specialties";
-import { listIndexableCountries } from "@/data/patients/publish";
+import { countries as patientHubs } from "@/data/countries";
 import { WhatsAppLink } from "@/components/contact/WhatsAppLink";
 import { formatPhone, legal, site, socialLinks, telHref } from "@/lib/site";
 
@@ -53,7 +53,7 @@ export async function Footer() {
             <li><Link className={link} href="/medical-visa-india">{nav("visa")}</Link></li>
             <li><Link className={link} href="/why-india">{nav("why")}</Link></li>
             <li><Link className={link} href="/patients-from">{nav("from")}</Link></li>
-            {listIndexableCountries().map((country) => (
+            {patientHubs.map((country) => (
               <li key={country.slug}><Link className={link} href={`/patients-from/${country.slug}`}>Patients from {country.name}</Link></li>
             ))}
             <li><Link className={link} href="/faq">{nav("faq")}</Link></li>

@@ -14,7 +14,8 @@ export const directoryIntro = [
 export function countryLine(record: PatientCountry) {
   const airports = record.travel.airports.map((item) => `${item.iata} ${item.city}`).join(", ");
   const languages = record.techdrLanguageSupport.join(", ");
-  return `${record.name} (${record.region}): ${languages}. ${record.currency.code}${airports ? `. ${airports}` : ""}.`;
+  const currency = record.currency?.code ?? "currency not checked";
+  return `${record.name} (${record.region}): ${languages || "coordinator language not checked"}. ${currency}${airports ? `. ${airports}` : ""}.`;
 }
 
 export function directoryText() {

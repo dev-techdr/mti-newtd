@@ -1,5 +1,5 @@
 import approvedFile from "@/data/patients/indexable.json";
-import { assessCity, assessCountry, assessTreatment } from "@/data/patients/assess";
+import { assessCity, assessCountry, assessTreatment, soughtSlugs } from "@/data/patients/assess";
 import { marketTreatments } from "@/data/patients/catalog";
 import { getPatientCountry, patientCountries, sourceCities } from "@/data/patients/load";
 import type { PatientCountry, SourceCity } from "@/data/patients/schema";
@@ -17,23 +17,9 @@ const approvedAnswers = new Set(approved.answers);
 const overlap = approved.treatments.filter((key) => approvedCities.has(key));
 if (overlap.length) throw new Error(`Patient slug collision: ${overlap.join(", ")}`);
 
-const gateCountries = new Set([
-  "nigeria",
-  "kenya",
-  "ethiopia",
-  "tanzania",
-  "bangladesh",
-  "iraq",
-  "oman",
-  "yemen",
-  "uzbekistan",
-  "afghanistan",
-]);
-
 export function isCountryIndexable(slug: string) {
-  if (!gateCountries.has(slug)) return false;
   const record = getPatientCountry(slug);
-  if (!record) return false;
+  if (!record || record.status !== "verified") return false;
   const assessment = assessCountry(record);
   return assessment.complete && assessment.fresh && approved.countries.includes(slug);
 }
@@ -44,9 +30,17 @@ export function listIndexableCountries() {
 
 export function isTreatmentIndexable(country: string, slug: string) {
   const record = getPatientCountry(country);
-  if (!record || !isCountryIndexable(country)) return false;
+  if (!record || !isCountryIndexable(country) || !soughtSlugs(record).includes(slug)) return false;
   const assessment = assessTreatment(record, slug);
   return assessment.complete && assessment.fresh && approvedTreatments.has(`${country}/${slug}`);
+}
+
+export function hubsForProcedure(slug: string) {
+  return patientCountries.flatMap((record) => {
+    if (!record.soughtTreatments.some((item) => item.slug === slug)) return [];
+    if (isTreatmentIndexable(record.slug, slug)) return [];
+    return [{ href: `/patients-from/${record.slug}`, label: `Patients from ${record.name}` }];
+  });
 }
 
 export function isCityIndexable(city: SourceCity) {

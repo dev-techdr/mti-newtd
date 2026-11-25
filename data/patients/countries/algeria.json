@@ -1,0 +1,72 @@
+{
+  "slug": "algeria",
+  "name": "Algeria",
+  "demonym": "Algerian",
+  "region": "North Africa",
+  "wave": 2,
+  "status": "needs-human-check",
+  "languages": [],
+  "techdrLanguageSupport": [
+    "English"
+  ],
+  "currency": null,
+  "fxRateToUSD": {
+    "value": null,
+    "asOf": null,
+    "source": null
+  },
+  "visa": {
+    "eMedicalEligible": false,
+    "attendantVisa": false,
+    "processingNotes": "This nationality is not a row on the country-wise e-Visa fee table dated 2026-04-15. That table is the list that prices e-Medical and e-Medical Attendant visas. Absence is not a refusal and not permission to travel on another category. Confirm the live form and the Indian mission before anyone books flights.",
+    "applyVia": "Check https://indianvisaonline.gov.in/evisa/tvoa.html and the Indian mission. Do not treat a missing row as an approval.",
+    "officialUrl": "https://indianvisaonline.gov.in/evisa/tvoa.html",
+    "source": "https://www.indianvisaonline.gov.in/evisa/images/eTV_revised_fee_final.pdf",
+    "lastChecked": "2026-11-25",
+    "processingDays": null
+  },
+  "travel": {
+    "airports": [],
+    "routesToIndia": [],
+    "lastChecked": null
+  },
+  "money": {
+    "paymentMethods": [],
+    "notes": null
+  },
+  "localCareContext": {
+    "commonReasonsPatientsTravel": [],
+    "followUpAtHome": null
+  },
+  "cultural": {
+    "foodNotes": null,
+    "prayerFacilities": null,
+    "otherNotes": null
+  },
+  "techdrContact": {
+    "whatsapp": null,
+    "localRepresentative": null,
+    "hours": null
+  },
+  "embassy": null,
+  "citations": [
+    {
+      "field": "techdrLanguages",
+      "source": "https://medicaltourism.techdr.in/faq",
+      "lastChecked": "2026-11-25"
+    }
+  ],
+  "soughtTreatments": [],
+  "localCosts": {},
+  "caseData": {
+    "patientsGuided": null,
+    "period": null
+  },
+  "uniqueContent": null,
+  "faqs": [],
+  "translatedTo": [],
+  "reviewed": {
+    "by": null,
+    "date": null
+  }
+}

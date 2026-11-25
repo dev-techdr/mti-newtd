@@ -1,4 +1,4 @@
-Patient-page readiness 2026-11-23
+Patient-page readiness 2026-11-25
 Country hubs built: 10. Indexable: 0.
 Country × treatment built: 0 of 150.
 Source cities built: 0. Question pages built: 0.
@@ -40,5 +40,5 @@ IndexNow was not called. No newly indexable corridor URL exists.
 Search Console was not queried. Resubmit the sitemap index after deploy: the 10 country URLs left /sitemaps/countries/sitemap.xml.
 Do not open Wave 2 until at least 70% of Wave 1 pages are indexed. That share is 0% today.
 
-Type B and type C route files are copied into app/ only when at least one of those pages is indexable. An empty generateStaticParams list breaks this Next.js build.
+Answer routes are copied into app/ only when at least one answer is indexable. The country treatment route stays installed while a fare page or an indexable corridor exists. An empty generateStaticParams list breaks this Next.js build.
 A source city also needs an indexable treatment corridor for the same country, so three internal links exist.

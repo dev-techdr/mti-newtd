@@ -1,13 +1,14 @@
 {
   "wave": 1,
   "visa": {
-    "eMedicalEligible": null,
-    "attendantVisa": null,
-    "processingNotes": null,
-    "applyVia": null,
+    "eMedicalEligible": true,
+    "attendantVisa": true,
+    "processingNotes": "The country-wise e-Visa fee table dated 2026-04-15 lists an e-Medical Visa fee of USD 80 and an e-Medical Attendant fee of USD 80. The application page says to upload a photo and the passport page, pay online, and receive an ETA by email. It does not publish how many days a decision takes.",
+    "applyVia": "Apply at https://indianvisaonline.gov.in/evisa/tvoa.html after the hospital invitation letter is ready. Print the ETA for the airline.",
     "officialUrl": "https://indianvisaonline.gov.in/evisa/tvoa.html",
-    "lastChecked": null,
-    "processingDays": null
+    "lastChecked": "2026-11-25",
+    "processingDays": null,
+    "source": "https://www.indianvisaonline.gov.in/evisa/images/eTV_revised_fee_final.pdf"
   },
   "fxRateToUSD": {
     "value": null,
@@ -76,5 +77,15 @@
       }
     ],
     "lastChecked": null
-  }
+  },
+  "status": "needs-human-check",
+  "citations": [
+    {
+      "field": "techdrLanguages",
+      "source": "https://medicaltourism.techdr.in/faq",
+      "lastChecked": "2026-11-25"
+    }
+  ],
+  "embassy": null,
+  "soughtTreatments": []
 }

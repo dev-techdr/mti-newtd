@@ -1,13 +1,14 @@
 {
   "wave": 1,
   "visa": {
-    "eMedicalEligible": null,
-    "attendantVisa": null,
-    "processingNotes": null,
-    "applyVia": null,
+    "eMedicalEligible": false,
+    "attendantVisa": false,
+    "processingNotes": "This nationality is not a row on the country-wise e-Visa fee table dated 2026-04-15. That table is the list that prices e-Medical and e-Medical Attendant visas. Absence is not a refusal and not permission to travel on another category. Confirm the live form and the Indian mission before anyone books flights.",
+    "applyVia": "Check https://indianvisaonline.gov.in/evisa/tvoa.html and the Indian mission. Do not treat a missing row as an approval.",
     "officialUrl": "https://indianvisaonline.gov.in/evisa/tvoa.html",
-    "lastChecked": null,
-    "processingDays": null
+    "lastChecked": "2026-11-25",
+    "processingDays": null,
+    "source": "https://www.indianvisaonline.gov.in/evisa/images/eTV_revised_fee_final.pdf"
   },
   "fxRateToUSD": {
     "value": null,
@@ -53,8 +54,7 @@
     "English"
   ],
   "techdrLanguageSupport": [
-    "English",
-    "Amharic"
+    "English"
   ],
   "currency": {
     "code": "ETB",
@@ -77,5 +77,15 @@
       }
     ],
     "lastChecked": null
-  }
+  },
+  "status": "needs-human-check",
+  "citations": [
+    {
+      "field": "techdrLanguages",
+      "source": "https://medicaltourism.techdr.in/faq",
+      "lastChecked": "2026-11-25"
+    }
+  ],
+  "embassy": null,
+  "soughtTreatments": []
 }

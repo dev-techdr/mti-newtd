@@ -1,0 +1,72 @@
+{
+  "slug": "norway",
+  "name": "Norway",
+  "demonym": "Norwegian",
+  "region": "Europe",
+  "wave": 4,
+  "status": "needs-human-check",
+  "languages": [],
+  "techdrLanguageSupport": [
+    "English"
+  ],
+  "currency": null,
+  "fxRateToUSD": {
+    "value": null,
+    "asOf": null,
+    "source": null
+  },
+  "visa": {
+    "eMedicalEligible": true,
+    "attendantVisa": true,
+    "processingNotes": "The country-wise e-Visa fee table dated 2026-04-15 lists an e-Medical Visa fee of USD 80 and an e-Medical Attendant fee of USD 80. The application page says to upload a photo and the passport page, pay online, and receive an ETA by email. It does not publish how many days a decision takes.",
+    "applyVia": "Apply at https://indianvisaonline.gov.in/evisa/tvoa.html after the hospital invitation letter is ready. Print the ETA for the airline.",
+    "officialUrl": "https://indianvisaonline.gov.in/evisa/tvoa.html",
+    "source": "https://www.indianvisaonline.gov.in/evisa/images/eTV_revised_fee_final.pdf",
+    "lastChecked": "2026-11-25",
+    "processingDays": null
+  },
+  "travel": {
+    "airports": [],
+    "routesToIndia": [],
+    "lastChecked": null
+  },
+  "money": {
+    "paymentMethods": [],
+    "notes": null
+  },
+  "localCareContext": {
+    "commonReasonsPatientsTravel": [],
+    "followUpAtHome": null
+  },
+  "cultural": {
+    "foodNotes": null,
+    "prayerFacilities": null,
+    "otherNotes": null
+  },
+  "techdrContact": {
+    "whatsapp": null,
+    "localRepresentative": null,
+    "hours": null
+  },
+  "embassy": null,
+  "citations": [
+    {
+      "field": "techdrLanguages",
+      "source": "https://medicaltourism.techdr.in/faq",
+      "lastChecked": "2026-11-25"
+    }
+  ],
+  "soughtTreatments": [],
+  "localCosts": {},
+  "caseData": {
+    "patientsGuided": null,
+    "period": null
+  },
+  "uniqueContent": null,
+  "faqs": [],
+  "translatedTo": [],
+  "reviewed": {
+    "by": null,
+    "date": null
+  }
+}

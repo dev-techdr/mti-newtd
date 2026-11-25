@@ -3,11 +3,12 @@
   "visa": {
     "eMedicalEligible": null,
     "attendantVisa": null,
-    "processingNotes": null,
-    "applyVia": null,
+    "processingNotes": "The 2026-04-15 fee table prints 00 for the e-Medical Visa and the e-Medical Attendant Visa. The only note on that PDF is a 3% bank charge. It does not say whether 00 means free or not offered.",
+    "applyVia": "Open https://indianvisaonline.gov.in/evisa/tvoa.html and see whether the form offers e-Medical for this passport. Do not copy a fee from a chat.",
     "officialUrl": "https://indianvisaonline.gov.in/evisa/tvoa.html",
-    "lastChecked": null,
-    "processingDays": null
+    "lastChecked": "2026-11-25",
+    "processingDays": null,
+    "source": "https://www.indianvisaonline.gov.in/evisa/images/eTV_revised_fee_final.pdf"
   },
   "fxRateToUSD": {
     "value": null,
@@ -83,5 +84,15 @@
       }
     ],
     "lastChecked": null
-  }
+  },
+  "status": "needs-human-check",
+  "citations": [
+    {
+      "field": "techdrLanguages",
+      "source": "https://medicaltourism.techdr.in/faq",
+      "lastChecked": "2026-11-25"
+    }
+  ],
+  "embassy": null,
+  "soughtTreatments": []
 }

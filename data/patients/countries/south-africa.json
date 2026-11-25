@@ -1,0 +1,72 @@
+{
+  "slug": "south-africa",
+  "name": "South Africa",
+  "demonym": "South African",
+  "region": "Southern Africa",
+  "wave": 2,
+  "status": "needs-human-check",
+  "languages": [],
+  "techdrLanguageSupport": [
+    "English"
+  ],
+  "currency": null,
+  "fxRateToUSD": {
+    "value": null,
+    "asOf": null,
+    "source": null
+  },
+  "visa": {
+    "eMedicalEligible": null,
+    "attendantVisa": null,
+    "processingNotes": "The 2026-04-15 fee table prints 00 for the e-Medical Visa and the e-Medical Attendant Visa. The only note on that PDF is a 3% bank charge. It does not say whether 00 means free or not offered.",
+    "applyVia": "Open https://indianvisaonline.gov.in/evisa/tvoa.html and see whether the form offers e-Medical for this passport. Do not copy a fee from a chat.",
+    "officialUrl": "https://indianvisaonline.gov.in/evisa/tvoa.html",
+    "source": "https://www.indianvisaonline.gov.in/evisa/images/eTV_revised_fee_final.pdf",
+    "lastChecked": "2026-11-25",
+    "processingDays": null
+  },
+  "travel": {
+    "airports": [],
+    "routesToIndia": [],
+    "lastChecked": null
+  },
+  "money": {
+    "paymentMethods": [],
+    "notes": null
+  },
+  "localCareContext": {
+    "commonReasonsPatientsTravel": [],
+    "followUpAtHome": null
+  },
+  "cultural": {
+    "foodNotes": null,
+    "prayerFacilities": null,
+    "otherNotes": null
+  },
+  "techdrContact": {
+    "whatsapp": null,
+    "localRepresentative": null,
+    "hours": null
+  },
+  "embassy": null,
+  "citations": [
+    {
+      "field": "techdrLanguages",
+      "source": "https://medicaltourism.techdr.in/faq",
+      "lastChecked": "2026-11-25"
+    }
+  ],
+  "soughtTreatments": [],
+  "localCosts": {},
+  "caseData": {
+    "patientsGuided": null,
+    "period": null
+  },
+  "uniqueContent": null,
+  "faqs": [],
+  "translatedTo": [],
+  "reviewed": {
+    "by": null,
+    "date": null
+  }
+}
