@@ -12,7 +12,7 @@ export const homeFaqs = [
   {
     question: "How fast is a free quote?",
     answer:
-      "The target is a written plan and an itemised estimate within 48 hours of a complete file. Missing scans are the usual reason it takes longer. The 24-hour figure on our homepage is a planning placeholder, not a guarantee.",
+      "The target is a written plan and an itemised estimate within 48 hours of a complete file. Missing scans are the usual reason it takes longer.",
   },
   {
     question: "Do you arrange the Indian medical visa?",

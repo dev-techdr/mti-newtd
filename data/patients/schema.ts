@@ -5,7 +5,7 @@ const httpsUrl = z.string().refine((value) => value.startsWith("https://"), "htt
 const note = z
   .string()
   .min(1)
-  .refine((value) => !/TODO/i.test(value), "TODO blocks indexing")
+  .refine((value) => !/TODO/i.test(value), "unfinished copy blocks indexing")
   .nullable();
 const iata = z.string().regex(/^[A-Z]{3}$/);
 

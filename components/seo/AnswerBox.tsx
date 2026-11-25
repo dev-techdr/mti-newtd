@@ -15,8 +15,7 @@ export function Byline({ updated, locale, note }: { updated: string; locale: str
   return (
     <footer className="mt-10 space-y-2 border-t border-border pt-6 text-sm text-muted">
       <p>This content is for information only and is not a substitute for professional medical advice.</p>
-      <p>{note ?? `Medically reviewed by TODO(client): Dr ___, qualification · Reviewed on ${reviewed}`}</p>
-      <p>Last updated: {reviewed}</p>
+      <p>{note ?? `Written by the TechDr editorial team · Last updated ${reviewed}`}</p>
     </footer>
   );
 }

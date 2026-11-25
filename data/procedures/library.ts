@@ -569,7 +569,7 @@ for (const row of libraryRows) {
       : `${label} in India: a planning range of ${range} ${profile.unit}. ${advisory} The written quote for ${label} follows your reports.`,
     answer: emergency
       ? caudaAnswer
-      : `${label} in India is a planning figure of ${range} ${profile.unit}. Care usually takes ${profile.stayH}, with ${profile.stayT} in India. A written quote for ${label} follows your reports and can advise against travel. The figure for ${label} is not an invoice.`,
+      : `${label} in India has an indicative range of ${range} ${profile.unit}. Care usually takes ${profile.stayH}, with ${profile.stayT} in India. A written quote for ${label} follows your reports and can advise against travel. The range for ${label} is not an invoice.`,
     hospitalStay: profile.stayH,
     totalStay: profile.stayT,
     success: profile.success,

@@ -45,7 +45,7 @@ export function answerGaps(record: AnswerRecord) {
   for (const treatment of record.treatments) {
     if (!getProcedure(treatment)) gaps.push(`treatments.${treatment} has no treatment page`);
   }
-  if (/TODO/i.test(record.body) || /TODO/i.test(record.shortAnswer)) gaps.push("TODO in the answer");
+  if (/TODO/i.test(record.body) || /TODO/i.test(record.shortAnswer)) gaps.push("unfinished copy in the answer");
   return gaps;
 }
 

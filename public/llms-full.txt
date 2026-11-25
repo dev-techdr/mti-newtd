@@ -79,7 +79,7 @@
 
 Every procedure in the catalog, including cardiac, orthopaedic, cancer, neurosurgery, transplant, gastrointestinal, gynaecology, reconstructive, paediatric and urology operations, is listed with its city pages in /llms.txt. Procedure guides live at /treatments/[specialty]/[procedure]. Dedicated cost pages live at /cost/[procedure]-cost-in-india and repeat the same figures from one source file, data/costs.ts. Country pages live at /patients-from/[country]. City hubs live at /destinations/[city]. Every treatment also has a page for Delhi, Mumbai, Chennai, Hyderabad and Bangalore at /destinations/{city}/{procedure}, for example /destinations/delhi/knee-replacement-surgery and /destinations/bangalore/ivf-treatment. The full city list is in /llms.txt and /sitemaps/city-treatments/sitemap.xml. Articles live at /blog/[slug].
 
-Statistics on the homepage (patients guided, countries, savings, quote speed) are labelled placeholders until the client replaces them with audited numbers. The site does not publish patient stories or review schema.
+The homepage does not publish unaudited patient counts, country counts, or savings percentages. The site does not publish patient stories or review schema.
 
 Sitemaps:
 

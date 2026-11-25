@@ -21,10 +21,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       <Breadcrumbs locale={locale} items={[{ name: "Medical review team", path: "/medical-review-team" }]} />
       <article className="mx-auto max-w-3xl px-4 py-10">
         <h1>Medical review team</h1>
-        <p className="mt-4">Treatment pages say who reviewed them, and the date of that review. A name appears only after that person has read the page.</p>
-        <p className="mt-4">TODO(client): add each reviewer with their name, qualification, medical registration number, specialty, a short biography and a photograph. Do not publish a name for a page that person has not reviewed.</p>
-        <p className="mt-4">Until those records exist, pages keep the line “Medically reviewed by TODO(client): Dr ___, qualification”. {site.name} will not invent a doctor to fill it.</p>
-        <p className="mt-4">The same people, the same qualifications and the same registration numbers should match any public profile you later create. Corrections go to {site.email}.</p>
+        <p className="mt-4">Pages are written by the TechDr editorial team. A clinician’s name is added only after that person has read the page and their registration number is on file. {site.name} does not invent a reviewer.</p>
+        <p className="mt-4">Corrections go to {site.email}.</p>
       </article>
     </>
   );

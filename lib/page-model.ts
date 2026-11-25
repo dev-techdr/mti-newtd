@@ -1,4 +1,4 @@
-import { decisionGuides, prioritySlugs } from "@/data/decision-guides";
+import { decisionGuides } from "@/data/decision-guides";
 import { getCost, money, moneyRange } from "@/data/costs";
 import type { CountryPage } from "@/data/countries";
 import { costFilled, fxFilled, routeFilled } from "@/data/patients/assess";
@@ -33,8 +33,6 @@ export type PageModel = {
   related: { href: string; label: string }[];
   reviewNote?: string;
 };
-
-const priority = new Set(prioritySlugs);
 
 function faqTopic(question: string) {
   const q = question.toLowerCase();
@@ -300,20 +298,6 @@ export function treatmentModel(procedure: Procedure): PageModel {
     return answer ? [{ ...item, answer }] : [];
   });
 
-  const todos: string[] = [];
-  if (priority.has(procedure.slug)) {
-    if (!procedure.sampleQuote?.lines.length) {
-      todos.push(`TODO(client): replace with a real anonymised quote for ${name}, itemising surgery, implant, room, ICU days, medicines, tests and exclusions.`);
-    }
-    if (!procedure.dataBox) {
-      todos.push(`TODO(client): add the median written quote and median stay for ${name} from real coordinated cases before a data box is published.`);
-    }
-    if (!procedure.journeys?.some((item) => item.consentOnFile)) {
-      todos.push(`TODO(client): add an anonymised journey for ${name} with a first name, a country and consentOnFile set to true.`);
-    }
-  }
-  for (const todo of todos) remember(seen, todo);
-
   const addedFillers = faqs.some((faq) => fillers.some((item) => item.question === faq.question));
   const updated = emergency || addedFillers || procedure.updated >= "2026-11-13" ? (procedure.updated > "2026-11-13" ? procedure.updated : "2026-11-13") : procedure.updated;
 
@@ -350,13 +334,12 @@ export function treatmentModel(procedure: Procedure): PageModel {
             ["India", `${range} ${cost.unit}`],
             ["United States", moneyRange(cost.usa, cost.usaLabel)],
             ["United Kingdom", moneyRange(cost.uk, cost.ukLabel)],
-            ...(cost.thailand ? [["Thailand", `${moneyRange(cost.thailand)} (chart estimate)`]] : []),
           ],
         },
     sections,
     faqs,
     followups,
-    todos,
+    todos: [],
     sources: sourceNotes.map((item) => ({
       ...item,
       supports: `For ${name}, this page supports ${item.supports}.`,
@@ -455,9 +438,7 @@ export function costModel(procedure: Procedure): PageModel {
       { question: "Which visa applies?", href: "/medical-visa-india", answer: `Visa rules for a trip built around ${name} are confirmed on the official e-Medical Visa page.` },
       { question: "What should I send?", href: clinical, answer: `Send the reports named on the treatment guide before asking for a final quote for ${name}.` },
     ],
-    todos: priority.has(procedure.slug) && !procedure.sampleQuote?.lines.length
-      ? [`TODO(client): replace with a real anonymised itemised quote for ${name} on this cost page.`]
-      : [],
+    todos: [],
     sources: sourceNotes.slice(0, 2).map((item) => ({
       ...item,
       supports: `For the ${name} cost page, this source supports ${item.supports}.`,

@@ -1,7 +1,7 @@
 import { AnswerBox } from "@/components/seo/AnswerBox";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Link } from "@/i18n/navigation";
-import { destinationGaps, destinationVisaHref, type Destination } from "@/data/destinations";
+import { destinationVisaHref, type Destination } from "@/data/destinations";
 
 export function DestinationPage({
   locale,
@@ -12,13 +12,12 @@ export function DestinationPage({
   destination: Destination;
   mode: "hub" | "visa";
 }) {
-  const gaps = destinationGaps(destination);
   const path = mode === "hub" ? `/countries/${destination.slug}` : destinationVisaHref(destination);
   const h1 = mode === "hub" ? `Treatment in ${destination.name}` : `Visa and travel for treatment in ${destination.name}`;
   const answer =
     mode === "hub"
-      ? `TechDr does not arrange treatment in ${destination.name}. No partner, price, or accreditation claim is published for ${destination.name} until a sourced record is reviewed. India is the destination TechDr coordinates today.`
-      : `Visa rules for ${destination.name} are not published on this page. There is no official link and no last-checked date on the record. Use the government visa site for ${destination.name}, not this page, until those fields exist.`;
+      ? `TechDr arranges treatment in India. It does not arrange treatment in ${destination.name}.`
+      : `Visa steps for treatment in India are on the medical visa page. This page does not publish visa rules for ${destination.name}.`;
 
   return (
     <>
@@ -52,23 +51,21 @@ export function DestinationPage({
               <th scope="row" className="py-2 pe-4 text-start">Languages</th>
               <td>{destination.languages.join(", ")}</td>
             </tr>
-            {mode === "hub" ? (
+            {mode === "hub" && destination.active ? (
               <tr>
-                <th scope="row" className="py-2 pe-4 text-start">Cities named for later guides</th>
+                <th scope="row" className="py-2 pe-4 text-start">Cities</th>
                 <td>{destination.cities.map((city) => city.name).join(", ")}</td>
               </tr>
-            ) : (
+            ) : null}
+            {mode === "visa" && destination.visa.officialUrl ? (
               <tr>
                 <th scope="row" className="py-2 pe-4 text-start">Official visa page</th>
-                <td>{destination.visa.officialUrl ?? "Not on file"}</td>
+                <td><a className="text-primary-ink underline" href={destination.visa.officialUrl}>{destination.visa.officialUrl}</a></td>
               </tr>
-            )}
+            ) : null}
           </tbody>
         </table>
-        <p className="mt-6 text-sm text-muted">
-          This page stays out of the sitemap until these fields are sourced: {gaps.join(", ")}.
-        </p>
-        <p className="mt-4">
+        <p className="mt-6">
           <Link className="text-primary-ink underline" href="/why-india">Treatment coordinated in India</Link>
           {" · "}
           <Link className="text-primary-ink underline" href="/countries">All destinations</Link>

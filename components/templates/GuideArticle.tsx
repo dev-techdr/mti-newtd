@@ -138,17 +138,6 @@ export function GuideArticle({
           </section>
         ) : null}
 
-        {model.todos.length ? (
-          <section className="mt-10">
-            <h2>What still needs a real client record?</h2>
-            <ul className="mt-3 list-disc space-y-2 ps-5">
-              {model.todos.map((todo) => (
-                <li key={todo}>{todo}</li>
-              ))}
-            </ul>
-          </section>
-        ) : null}
-
         {model.followups.length ? (
           <section className="mt-10">
             <h2>Which follow-up questions does this page answer?</h2>

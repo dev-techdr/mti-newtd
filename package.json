@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "tsx scripts/readiness.ts && tsx scripts/check-repetition.ts && tsx scripts/check-jsonld.ts && next build",
+    "prebuild": "tsx scripts/check-placeholders.ts",
+    "build": "tsx scripts/readiness.ts && tsx scripts/check-repetition.ts && tsx scripts/check-jsonld.ts && next build && tsx scripts/check-placeholders.ts --built",
+    "check:placeholders": "tsx scripts/check-placeholders.ts",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",

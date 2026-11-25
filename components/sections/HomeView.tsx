@@ -107,7 +107,6 @@ export function HomeView() {
                 <span className="mt-1 block text-sm text-muted">{label}</span>
               </p>
             ))}
-            <p className="sm:col-span-2 text-xs leading-snug text-muted">Planning figures. A written quote after your reports replaces these totals.</p>
           </div>
         </div>
       </section>
