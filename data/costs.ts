@@ -384,11 +384,15 @@ export function money(amount: number) {
   }).format(amount);
 }
 
+function asDollars(label: string) {
+  return label.replace(/USD\s+(\d)/g, "$$$1").replace(/–(\d)/g, "–$$$1");
+}
+
 export function moneyRange(
   range: readonly [number, number],
   label?: string,
 ) {
-  if (label) return label;
+  if (label) return asDollars(label);
   return `${money(range[0])}–${money(range[1])}`;
 }
 

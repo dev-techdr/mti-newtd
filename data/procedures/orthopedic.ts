@@ -12,11 +12,11 @@ export const primaryProcedures: Procedure[] = [
     description:
       "Knee replacement in India costs about USD 4,500–7,000 per knee in 2026. See stay, implants, recovery and what a written TechDr quote includes.",
     answer:
-      "Knee replacement surgery in India typically costs USD 4,500–7,000 per knee, including surgery, implant, hospital stay and standard medicines. Most patients stay 5–7 days in hospital and about 2–3 weeks in India in total. That is roughly 70–85% less than in the USA or UK.",
+      "Knee replacement surgery in India typically costs USD 4,500–7,000 per knee, including surgery, implant, hospital stay and standard medicines. Most patients stay 5–7 days in hospital and about 2–3 weeks in India in total. The cost page shows the published United States and United Kingdom ranges beside that band.",
     hospitalStay: "5–7 days",
     totalStay: "2–3 weeks",
     success:
-      "National joint registries often report about 90–95% implant survival at 10 years for straightforward primary knees. Individual results vary with weight, alignment and other joint disease.",
+      "How long a primary knee implant lasts depends on weight, alignment and other joint disease. Ask the treating centre for its own audited figures. This page does not publish an unsourced survival percentage.",
     recovery: "Walking with support within a day or two; most daily tasks by 6–12 weeks",
     anaesthesia: "Spinal or general anaesthesia, decided after a pre-operative review",
     whatIs:
@@ -82,7 +82,7 @@ export const primaryProcedures: Procedure[] = [
       { question: "Is the implant included?", answer: "A standard primary implant is included only when the quote says so. Premium, hinged or custom implants are priced separately. Ask for the implant name in writing before you pay a deposit." },
       { question: "Can both knees be replaced in one trip?", answer: "Some people have both knees replaced in one admission, and others stage them. The decision depends on heart health, age and home support. The quote will show one or two implants." },
       { question: "When can I fly after knee replacement?", answer: "Many surgeons clear a short-haul or long-haul flight around two to three weeks after an uncomplicated primary knee, with stockings and movement breaks. This is a clinical decision, not a fixed airline rule." },
-      { question: "What is the reported success rate?", answer: "Joint registries commonly report about 90–95% of primary implants still in place at 10 years. That is not a promise for one person. Ask the centre for its own audited figures." },
+      { question: "What result should I ask the centre about?", answer: "Ask the treating centre for its own audited figures. This page does not publish an unsourced survival percentage, and a registry average is not a promise for one person." },
       { question: "Will I need a blood transfusion?", answer: "Many primary knees do not need a transfusion. Anaemia, a revision operation or both knees together raise the chance. Your blood count is checked before surgery." },
       { question: "What if my reports are only on paper?", answer: "Photographs of X-ray films are a start, but surgeons prefer DICOM images or a CD. TechDr will tell you if the file is not enough for an opinion." },
     ],
@@ -106,7 +106,7 @@ export const primaryProcedures: Procedure[] = [
     hospitalStay: "4–7 days",
     totalStay: "2–3 weeks",
     success:
-      "Registry series often describe about 90–95% of primary hip implants still functioning at 10 years. Dislocation risk and bone quality change that picture for some patients.",
+      "Dislocation risk and bone quality change the result of a primary hip. Ask the treating centre for its own audited figures. This page does not publish an unsourced survival percentage.",
     recovery: "Walking with support within 24 hours; a walking stick often for 4–6 weeks",
     anaesthesia: "Spinal or general anaesthesia",
     whatIs:
@@ -139,7 +139,7 @@ export const primaryProcedures: Procedure[] = [
       { question: "Which surgical approach is better?", answer: "Anterior, lateral and posterior approaches can all work. The better choice is the one your surgeon performs regularly and that matches your anatomy. Ask how many of that approach they do." },
       { question: "Can I sit on a normal chair afterwards?", answer: "Yes, with the height and precautions your team sets. Very low seats are uncomfortable and, after some approaches, raise dislocation risk in the first weeks." },
       { question: "Is ceramic better than metal and plastic?", answer: "Bearings have different wear and cost profiles. There is no single best surface for every age and activity. The quote should name the bearing." },
-      { question: "What is the reported long-term result?", answer: "Many registries report roughly 90–95% implant survival at 10 years for primary hips. Your bone quality, weight and the reason for surgery change the outlook." },
+      { question: "What result should I ask the centre about?", answer: "Ask the treating centre for its own audited figures. Bone quality, weight and the reason for surgery change the outlook. This page does not publish an unsourced survival percentage." },
       { question: "Do I need a walker at home?", answer: "Most people need a frame or crutches at first and a stick for several weeks. Buy or borrow them before you fly home." },
       { question: "When can I climb stairs?", answer: "Physiotherapists usually teach a step pattern within the first days. Full confidence on stairs often takes a few weeks." },
     ],

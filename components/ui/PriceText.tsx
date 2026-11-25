@@ -13,13 +13,17 @@ function nextKey(ids: { n: number }, prefix: string) {
   return `${prefix}${ids.n}`;
 }
 
+function asDollars(part: string) {
+  return part.replace(/USD\s+(\d)/g, "$$$1").replace(/–(\d)/g, "–$$$1");
+}
+
 function markPrices(text: string, ids: { n: number }): ReactNode {
   const parts = text.split(PRICE);
   if (parts.length === 1) return text;
   return parts.map((part, index) =>
     index % 2 === 1 ? (
       <mark key={nextKey(ids, "m")} className="box-decoration-clone rounded-sm bg-primary/20 px-[0.22em] font-semibold text-primary-ink">
-        {part}
+        {asDollars(part)}
       </mark>
     ) : (
       part

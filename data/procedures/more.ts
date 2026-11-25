@@ -16,7 +16,7 @@ export const moreProcedures: Procedure[] = [
     hospitalStay: "Day care",
     totalStay: "5–7 days",
     success:
-      "Graft survival above 90% is often described in suitable scalps. A weak donor area, smoking and unrealistic density requests change the result. Shock loss of existing hair can happen.",
+      "A weak donor area, smoking and an unrealistic density request change how much transplanted hair grows. Shock loss of existing hair can happen. This page does not publish an unsourced survival percentage.",
     recovery: "Redness and crusts for 7–14 days; new growth is judged at 9–12 months",
     anaesthesia: "Local anaesthesia",
     whatIs:
@@ -69,7 +69,7 @@ export const moreProcedures: Procedure[] = [
     hospitalStay: "Dental chair, same day",
     totalStay: "5–10 days for placement, longer or a second trip if a graft or crown is staged",
     success:
-      "Ten-year survival above 90% is often reported for implants in healthy bone. Smoking, uncontrolled diabetes and untreated gum disease lower that figure.",
+      "Smoking, uncontrolled diabetes and untreated gum disease make an implant less likely to last. This page does not publish an unsourced survival percentage.",
     recovery: "Soft diet for days; the final crown may wait months if the implant is buried",
     anaesthesia: "Local anaesthesia, sedation if requested and safe",
     whatIs:

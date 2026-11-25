@@ -5,7 +5,7 @@ import { TreatmentSearch } from "@/components/sections/TreatmentSearch";
 import { Button } from "@/components/ui/button";
 import { FaqList } from "@/components/ui/accordion";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { costs, getCost, moneyRange } from "@/data/costs";
+import { costs, getCost, midpointSavings, moneyRange } from "@/data/costs";
 import { CostMark } from "@/components/ui/CostMark";
 import { PriceText } from "@/components/ui/PriceText";
 import { ServiceIcon, serviceIcon } from "@/components/ui/ServiceIcon";
@@ -50,15 +50,31 @@ const indiaReasons: { icon: LucideIcon; label: string }[] = [
 const words = "Find the Right Treatment Abroad — Compare Countries, Costs and Care".split(" ");
 
 const trustPoints = [
-  "JCI & NABH partners",
-  "24/7 patient care",
-  "Free second opinion",
-  "No hidden fees",
-  "Support in 6 languages",
+  "Accredited partner hospitals",
+  "Free written opinion",
+  "Itemised written estimate",
+  "Visa letter after you accept a plan",
+  "Support in 6 coordinator languages",
+];
+
+const heroFacts = [
+  "Free written opinion",
+  "Reply on WhatsApp",
+  "Written estimate within 48 hours of complete reports",
 ];
 
 export function HomeView() {
   const searchItems = treatmentSearchItems();
+  const chartGaps = chartIds.flatMap((id) => {
+    const row = costs.find((item) => item.id === id);
+    if (!row) return [];
+    return [
+      midpointSavings(row.india, row.usa, Boolean(row.usaLabel)),
+      midpointSavings(row.india, row.uk, Boolean(row.ukLabel)),
+    ];
+  });
+  const chartLow = chartGaps.length ? Math.min(...chartGaps) : 0;
+  const chartHigh = chartGaps.length ? Math.max(...chartGaps) : 0;
 
   return (
     <PriceText>
@@ -95,16 +111,10 @@ export function HomeView() {
               <Link className="rounded-full border border-border px-3 py-1.5 font-medium" href="/countries">All destinations</Link>
             </div>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {[
-              ["10,000+", "Patients guided"],
-              ["50+", "Countries"],
-              ["60–80%", "Average savings"],
-              ["24h", "Quote turnaround"],
-            ].map(([value, label], index) => (
-              <p key={label} className="parallax-card rounded-2xl border border-border bg-card p-5 shadow-sm" style={{ animationDelay: `${index * 60}ms` }}>
-                <span className="block font-heading text-3xl font-bold tracking-tight">{value}</span>
-                <span className="mt-1 block text-sm text-muted">{label}</span>
+          <div className="grid gap-3">
+            {heroFacts.map((fact, index) => (
+              <p key={fact} className="parallax-card rounded-2xl border border-border bg-card p-5 text-lg font-semibold shadow-sm" style={{ animationDelay: `${index * 60}ms` }}>
+                {fact}
               </p>
             ))}
           </div>
@@ -168,7 +178,6 @@ export function HomeView() {
               ["India", row.india[1], moneyRange(row.india), "bg-primary"],
               ["USA", row.usa[1], moneyRange(row.usa, row.usaLabel), "bg-[#0b2545] dark:bg-[#9bb6d0]"],
               ["UK", row.uk[1], moneyRange(row.uk, row.ukLabel), "bg-accent"],
-              ["Thailand", row.thailand?.[1] ?? 0, row.thailand ? moneyRange(row.thailand) : "—", "bg-[#c2410c]"],
             ] as const;
             const max = Math.max(...series.map((item) => item[1]));
             return (
@@ -191,10 +200,13 @@ export function HomeView() {
             );
           })}
         </div>
+        <p className="mt-4 max-w-3xl text-sm text-muted">
+          Across these procedures, the India midpoint is about {chartLow === chartHigh ? `${chartLow}%` : `${chartLow}–${chartHigh}%`} below the United States and United Kingdom midpoints, based on the published ranges in this table.
+        </p>
         <div className="mt-6 overflow-x-auto rounded-2xl border border-border bg-card px-4">
           <table className="data-table">
-            <caption>Indicative ranges behind the chart, in USD</caption>
-            <thead><tr><th scope="col">Procedure</th><th scope="col">India</th><th scope="col">USA</th><th scope="col">UK</th><th scope="col">Thailand</th></tr></thead>
+            <caption>Indicative ranges behind the chart</caption>
+            <thead><tr><th scope="col">Procedure</th><th scope="col">India</th><th scope="col">USA</th><th scope="col">UK</th></tr></thead>
             <tbody>
               {chartIds.map((id) => {
                 const row = costs.find((item) => item.id === id)!;
@@ -204,7 +216,6 @@ export function HomeView() {
                     <td className="cost-cell">{moneyRange(row.india)}</td>
                     <td>{moneyRange(row.usa, row.usaLabel)}</td>
                     <td>{moneyRange(row.uk, row.ukLabel)}</td>
-                    <td>{row.thailand ? moneyRange(row.thailand) : "—"}</td>
                   </tr>
                 );
               })}

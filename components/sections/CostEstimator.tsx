@@ -28,7 +28,7 @@ export function CostEstimator() {
           <option value="uk">United Kingdom private range</option>
         </select>
       </label>
-      <p className="mt-4 flex flex-wrap items-center gap-2">India <CostMark value={moneyRange(row.india)} /> versus {moneyRange(other, label)}. The midpoint gap is about {savings}%. This is not your quote.</p>
+      <p className="mt-4 flex flex-wrap items-center gap-2">India <CostMark value={moneyRange(row.india)} /> versus {moneyRange(other, label)}. The midpoint gap is about {savings}%, based on the published ranges in this table. This is not your quote.</p>
     </form>
     </PriceText>
   );

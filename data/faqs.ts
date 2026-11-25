@@ -2,7 +2,7 @@ export const homeFaqs = [
   {
     question: "How much can treatment in India cost compared with the US or UK?",
     answer:
-      "Across the procedures in our 2026 guide, indicative Indian packages are often about 60–85% below the midpoint of typical US private ranges, and lower than UK private ranges too. Your written quote can differ. These are not promises.",
+      "Indicative India, United States and United Kingdom ranges are in the comparison table on the home page. A written quote can differ. A percentage is shown only beside that table, and only when it is calculated from those ranges.",
   },
   {
     question: "Are the hospitals named on this website?",
