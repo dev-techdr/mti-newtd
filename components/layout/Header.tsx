@@ -39,8 +39,11 @@ export function Header() {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    setDark(document.documentElement.classList.contains("dark"));
-    return () => window.removeEventListener("scroll", onScroll);
+    const frame = requestAnimationFrame(() => setDark(document.documentElement.classList.contains("dark")));
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   function toggleTheme() {

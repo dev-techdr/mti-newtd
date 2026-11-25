@@ -154,7 +154,7 @@ export function HomeView() {
         </div>
       </section>
       <section className="mx-auto max-w-6xl px-4 py-16">
-        <h2>How do India, the USA, the UK and Thailand compare?</h2>
+        <h2>How do India, the USA and the UK compare?</h2>
         <p className="mt-2 max-w-3xl text-muted">A longer bar is a higher top-of-range price. These are indicative starting estimates for {site.year}.</p>
         <div className="mt-6 grid gap-4 lg:grid-cols-2">
           {chartIds.map((id) => {

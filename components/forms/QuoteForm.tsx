@@ -2,21 +2,14 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { WhatsAppLink } from "@/components/contact/WhatsAppLink";
+import { Link } from "@/i18n/navigation";
+import { countryNames } from "@/data/country-names";
 import { QUOTE_MAX_FILES, quoteFileError } from "@/lib/quote-files";
 
 const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 const field = "mt-1.5 min-h-11 w-full rounded-xl border border-border bg-background px-3 text-base";
 const notSure = "Not sure — please advise";
 const utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"] as const;
-
-function countryNames() {
-  const display = new Intl.DisplayNames(["en"], { type: "region" });
-  return Intl.supportedValuesOf("region")
-    .filter((code) => /^[A-Z]{2}$/.test(code))
-    .map((code) => display.of(code) ?? "")
-    .filter((name) => name.length > 1)
-    .sort((a, b) => a.localeCompare(b));
-}
 
 function SpamCheck() {
   const [armed, setArmed] = useState(false);
@@ -72,41 +65,30 @@ function SearchSelect({
   onChange: (value: string) => void;
 }) {
   const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState(value);
-  useEffect(() => setQuery(value), [value]);
-  const matches = options.filter((item) => item.toLowerCase().includes(query.trim().toLowerCase())).slice(0, 8);
+  const matches = options.filter((item) => item.toLowerCase().includes(value.trim().toLowerCase())).slice(0, 8);
   return (
     <label className="relative text-sm font-medium">
       {label}
       <input
         name={name}
         required={required}
-        value={query}
+        value={value}
         className={field}
         autoComplete="off"
-        role="combobox"
-        aria-expanded={open}
-        aria-autocomplete="list"
         onFocus={() => setOpen(true)}
         onBlur={() => {
           window.setTimeout(() => setOpen(false), 120);
-          const exact = options.find((item) => item.toLowerCase() === query.trim().toLowerCase());
-          if (exact) {
-            setQuery(exact);
-            onChange(exact);
-          } else if (!required) {
-            setQuery("");
-            onChange("");
-          }
+          const exact = options.find((item) => item.toLowerCase() === value.trim().toLowerCase());
+          if (exact) onChange(exact);
+          else if (!required) onChange("");
         }}
         onChange={(event) => {
-          setQuery(event.target.value);
           setOpen(true);
           onChange(event.target.value);
         }}
       />
       {open && matches.length ? (
-        <ul className="absolute z-20 mt-1 max-h-56 w-full overflow-auto rounded-xl border border-border bg-card py-1 shadow-lg" role="listbox">
+        <ul id={`${name}-options`} className="absolute z-20 mt-1 max-h-56 w-full overflow-auto rounded-xl border border-border bg-card py-1 shadow-lg" role="listbox">
           {matches.map((item) => (
             <li key={item}>
               <button
@@ -114,7 +96,6 @@ function SearchSelect({
                 className="block w-full px-3 py-2 text-start text-sm hover:bg-surface"
                 onMouseDown={(event) => {
                   event.preventDefault();
-                  setQuery(item);
                   onChange(item);
                   setOpen(false);
                 }}
@@ -135,7 +116,7 @@ export function QuoteForm({
   treatments: { slug: string; name: string }[];
 }) {
   const fileRef = useRef<HTMLInputElement>(null);
-  const countries = useMemo(countryNames, []);
+  const countries = countryNames;
   const treatmentOptions = useMemo(() => [notSure, ...treatments.map((item) => item.name)], [treatments]);
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
@@ -144,19 +125,17 @@ export function QuoteForm({
   const [files, setFiles] = useState<File[]>([]);
   const [country, setCountry] = useState("");
   const [treatment, setTreatment] = useState("");
-  const [utm, setUtm] = useState<Record<string, string>>({});
-  const [pageUrl, setPageUrl] = useState("");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    setPageUrl(window.location.href);
-    setUtm(storedUtm());
     const found = treatments.find((item) => item.slug === params.get("procedure"));
-    if (found) setTreatment(found.name);
     const named = params.get("country");
-    if (named && countries.some((item) => item.toLowerCase() === named.toLowerCase())) {
-      setCountry(countries.find((item) => item.toLowerCase() === named.toLowerCase()) ?? "");
-    }
+    const countryMatch = named ? countries.find((item) => item.toLowerCase() === named.toLowerCase()) : "";
+    const frame = requestAnimationFrame(() => {
+      if (found) setTreatment(found.name);
+      if (countryMatch) setCountry(countryMatch);
+    });
+    return () => cancelAnimationFrame(frame);
   }, [countries, treatments]);
 
   function addFiles(list: FileList | null) {
@@ -196,10 +175,11 @@ export function QuoteForm({
     setPending(true);
     setError("");
     const body = new FormData(form);
+    const campaign = storedUtm();
     body.set("country", country);
     body.set("treatment", treatment);
-    body.set("pageUrl", pageUrl);
-    for (const key of utmKeys) body.set(key, utm[key] ?? "");
+    body.set("pageUrl", window.location.href);
+    for (const key of utmKeys) body.set(key, campaign[key] ?? "");
     for (const file of files) body.append("reports", file);
     const response = await fetch("/api/quote", { method: "POST", body });
     const payload = (await response.json().catch(() => ({}))) as { ok?: boolean; message?: string };
@@ -208,7 +188,7 @@ export function QuoteForm({
       setError(payload.message || "Please check the highlighted fields.");
       return;
     }
-    window.dispatchEvent(new CustomEvent("generate-lead", { detail: { treatment, country, pageUrl } }));
+    window.dispatchEvent(new CustomEvent("generate-lead", { detail: { treatment, country, pageUrl: window.location.href } }));
     setDone(true);
   }
 
@@ -300,7 +280,7 @@ export function QuoteForm({
 
       <label className="mt-4 flex items-start gap-2 text-sm">
         <input required type="checkbox" name="consent" className="mt-1 size-4" />
-        <span>I agree to the <a className="underline" href="/privacy-policy">privacy policy</a> and to TechDr contacting me about this enquiry.</span>
+        <span>I agree to the <Link className="underline" href="/privacy-policy">privacy policy</Link> and to TechDr contacting me about this enquiry.</span>
       </label>
       <p className="absolute -left-[9999px] h-px overflow-hidden" aria-hidden="true">
         <input name="hp_field" tabIndex={-1} autoComplete="off" defaultValue="" />

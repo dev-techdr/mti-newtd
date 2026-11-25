@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 import Script from "next/script";
 import { Link, usePathname } from "@/i18n/navigation";
@@ -11,16 +11,11 @@ export function Assist() {
   const t = useTranslations();
   const pathname = usePathname();
   const wa = whatsappHref(whatsappMessage(topicFromPath(pathname)));
-  const [cookies, setCookies] = useState<"unknown" | "set">("unknown");
-
-  useEffect(() => {
-    setCookies(localStorage.getItem("cookie-consent") ? "set" : "unknown");
-  }, []);
+  const cookies = useSyncExternalStore(subscribeConsent, consentSnapshot, () => "unknown" as const);
 
   function choose(value: "accepted" | "rejected") {
     localStorage.setItem("cookie-consent", value);
-    setCookies("set");
-    if (value === "accepted") window.dispatchEvent(new Event("analytics-consent"));
+    window.dispatchEvent(new Event("analytics-consent"));
   }
 
   return (
@@ -50,6 +45,15 @@ export function Assist() {
       <Analytics />
     </>
   );
+}
+
+function subscribeConsent(onStoreChange: () => void) {
+  window.addEventListener("analytics-consent", onStoreChange);
+  return () => window.removeEventListener("analytics-consent", onStoreChange);
+}
+
+function consentSnapshot() {
+  return localStorage.getItem("cookie-consent") ? "set" : "unknown";
 }
 
 type LeadEvent = "generate_lead" | "whatsapp_click" | "call_click";
