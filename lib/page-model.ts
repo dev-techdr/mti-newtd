@@ -311,8 +311,7 @@ export function treatmentModel(procedure: Procedure): PageModel {
     return answer ? [{ ...item, answer }] : [];
   });
 
-  const addedFillers = faqs.some((faq) => fillers.some((item) => item.question === faq.question));
-  const updated = emergency || addedFillers || procedure.updated >= "2026-11-13" ? (procedure.updated > "2026-11-13" ? procedure.updated : "2026-11-13") : procedure.updated;
+  const updated = procedure.updated;
 
   return {
     kind,
@@ -422,7 +421,7 @@ export function costModel(procedure: Procedure): PageModel {
     kind: "cost",
     h1: `${procedure.card} cost in India in ${site.year}`,
     quickAnswer,
-    updated: procedure.updated > "2026-11-13" ? procedure.updated : "2026-11-13",
+    updated: procedure.updated,
     showPrice: true,
     showQuote: true,
     quoteHref: `/get-a-free-quote?procedure=${procedure.slug}`,

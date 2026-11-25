@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     path: `/patients-from/${slug}`,
     title: `Treatment in India from ${country.name} | TechDr`.slice(0, 60),
     description: country.description,
-    index: Boolean(fare) || isCountryIndexable(slug),
+    index: isCountryIndexable(slug),
   });
 }
 

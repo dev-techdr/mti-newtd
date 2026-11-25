@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { countryLine, directoryIntro, directoryQuickAnswer } from "@/data/patients/directory";
 import { indiaFares, oneWayLabel, returnLabel } from "@/data/patients/india-fares";
 import { patientCountries } from "@/data/patients/load";
-import { indexableCityRecords } from "@/data/patients/publish";
+import { indexableCityRecords, isCountryIndexable } from "@/data/patients/publish";
 import { absoluteUrl, pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -48,7 +48,11 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <ul className="mt-4 space-y-4">
           {patientCountries.map((record) => (
             <li key={record.slug}>
-              <Link className="font-semibold text-primary-ink underline" href={`/patients-from/${record.slug}`}>{record.name}</Link>
+              {isCountryIndexable(record.slug) ? (
+                <Link className="font-semibold text-primary-ink underline" href={`/patients-from/${record.slug}`}>{record.name}</Link>
+              ) : (
+                <span className="font-semibold">{record.name}</span>
+              )}
               <p className="mt-1">{countryLine(record)}</p>
             </li>
           ))}
@@ -70,7 +74,11 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               return (
                 <tr key={fare.slug} className="border-b border-border">
                   <th scope="row" className="py-2 pe-3 text-start font-medium">
-                    <Link className="text-primary-ink underline" href={`/patients-from/${fare.slug}`}>{fare.name}</Link>
+                    {isCountryIndexable(fare.slug) ? (
+                      <Link className="text-primary-ink underline" href={`/patients-from/${fare.slug}`}>{fare.name}</Link>
+                    ) : (
+                      fare.name
+                    )}
                   </th>
                   <td className="py-2 pe-3">{oneWayLabel(fare)}</td>
                   <td className="py-2 pe-3">{returnLabel(fare)}</td>

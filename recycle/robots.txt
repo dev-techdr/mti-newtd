@@ -1,0 +1,49 @@
+# robots.txt — https://medicaltourism.techdr.in
+# TechDr Medical Tourism
+# One rule set for every crawler. Named bots repeat the same Disallow lines,
+# because a bot that finds its own group ignores the * group.
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /thank-you
+Disallow: /*?*utm_
+Disallow: /*?*gclid=
+Disallow: /*?*fbclid=
+
+# Search engines and AI answer engines (allowed, same rules)
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: DuckDuckBot
+User-agent: YandexBot
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Amazonbot
+Allow: /
+Disallow: /api/
+Disallow: /thank-you
+Disallow: /*?*utm_
+Disallow: /*?*gclid=
+Disallow: /*?*fbclid=
+
+# Bots that bring no patients
+User-agent: Bytespider
+User-agent: CCBot
+User-agent: AhrefsBot
+User-agent: SemrushBot
+User-agent: MJ12bot
+User-agent: DotBot
+User-agent: BLEXBot
+User-agent: DataForSeoBot
+Disallow: /
+
+Sitemap: https://medicaltourism.techdr.in/sitemap.xml

@@ -1,15 +1,8 @@
-import { fareTreatmentPairs } from "@/data/patients/fare-treatments";
 import { treatmentSitemapItems } from "@/data/patients/publish";
 import { latestDate, localizedEntries, sitemapXml } from "@/lib/sitemap-entries";
 import { site } from "@/lib/site";
 
-const items = [
-  ...treatmentSitemapItems(),
-  ...fareTreatmentPairs().map((item) => ({
-    path: `/patients-from/${item.country}/${item.procedure}`,
-    lastModified: site.updated,
-  })),
-];
+const items = treatmentSitemapItems();
 
 export const lastModified = items.length ? latestDate(items.map((item) => item.lastModified)) : site.updated;
 

@@ -1,3 +1,4 @@
+import { blogRedirects } from "./blog";
 import { routing } from "../i18n/routing";
 import { cities } from "./cities";
 import { procedurePath, procedures } from "./procedures";
@@ -154,4 +155,5 @@ export const redirectMap: RedirectItem[] = [
   ...cityAliasRedirects(),
   ...procedureAliasRedirects(),
   ...mergedPaths.flatMap(([source, destination]) => localizedRedirect(source, destination)),
+  ...blogRedirects.flatMap((item) => localizedRedirect(item.source, item.destination)),
 ];

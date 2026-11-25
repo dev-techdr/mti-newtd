@@ -17,7 +17,21 @@ const approvedAnswers = new Set(approved.answers);
 const overlap = approved.treatments.filter((key) => approvedCities.has(key));
 if (overlap.length) throw new Error(`Patient slug collision: ${overlap.join(", ")}`);
 
+const gateCountries = new Set([
+  "nigeria",
+  "kenya",
+  "ethiopia",
+  "tanzania",
+  "bangladesh",
+  "iraq",
+  "oman",
+  "yemen",
+  "uzbekistan",
+  "afghanistan",
+]);
+
 export function isCountryIndexable(slug: string) {
+  if (!gateCountries.has(slug)) return false;
   const record = getPatientCountry(slug);
   if (!record) return false;
   const assessment = assessCountry(record);

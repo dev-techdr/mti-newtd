@@ -1,5 +1,4 @@
 import type { MetadataRoute } from "next";
-import { publishedSitemapPaths } from "@/lib/city-treatments";
 import { site } from "@/lib/site";
 
 const bots = [
@@ -14,13 +13,14 @@ const bots = [
   "Applebot",
 ];
 
+const disallow = ["/api/", "/thank-you"];
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: "*", allow: "/" },
-      { userAgent: bots, allow: "/" },
+      { userAgent: "*", allow: "/", disallow },
+      { userAgent: bots, allow: "/", disallow },
     ],
-    sitemap: [`${site.url}/sitemap.xml`, ...publishedSitemapPaths().map((path) => `${site.url}${path}`)],
-    host: site.url,
+    sitemap: `${site.url}/sitemap.xml`,
   };
 }

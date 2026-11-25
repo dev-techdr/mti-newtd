@@ -2,7 +2,6 @@ import { posts } from "@/data/blog";
 import { cityComboIndexable } from "@/data/city-unique";
 import { cities, cityPath, treatmentCities, type City } from "@/data/cities";
 import { getCost, moneyRange } from "@/data/costs";
-import { fareTreatmentPairs } from "@/data/patients/fare-treatments";
 import { hasAnswerPages, hasCountryTreatmentPages, hasSourceCityPages, listIndexableCountries } from "@/data/patients/publish";
 import { isLibraryProcedure, procedurePath, procedures, type Procedure } from "@/data/procedures";
 import { specialties } from "@/data/specialties";
@@ -100,7 +99,7 @@ export const cityTreatmentSitemapLastModified = latestDate(cityItems.map((item) 
 export function publishedSitemapPaths() {
   return sitemapPaths.filter((path) => {
     if (path === "/sitemaps/city-treatments/sitemap.xml") return cityItems.length > 0;
-    if (path === "/sitemaps/country-treatments/sitemap.xml") return hasCountryTreatmentPages() || fareTreatmentPairs().length > 0;
+    if (path === "/sitemaps/country-treatments/sitemap.xml") return hasCountryTreatmentPages();
     if (path === "/sitemaps/source-cities/sitemap.xml") return hasSourceCityPages();
     if (path === "/sitemaps/answers/sitemap.xml") return hasAnswerPages();
     return true;
@@ -125,11 +124,11 @@ export function llmsText() {
 
 - Canonical site: ${site.url}
 - Email: ${site.email}
-- WhatsApp and phone: ${site.whatsapps.join(", ")}
+- WhatsApp and phone: ${site.phone}
 - Legal entity: ${legal.entity}, ${legal.constitution}, trading as ${legal.tradeName}
-- Medical tourism brand: ${legal.brand} (${legal.websiteLabel})
+- Brand: ${site.name}
 - Authorized signatory: ${legal.signatory}, ${legal.signatoryRole}
-- GSTIN: ${legal.gstin}. PAN: ${legal.pan}. TAN: ${legal.tan}
+- GSTIN: ${legal.gstin}
 - Registered address: ${legal.address}
 - Content language: English, with Arabic, French, Russian and Bengali navigation. Hindi-speaking coordinators are also offered.
 - Last updated: ${site.updated}
@@ -164,7 +163,6 @@ ${posts
 ## Sitemaps
 
 - ${site.url}/sitemap.xml
-${publishedSitemapPaths().map((path) => `- ${site.url}${path}`).join("\n")}
 - Full brief: ${site.url}/llms-full.txt
 `;
 }

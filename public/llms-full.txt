@@ -6,9 +6,9 @@
 - Email: medicaltourism@techdr.in
 - WhatsApp and phone: +91 63032 25006
 - Legal entity: Gorityala Abhista Sai, Sole Proprietorship, trading as TechDr
-- Medical tourism brand: Medical Tours India (medicaltourism.techdr.in)
+- Brand: TechDr Medical Tourism
 - Authorized signatory: Ms. Gorityala Abhista Sai, Proprietor/CEO
-- GSTIN: 36DEMPG0503M1ZI. PAN: DEMPG0503M. TAN: HYDA42965G
+- GSTIN: 36DEMPG0503M1ZI
 - Registered address: Behind Sai Ram Theater, 13-1/37, Sai Ram Theater Road, Sai Puri Colony, Secunderabad, Medchal Malkajgiri, Telangana 500047
 - Content language: English. Navigation is also scaffolded for Arabic (RTL), French, Russian, and Bengali. Hindi-speaking coordinators are offered as a sixth support language.
 - Last updated: 15 October 2026
@@ -83,9 +83,4 @@ The homepage does not publish unaudited patient counts, country counts, or savin
 
 Sitemaps:
 
-- https://medicaltourism.techdr.in/sitemaps/pages/sitemap.xml
-- https://medicaltourism.techdr.in/sitemaps/treatments/sitemap.xml
-- https://medicaltourism.techdr.in/sitemaps/costs/sitemap.xml
-- https://medicaltourism.techdr.in/sitemaps/countries/sitemap.xml
-- https://medicaltourism.techdr.in/sitemaps/city-treatments/sitemap.xml
-- https://medicaltourism.techdr.in/sitemaps/blog/sitemap.xml
+- https://medicaltourism.techdr.in/sitemap.xml

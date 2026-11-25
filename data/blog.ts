@@ -1,4 +1,4 @@
-export const posts = [
+const allPosts = [
   {
     slug: "knee-replacement-cost-india-2026",
     title: "Cost of Knee Replacement in India in 2026: Complete Guide",
@@ -381,7 +381,33 @@ export const posts = [
   },
 ] as const;
 
-export type PostMeta = (typeof posts)[number];
+const retiredBlogPosts = [
+  ["knee-replacement-cost-india-2026", "/cost/knee-replacement-cost-in-india"],
+  ["hip-replacement-cost-india-2026", "/cost/hip-replacement-cost-in-india"],
+  ["heart-bypass-cost-india-2026", "/cost/heart-bypass-cost-in-india"],
+  ["angioplasty-stent-cost-india", "/cost/angioplasty-cost-in-india"],
+  ["heart-valve-replacement-cost-india", "/cost/heart-valve-replacement-cost-in-india"],
+  ["kidney-transplant-cost-india", "/cost/kidney-transplant-cost-in-india"],
+  ["bone-marrow-transplant-cost-india", "/cost/bone-marrow-transplant-cost-in-india"],
+  ["spinal-fusion-cost-india", "/cost/spinal-fusion-cost-in-india"],
+  ["gastric-sleeve-cost-india", "/cost/sleeve-gastrectomy-cost-in-india"],
+  ["cataract-surgery-cost-india", "/cost/cataract-cost-in-india"],
+  ["lasik-cost-india", "/cost/lasik-cost-in-india"],
+  ["hair-transplant-cost-india", "/cost/hair-transplant-cost-in-india"],
+  ["dental-implant-cost-india", "/cost/dental-implant-cost-in-india"],
+  ["brain-tumour-surgery-cost-india", "/cost/brain-tumour-surgery-cost-in-india"],
+  ["cochlear-implant-cost-india", "/cost/cochlear-implant-cost-in-india"],
+] as const;
+
+const retiredBlogSlugs = new Set<string>(retiredBlogPosts.map(([slug]) => slug));
+
+export const posts = allPosts.filter((post) => !retiredBlogSlugs.has(post.slug));
+export const blogRedirects = retiredBlogPosts.map(([slug, destination]) => ({
+  source: `/blog/${slug}`,
+  destination,
+}));
+
+export type PostMeta = (typeof allPosts)[number];
 
 export function getPostMeta(slug: string) {
   return posts.find((post) => post.slug === slug);
