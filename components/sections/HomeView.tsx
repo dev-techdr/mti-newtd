@@ -12,7 +12,6 @@ import { ServiceIcon, serviceIcon } from "@/components/ui/ServiceIcon";
 import { homeFaqs } from "@/data/faqs";
 import { posts } from "@/data/blog";
 import { cities } from "@/data/cities";
-import { activeDestinations, destinationHref } from "@/data/destinations";
 import { procedurePath, procedures, treatmentSearchItems } from "@/data/procedures";
 import { faqList } from "@/lib/schema";
 import { WhatsAppLink } from "@/components/contact/WhatsAppLink";
@@ -47,8 +46,6 @@ const indiaReasons: { icon: LucideIcon; label: string }[] = [
   { icon: Languages, label: "Interpreters in six coordinator languages" },
   { icon: ShieldBan, label: "No paid-donor or guaranteed-outcome cases" },
 ];
-
-const words = "Find the Right Treatment Abroad — Compare Countries, Costs and Care".split(" ");
 
 const trustPoints = [
   "Accredited partner hospitals",
@@ -89,28 +86,15 @@ export function HomeView() {
         <div className="relative mx-auto grid max-w-6xl gap-10 px-4 pt-8 pb-16 lg:grid-cols-[1.15fr_0.85fr] lg:pt-12 lg:pb-24">
           <div>
             <p className="text-sm font-semibold text-primary-ink">TechDr Medical Tourism</p>
-            <h1 className="mt-3 max-w-3xl text-balance leading-[1.18]">
-              {words.map((word, index) => (
-                <span key={`${word}-${index}`} className={word === "Abroad" ? "word text-accent" : "word"} style={{ animationDelay: `${index * 40}ms` }}>{word}</span>
-              ))}
-            </h1>
+            <h1 className="mt-3 max-w-3xl text-balance leading-[1.18]">Affordable Treatment in India for International Patients</h1>
             <p className="mt-5 max-w-2xl text-lg text-muted">
-              Compare countries, costs and care. India is the destination TechDr coordinates today. Free opinions, written estimates, and travel support. TechDr is a facilitator, not a hospital.
+              Send your reports and get a free written opinion and itemised estimate from accredited hospitals within 48 hours. TechDr arranges your visa letter, travel and stay.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <WhatsAppLink className="inline-flex min-h-11 items-center justify-center rounded-full bg-accent px-5 text-sm font-semibold text-accent-ink">Chat on WhatsApp</WhatsAppLink>
               <Button variant="outline" href="/get-a-free-quote">Get a free quote</Button>
             </div>
             <div className="mt-6 max-w-xl"><TreatmentSearch items={searchItems} /></div>
-            <div className="mt-4 flex flex-wrap items-center gap-2 text-sm">
-              <span className="font-medium">Destination</span>
-              {activeDestinations().map((item) => (
-                <Link key={item.slug} className="rounded-full border border-border bg-card px-3 py-1.5 font-medium text-primary-ink" href={destinationHref(item)}>
-                  {item.name}
-                </Link>
-              ))}
-              <Link className="rounded-full border border-border px-3 py-1.5 font-medium" href="/countries">All destinations</Link>
-            </div>
           </div>
           <div className="grid gap-3">
             {heroFacts.map((fact, index) => (
@@ -227,7 +211,7 @@ export function HomeView() {
       <section className="bg-secondary py-16 text-background dark:bg-[#10243a] dark:text-foreground">
         <div className="mx-auto max-w-6xl px-4">
           <h2>Why patients choose India</h2>
-          <p className="mt-2 max-w-2xl text-background/80 dark:text-muted">Accredited hospitals, a written plan, and the trip arranged around the campus.</p>
+          <p className="mt-2 max-w-2xl text-background/80 dark:text-muted">Accredited hospitals, a written plan, and the trip arranged around the campus. TechDr coordinates the opinion, the visa letter and the stay. The hospital provides the treatment.</p>
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {indiaReasons.map(({ icon: Icon, label }) => (
               <h3 key={label} className="flex items-start gap-3 rounded-2xl bg-background/10 p-4 text-lg font-medium dark:border dark:border-border dark:bg-card">
@@ -247,7 +231,7 @@ export function HomeView() {
       </section>
       <section className="mx-auto max-w-6xl px-4 py-16">
         <h2>Patient services</h2>
-        <p className="mt-2 max-w-2xl text-muted">The practical side of the trip, arranged with the treatment plan.</p>
+        <p className="mt-2 max-w-2xl text-muted">The practical side of the trip, arranged with the treatment plan. After you accept a written plan, TechDr helps with the visa letter, a hotel near the campus, and an interpreter.</p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {patientServices.map(({ icon: Icon, label }) => (
             <p key={label} className="flex items-start gap-3 rounded-2xl border border-border bg-card p-4 shadow-sm">

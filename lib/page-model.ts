@@ -82,12 +82,25 @@ function sentencesOf(text: string) {
     .filter(Boolean);
 }
 
+function sentenceName(name: string) {
+  if (/^[A-Z0-9]{2,6}\b/.test(name)) return name;
+  return name.charAt(0).toLowerCase() + name.slice(1);
+}
+
+function whoHeading(name: string) {
+  const short = name.replace(/\s+(surgery|treatment|procedure)$/i, "");
+  if (/^[A-Z0-9]{2,6}\b/.test(short)) return `Who needs ${short}?`;
+  const spoken = sentenceName(short);
+  const article = /^[aeiou]/i.test(spoken) ? "an" : "a";
+  return `Who needs ${article} ${spoken}?`;
+}
+
 function claim(name: string, line: string) {
   const text = line.trim();
   if (!text) return "";
   if (text.toLowerCase().includes(name.toLowerCase())) return /[.!?]$/.test(text) ? text : `${text}.`;
   const body = text.replace(/[.!?]+$/, "");
-  return `For ${name}, ${body.charAt(0).toLowerCase()}${body.slice(1)}.`;
+  return `${body.charAt(0).toUpperCase()}${body.slice(1)} for ${sentenceName(name)}.`;
 }
 
 function absorb(seen: Set<string>, text: string) {
@@ -192,7 +205,7 @@ export function treatmentModel(procedure: Procedure): PageModel {
     }
     addSection(seen, sections, name, {
       id: "who",
-      heading: kind === "condition" ? `When is an operation considered for ${name}?` : `Who is ${name} for?`,
+      heading: kind === "condition" ? `Why get ${sentenceName(name)} treated in India?` : whoHeading(name),
       paragraphs: [
         kind === "condition"
           ? `An operation for ${name} is considered only when a specialist ties the symptoms to the scan and the non-surgical options are not enough.`
@@ -342,7 +355,7 @@ export function treatmentModel(procedure: Procedure): PageModel {
     todos: [],
     sources: sourceNotes.map((item) => ({
       ...item,
-      supports: `For ${name}, this page supports ${item.supports}.`,
+      supports: `This source supports ${item.supports} for ${sentenceName(name)}.`,
     })),
     sampleQuote: procedure.sampleQuote?.lines.length ? procedure.sampleQuote : undefined,
     dataNote: procedure.dataBox
@@ -441,7 +454,7 @@ export function costModel(procedure: Procedure): PageModel {
     todos: [],
     sources: sourceNotes.slice(0, 2).map((item) => ({
       ...item,
-      supports: `For the ${name} cost page, this source supports ${item.supports}.`,
+      supports: `This source supports ${item.supports} for ${sentenceName(name)}.`,
     })),
     related: [{ href: procedurePath(procedure), label: `${name} treatment guide` }],
   };

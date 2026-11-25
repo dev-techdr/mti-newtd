@@ -1,25 +1,16 @@
 "use client";
 
 import { ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/brand/Logo";
 import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Link, usePathname } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
 import { cities, cityPath } from "@/data/cities";
 import { WhatsAppLink } from "@/components/contact/WhatsAppLink";
 import { telHref } from "@/lib/site";
 import { cn } from "@/lib/utils";
-
-const languages = [
-  { locale: "en", label: "English" },
-  { locale: "ar", label: "العربية" },
-  { locale: "fr", label: "Français" },
-  { locale: "ru", label: "Русский" },
-  { locale: "bn", label: "বাংলা" },
-] as const;
 
 function active(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
@@ -29,16 +20,12 @@ export function Header() {
   const t = useTranslations("nav");
   const call = useTranslations("mobile")("call");
   const skip = useTranslations("a11y")("skip");
-  const locale = useLocale();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dark, setDark] = useState(false);
 
-  const cityLinks = [
-    ...cities.map((city) => ({ href: cityPath(city), label: city.searchName })),
-    { href: "/countries", label: t("allDestinations") },
-  ];
+  const cityLinks = cities.map((city) => ({ href: cityPath(city), label: city.searchName }));
   const planLinks = [
     { href: "/why-india", label: t("why") },
     { href: "/patient-services", label: t("services") },
@@ -63,10 +50,6 @@ export function Header() {
     setDark(next);
   }
 
-  function chooseLocale(next: string) {
-    window.location.href = next === routing.defaultLocale ? pathname : `/${next}${pathname === "/" ? "" : pathname}`;
-  }
-
   return (
     <>
       <a href="#content" className="skip-link">{skip}</a>
@@ -82,7 +65,6 @@ export function Header() {
             <NavLink href="/blog" pathname={pathname}>{t("blog")}</NavLink>
           </nav>
           <div className="ms-auto flex items-center gap-2">
-            <LanguageSelect id="language" label={t("language")} locale={locale} onChange={chooseLocale} className="hidden md:block" />
             <button type="button" className="inline-flex size-11 items-center justify-center rounded-full border border-border" onClick={toggleTheme} aria-label={t("theme")}>
               {dark ? <Sun className="size-5" /> : <Moon className="size-5" />}
             </button>
@@ -108,7 +90,6 @@ export function Header() {
                     <NavLink key={item.href} href={item.href} pathname={pathname} onClick={() => setOpen(false)} className="min-h-11 text-lg">{item.label}</NavLink>
                   ))}
                   <NavLink href="/blog" pathname={pathname} onClick={() => setOpen(false)} className="min-h-11 text-lg">{t("blog")}</NavLink>
-                  <LanguageSelect id="language-menu" label={t("language")} locale={locale} onChange={chooseLocale} className="mt-3 w-full" />
                   <NavLink href="/get-a-free-quote" pathname={pathname} onClick={() => setOpen(false)} className="min-h-11 text-lg">{t("quote")}</NavLink>
                   <WhatsAppLink className="min-h-11 text-lg">{t("whatsapp")}</WhatsAppLink>
                   <a className="min-h-11 text-lg" href={telHref()}>{call}</a>
@@ -188,36 +169,5 @@ function Drop({
         </ul>
       </div>
     </div>
-  );
-}
-
-function LanguageSelect({
-  id,
-  label,
-  locale,
-  onChange,
-  className,
-}: {
-  id: string;
-  label: string;
-  locale: string;
-  onChange: (locale: string) => void;
-  className?: string;
-}) {
-  return (
-    <>
-      <label className="sr-only" htmlFor={id}>{label}</label>
-      <select
-        id={id}
-        className={cn("min-h-11 rounded-full border border-border bg-card px-3 text-sm", className)}
-        value={locale}
-        aria-label={label}
-        onChange={(event) => onChange(event.target.value)}
-      >
-        {languages.map((item) => (
-          <option key={item.locale} value={item.locale}>{item.label}</option>
-        ))}
-      </select>
-    </>
   );
 }

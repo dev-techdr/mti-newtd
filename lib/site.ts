@@ -23,7 +23,7 @@ export const legal = {
 } as const;
 
 export const positioning =
-  "TechDr Medical Tourism helps patients worldwide compare and plan treatment abroad — in India and other leading medical destinations — with free opinions, transparent estimates and end-to-end travel support. TechDr is a facilitator, not a hospital.";
+  "TechDr Medical Tourism helps international patients plan treatment in India, with a free written opinion, an itemised estimate within 48 hours of complete reports, and support for the visa letter, travel and stay. TechDr is a facilitator, not a hospital.";
 
 export const site = {
   name: "TechDr Medical Tourism",

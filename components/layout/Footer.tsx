@@ -29,7 +29,6 @@ export async function Footer() {
                 <Link className={link} href={cityPath(city)}>Treatment in {city.searchName}</Link>
               </li>
             ))}
-            <li><Link className={link} href="/countries">{nav("allDestinations")}</Link></li>
           </ul>
         </div>
         <div>

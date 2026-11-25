@@ -585,7 +585,7 @@ for (const row of libraryRows) {
     types: [
       {
         title: "The decision named for this person",
-        text: `For ${label}, the written plan should say whether the next step is treatment in India, care at home, or an emergency locally.`,
+        text: `The written plan for ${lower} should say whether the next step is treatment in India, care at home, or an emergency locally.`,
       },
       {
         title: "A different next step",
