@@ -5,7 +5,8 @@ import { ServiceIcon } from "@/components/ui/ServiceIcon";
 import { cities, cityPath } from "@/data/cities";
 import { specialties } from "@/data/specialties";
 import { listIndexableCountries } from "@/data/patients/publish";
-import { formatPhone, legal, site, socialLinks, telHref, whatsappHref } from "@/lib/site";
+import { WhatsAppLink } from "@/components/contact/WhatsAppLink";
+import { formatPhone, legal, site, socialLinks, telHref } from "@/lib/site";
 
 const link = "hover:underline";
 
@@ -72,16 +73,12 @@ export async function Footer() {
             <li><Link className={link} href="/terms">{t("terms")}</Link></li>
             <li><Link className={link} href="/medical-disclaimer">{t("disclaimer")}</Link></li>
             <li><a className={link} href={`mailto:${site.email}`}>{site.email}</a></li>
-            {site.phones.map((number) => (
-              <li key={`tel-${number}`}>
-                <a className={link} href={telHref(number)}>{t("call")} {formatPhone(number)}</a>
-              </li>
-            ))}
-            {site.whatsapps.map((number) => (
-              <li key={`wa-${number}`}>
-                <a className={link} href={whatsappHref("Hello TechDr, I would like to discuss treatment in India.", number)}>WhatsApp {formatPhone(number)}</a>
-              </li>
-            ))}
+            <li>
+              <a className={link} href={telHref()}>{t("call")} {formatPhone(site.phone)}</a>
+            </li>
+            <li>
+              <WhatsAppLink className={link}>WhatsApp {formatPhone(site.whatsapp)}</WhatsAppLink>
+            </li>
             {socials.map((item) => (
               <li key={item.href}><a className={link} href={item.href}>{item.label}</a></li>
             ))}

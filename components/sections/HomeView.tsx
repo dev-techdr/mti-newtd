@@ -15,7 +15,8 @@ import { cities } from "@/data/cities";
 import { activeDestinations, destinationHref } from "@/data/destinations";
 import { procedurePath, procedures, treatmentSearchItems } from "@/data/procedures";
 import { faqList } from "@/lib/schema";
-import { site, whatsappHref } from "@/lib/site";
+import { WhatsAppLink } from "@/components/contact/WhatsAppLink";
+import { site } from "@/lib/site";
 
 const chartIds = ["knee-replacement", "heart-bypass", "kidney-transplant", "ivf", "cataract"] as const;
 
@@ -97,8 +98,8 @@ export function HomeView() {
               Compare countries, costs and care. India is the destination TechDr coordinates today. Free opinions, written estimates, and travel support. TechDr is a facilitator, not a hospital.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Button href="/get-a-free-quote">Get a Free Quote</Button>
-              <Button variant="outline" href={whatsappHref("Hello TechDr, I would like to discuss treatment in India.")} external>Talk on WhatsApp</Button>
+              <WhatsAppLink className="inline-flex min-h-11 items-center justify-center rounded-full bg-accent px-5 text-sm font-semibold text-accent-ink">Chat on WhatsApp</WhatsAppLink>
+              <Button variant="outline" href="/get-a-free-quote">Get a free quote</Button>
             </div>
             <div className="mt-6 max-w-xl"><TreatmentSearch items={searchItems} /></div>
             <div className="mt-4 flex flex-wrap items-center gap-2 text-sm">

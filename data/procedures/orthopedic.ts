@@ -107,7 +107,7 @@ export const primaryProcedures: Procedure[] = [
     totalStay: "2–3 weeks",
     success:
       "Dislocation risk and bone quality change the result of a primary hip. Ask the treating centre for its own audited figures. This page does not publish an unsourced survival percentage.",
-    recovery: "Walking with support within 24 hours; a walking stick often for 4–6 weeks",
+    recovery: "Walking with support in the first days; a walking stick often for 4–6 weeks",
     anaesthesia: "Spinal or general anaesthesia",
     whatIs:
       "Hip replacement swaps the worn ball and socket for an artificial joint. It is used for advanced osteoarthritis, some fractures, and selected cases of avascular necrosis. The approach — posterior, lateral or anterior — changes the precautions you follow in the first weeks, not the fact that a surgeon must match the implant to your anatomy. TechDr’s role is to collect comparable written plans, not to recommend a brand of hip.",

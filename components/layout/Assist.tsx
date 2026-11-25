@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import Script from "next/script";
 import { Link, usePathname } from "@/i18n/navigation";
-import { telHref, whatsappHref } from "@/lib/site";
-
-const wa = whatsappHref("Hello TechDr, I would like a free treatment quote.");
+import { topicFromPath } from "@/components/contact/WhatsAppLink";
+import { telHref, whatsappHref, whatsappMessage } from "@/lib/site";
 
 export function Assist() {
   const t = useTranslations();
   const pathname = usePathname();
+  const wa = whatsappHref(whatsappMessage(topicFromPath(pathname)));
   const [cookies, setCookies] = useState<"unknown" | "set">("unknown");
 
   useEffect(() => {
@@ -35,8 +35,8 @@ export function Assist() {
       )}
       <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-border bg-background md:hidden" aria-label="Quick contact">
         <a className="flex min-h-14 items-center justify-center text-sm font-medium" href={telHref()}>{t("mobile.call")}</a>
-        <a className="flex min-h-14 items-center justify-center text-sm font-medium" href={wa}>{t("mobile.whatsapp")}</a>
-        <Link className="flex min-h-14 items-center justify-center text-sm font-semibold text-accent-ink" href="/get-a-free-quote">{t("mobile.quote")}</Link>
+        <a className="flex min-h-14 items-center justify-center bg-accent text-sm font-semibold text-accent-ink" href={wa}>Chat on WhatsApp</a>
+        <Link className="flex min-h-14 items-center justify-center text-sm font-medium" href="/get-a-free-quote">Get a free quote</Link>
       </nav>
       {cookies === "unknown" ? (
         <div className="fixed inset-x-3 bottom-20 z-40 rounded-2xl border border-border bg-card p-4 shadow-lg md:bottom-6 md:end-auto md:start-4 md:max-w-sm" role="dialog" aria-label="Cookies">

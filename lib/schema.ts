@@ -133,14 +133,13 @@ export function siteGraph(locale: string) {
         currenciesAccepted: "USD",
         areaServed: { "@type": "Place", name: "Worldwide" },
         knowsAbout: specialties.map((item) => item.name),
-        contactPoint: site.whatsapps.map((telephone) => ({
+        contactPoint: {
           "@type": "ContactPoint",
           contactType: "patient support",
           email: site.email,
-          telephone,
+          telephone: site.phone,
           availableLanguage: [...coordinatorLanguages],
-          hoursAvailable: "Mo-Su 00:00-23:59",
-        })),
+        },
       },
       {
         "@type": "WebSite",

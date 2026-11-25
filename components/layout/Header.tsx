@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Link, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { cities, cityPath } from "@/data/cities";
-import { telHref, whatsappHref } from "@/lib/site";
+import { WhatsAppLink } from "@/components/contact/WhatsAppLink";
+import { telHref } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const languages = [
@@ -109,7 +110,7 @@ export function Header() {
                   <NavLink href="/blog" pathname={pathname} onClick={() => setOpen(false)} className="min-h-11 text-lg">{t("blog")}</NavLink>
                   <LanguageSelect id="language-menu" label={t("language")} locale={locale} onChange={chooseLocale} className="mt-3 w-full" />
                   <NavLink href="/get-a-free-quote" pathname={pathname} onClick={() => setOpen(false)} className="min-h-11 text-lg">{t("quote")}</NavLink>
-                  <a className="min-h-11 text-lg" href={whatsappHref("Hello TechDr, I would like to discuss treatment in India.")}>{t("whatsapp")}</a>
+                  <WhatsAppLink className="min-h-11 text-lg">{t("whatsapp")}</WhatsAppLink>
                   <a className="min-h-11 text-lg" href={telHref()}>{call}</a>
                 </Dialog.Content>
               </Dialog.Portal>

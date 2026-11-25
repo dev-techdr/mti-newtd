@@ -1,15 +1,4 @@
-const defaultWhatsapps = ["+916303225006", "+918499005006"];
-
-function listFromEnv(value: string | undefined, fallback: readonly string[]) {
-  const items = (value ?? "")
-    .split(/[,|]/)
-    .map((item) => item.trim())
-    .filter(Boolean);
-  return items.length ? items : [...fallback];
-}
-
-const whatsapps = listFromEnv(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER, defaultWhatsapps);
-const phones = listFromEnv(process.env.NEXT_PUBLIC_PHONE, whatsapps);
+const primaryPhone = "+916303225006";
 
 export const legal = {
   entity: "Gorityala Abhista Sai",
@@ -41,10 +30,10 @@ export const site = {
   entity: `${legal.entity}, trading as ${legal.tradeName}`,
   url: "https://medicaltourism.techdr.in",
   email: process.env.NEXT_PUBLIC_EMAIL || "medicaltourism@techdr.in",
-  phone: phones[0] || "",
-  phones,
-  whatsapp: whatsapps[0] || "",
-  whatsapps,
+  phone: primaryPhone,
+  phones: [primaryPhone],
+  whatsapp: primaryPhone,
+  whatsapps: [primaryPhone],
   year: 2026,
   updated: "2026-10-15",
   locale: "en_IN",
@@ -67,9 +56,13 @@ export function formatPhone(value: string) {
   return value.trim();
 }
 
-export function whatsappHref(text: string, number = site.whatsapp) {
-  if (!number) return "/contact#whatsapp";
-  const digits = number.replace(/\D/g, "");
+export function whatsappMessage(topic = "treatment") {
+  const subject = topic.trim() || "treatment";
+  return `Hello TechDr, I need help with ${subject} in India. I am from ___.`;
+}
+
+export function whatsappHref(text = whatsappMessage(), number = site.whatsapp) {
+  const digits = (number || site.whatsapp).replace(/\D/g, "");
   return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
 }
 

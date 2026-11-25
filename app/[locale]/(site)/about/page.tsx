@@ -28,7 +28,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <p className="mt-4">TechDr does coordinate hospital opinions, itemised estimates, invitation letters and travel support with independent partner hospitals. TechDr does not perform surgery, does not employ the treating doctors, does not promise a bed or a result, and does not arrange paid organ donation or surrogacy.</p>
         <p className="mt-4">Complaints come to {site.email} with the page address or the case reference. We acknowledge the email and correct a factual error on the page it concerns. Clinical complaints about a hospital stay belong to that hospital as well, and we will say so.</p>
         <p className="mt-4">The comparison prices on this site are indicative starting estimates in USD for {site.year}. A written quote after your reports replaces the table. The phone numbers and the Secunderabad address in the footer are the ones used for this site.</p>
-        <p className="mt-4">Write to {site.email}, or WhatsApp {site.whatsapps.map(formatPhone).join(" or ")}.</p>
+        <p className="mt-4">Write to {site.email}, or WhatsApp {formatPhone(site.whatsapp)}.</p>
         <LegalIdentity />
       </article>
     </>
