@@ -130,7 +130,7 @@ export function llmsText() {
 - Authorized signatory: ${legal.signatory}, ${legal.signatoryRole}
 - GSTIN: ${legal.gstin}
 - Registered address: ${legal.address}
-- Content language: English, with Arabic, French, Russian and Bengali navigation. Hindi-speaking coordinators are also offered.
+- Content language: English. Arabic, French, Russian and Bengali pages are not published.
 - Last updated: ${site.updated}
 - Prices are indicative starting estimates in USD for ${site.year}. They are not a personal quote and not a promise of an outcome.
 - Paid organ donation is refused. Surrogacy arrangements are refused.

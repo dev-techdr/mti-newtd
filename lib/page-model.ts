@@ -83,8 +83,10 @@ function sentencesOf(text: string) {
 }
 
 function sentenceName(name: string) {
-  if (/^[A-Z0-9]{2,6}\b/.test(name)) return name;
-  return name.charAt(0).toLowerCase() + name.slice(1);
+  return name
+    .split(" ")
+    .map((word) => (/^[A-Z0-9]{2,6}$/.test(word) ? word : word.charAt(0).toLowerCase() + word.slice(1)))
+    .join(" ");
 }
 
 function whoHeading(name: string) {
@@ -533,15 +535,16 @@ export function countryModel(country: CountryPage): PageModel {
     if (!answer) continue;
     faqs.push({ question: faq.question, answer });
   }
-  const visaValue =
-    record.visa.eMedicalEligible === null
-      ? "Not checked"
-      : `${record.visa.eMedicalEligible ? "e-Medical route listed" : "e-Medical route not listed"}${record.visa.lastChecked ? `, checked ${record.visa.lastChecked}` : ""}`;
   const facts = [
     { label: "Languages", value: record.techdrLanguageSupport.join(", ") },
     { label: "Currency", value: `${record.currency.code} (${record.currency.symbol})` },
-    { label: "Visa eligibility", value: visaValue },
   ];
+  if (record.visa.eMedicalEligible !== null) {
+    facts.push({
+      label: "Visa eligibility",
+      value: `${record.visa.eMedicalEligible ? "e-Medical route listed" : "e-Medical route not listed"}${record.visa.lastChecked ? `, checked ${record.visa.lastChecked}` : ""}`,
+    });
+  }
   if (record.travel.airports.length) {
     facts.unshift({ label: "Airports", value: record.travel.airports.map((item) => `${item.iata} ${item.city}`).join(", ") });
   }
@@ -554,15 +557,15 @@ export function countryModel(country: CountryPage): PageModel {
     showPrice: false,
     showQuote: false,
     alsoKnownAs: [],
-    facts,
+    facts: facts.filter((item) => item.value.trim()),
     comparison,
     sections,
     faqs,
     followups: [],
     todos: [],
-    reviewNote: record.reviewed.by
-      ? `Reviewed by ${record.reviewed.by}${record.reviewed.date ? ` on ${record.reviewed.date}` : ""}.`
-      : "This country page has no named medical reviewer on file.",
+    ...(record.reviewed.by
+      ? { reviewNote: `Reviewed by ${record.reviewed.by}${record.reviewed.date ? ` on ${record.reviewed.date}` : ""}.` }
+      : {}),
     sources: [
       { href: record.visa.officialUrl, label: "Indian e-Visa application", supports: "Official application and current fee." },
       { href: "https://indianvisaonline.gov.in/evisa/", label: "Official e-Visa categories", supports: "Official category list." },

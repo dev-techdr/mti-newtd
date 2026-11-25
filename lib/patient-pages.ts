@@ -77,9 +77,9 @@ export function treatmentCorridorModel(countrySlug: string, treatmentSlug: strin
     faqs: cost.faqs,
     followups: [],
     todos: [],
-    reviewNote: record.reviewed.by
-      ? `Reviewed by ${record.reviewed.by}${record.reviewed.date ? ` on ${record.reviewed.date}` : ""}. Prices are indicative.`
-      : "No named medical reviewer is on this corridor. Prices are indicative.",
+    ...(record.reviewed.by
+      ? { reviewNote: `Reviewed by ${record.reviewed.by}${record.reviewed.date ? ` on ${record.reviewed.date}` : ""}. Prices are indicative.` }
+      : {}),
     sources: [
       ...(cost.source?.startsWith("https://")
         ? [{ href: cost.source, label: `${record.name} cost source`, supports: `Checked ${cost.asOf}.` }]
@@ -118,8 +118,8 @@ export function cityCorridorModel(countrySlug: string, citySlug: string): PageMo
     alsoKnownAs: [],
     facts: [
       ...routeLines.map((line, index) => ({ label: `Route ${index + 1}`, value: line })),
-      { label: "Visa centre", value: city.visaCentre ? `${city.visaCentre.name}, ${city.visaCentre.city}` : "Not on file" },
-      { label: "Local support", value: city.localSupport ? city.localSupport.detail : "Not on file" },
+      ...(city.visaCentre ? [{ label: "Visa centre", value: `${city.visaCentre.name}, ${city.visaCentre.city}` }] : []),
+      ...(city.localSupport ? [{ label: "Local support", value: city.localSupport.detail }] : []),
     ].slice(0, 8),
     sections: rest
       ? [{ id: "city", heading: `What is different about leaving from ${city.name}?`, paragraphs: [rest] }]
@@ -127,7 +127,7 @@ export function cityCorridorModel(countrySlug: string, citySlug: string): PageMo
     faqs: [],
     followups: [],
     todos: [],
-    reviewNote: "No named medical reviewer is on this city record. Route facts are only as current as the checked date.",
+    reviewNote: undefined,
     sources: [{ href: record.visa.officialUrl, label: "Indian e-Visa application", supports: "Official application and current fee." }],
     related: [{ href: `/patients-from/${record.slug}`, label: `Patients from ${record.name}` }],
   };
