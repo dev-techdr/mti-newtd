@@ -1,13 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { procedures } from "@/data/procedures";
-import { cities } from "@/data/cities";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { WhatsAppLink } from "@/components/contact/WhatsAppLink";
 import { QUOTE_MAX_FILES, quoteFileError } from "@/lib/quote-files";
 
 const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
-const field =
-  "mt-1.5 min-h-11 w-full rounded-xl border border-border bg-background px-3 text-base";
+const field = "mt-1.5 min-h-11 w-full rounded-xl border border-border bg-background px-3 text-base";
+const notSure = "Not sure — please advise";
+const utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"] as const;
+
+function countryNames() {
+  const display = new Intl.DisplayNames(["en"], { type: "region" });
+  return Intl.supportedValuesOf("region")
+    .filter((code) => /^[A-Z]{2}$/.test(code))
+    .map((code) => display.of(code) ?? "")
+    .filter((name) => name.length > 1)
+    .sort((a, b) => a.localeCompare(b));
+}
 
 function SpamCheck() {
   const [armed, setArmed] = useState(false);
@@ -35,36 +44,120 @@ function formatSize(bytes: number) {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
-export function QuoteForm({ preset }: { preset?: string }) {
+function storedUtm() {
+  const params = new URLSearchParams(window.location.search);
+  const saved = JSON.parse(sessionStorage.getItem("utm") || "{}") as Record<string, string>;
+  const next = { ...saved };
+  for (const key of utmKeys) {
+    const value = params.get(key);
+    if (value) next[key] = value;
+  }
+  sessionStorage.setItem("utm", JSON.stringify(next));
+  return next;
+}
+
+function SearchSelect({
+  name,
+  label,
+  required,
+  value,
+  options,
+  onChange,
+}: {
+  name: string;
+  label: string;
+  required?: boolean;
+  value: string;
+  options: string[];
+  onChange: (value: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState(value);
+  useEffect(() => setQuery(value), [value]);
+  const matches = options.filter((item) => item.toLowerCase().includes(query.trim().toLowerCase())).slice(0, 8);
+  return (
+    <label className="relative text-sm font-medium">
+      {label}
+      <input
+        name={name}
+        required={required}
+        value={query}
+        className={field}
+        autoComplete="off"
+        role="combobox"
+        aria-expanded={open}
+        aria-autocomplete="list"
+        onFocus={() => setOpen(true)}
+        onBlur={() => {
+          window.setTimeout(() => setOpen(false), 120);
+          const exact = options.find((item) => item.toLowerCase() === query.trim().toLowerCase());
+          if (exact) {
+            setQuery(exact);
+            onChange(exact);
+          } else if (!required) {
+            setQuery("");
+            onChange("");
+          }
+        }}
+        onChange={(event) => {
+          setQuery(event.target.value);
+          setOpen(true);
+          onChange(event.target.value);
+        }}
+      />
+      {open && matches.length ? (
+        <ul className="absolute z-20 mt-1 max-h-56 w-full overflow-auto rounded-xl border border-border bg-card py-1 shadow-lg" role="listbox">
+          {matches.map((item) => (
+            <li key={item}>
+              <button
+                type="button"
+                className="block w-full px-3 py-2 text-start text-sm hover:bg-surface"
+                onMouseDown={(event) => {
+                  event.preventDefault();
+                  setQuery(item);
+                  onChange(item);
+                  setOpen(false);
+                }}
+              >
+                {item}
+              </button>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+    </label>
+  );
+}
+
+export function QuoteForm({
+  treatments,
+}: {
+  treatments: { slug: string; name: string }[];
+}) {
   const fileRef = useRef<HTMLInputElement>(null);
+  const countries = useMemo(countryNames, []);
+  const treatmentOptions = useMemo(() => [notSure, ...treatments.map((item) => item.name)], [treatments]);
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
   const [pending, setPending] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
-  const [treatment, setTreatment] = useState(preset ?? "");
-  const [preferredCity, setPreferredCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [treatment, setTreatment] = useState("");
+  const [utm, setUtm] = useState<Record<string, string>>({});
+  const [pageUrl, setPageUrl] = useState("");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const form = document.getElementById("quote-form");
-    const fill = (name: string, value: string | null) => {
-      if (!value || !(form instanceof HTMLFormElement)) return;
-      const input = form.elements.namedItem(name);
-      if (input instanceof HTMLInputElement && !input.value) input.value = value;
-    };
-    fill("name", params.get("name"));
-    fill("email", params.get("email"));
-    fill("phone", params.get("phone"));
-    fill("country", params.get("country"));
-    const found = procedures.find((item) => item.slug === params.get("procedure"));
+    setPageUrl(window.location.href);
+    setUtm(storedUtm());
+    const found = treatments.find((item) => item.slug === params.get("procedure"));
     if (found) setTreatment(found.name);
-    const cityQuery = params.get("city");
-    const city = cities.find(
-      (item) => item.searchName === cityQuery || item.name === cityQuery || item.path === cityQuery || item.slug === cityQuery,
-    );
-    if (city) setPreferredCity(city.name);
-  }, []);
+    const named = params.get("country");
+    if (named && countries.some((item) => item.toLowerCase() === named.toLowerCase())) {
+      setCountry(countries.find((item) => item.toLowerCase() === named.toLowerCase()) ?? "");
+    }
+  }, [countries, treatments]);
 
   function addFiles(list: FileList | null) {
     const next = [...files];
@@ -86,6 +179,14 @@ export function QuoteForm({ preset }: { preset?: string }) {
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
+    if (!countries.includes(country)) {
+      setError("Choose the country you live in from the list.");
+      return;
+    }
+    if (treatment && !treatmentOptions.includes(treatment)) {
+      setError("Choose a treatment from the list, or leave it blank.");
+      return;
+    }
     if (!form.reportValidity()) return;
     const fileMessage = quoteFileError(files);
     if (fileMessage) {
@@ -95,6 +196,10 @@ export function QuoteForm({ preset }: { preset?: string }) {
     setPending(true);
     setError("");
     const body = new FormData(form);
+    body.set("country", country);
+    body.set("treatment", treatment);
+    body.set("pageUrl", pageUrl);
+    for (const key of utmKeys) body.set(key, utm[key] ?? "");
     for (const file of files) body.append("reports", file);
     const response = await fetch("/api/quote", { method: "POST", body });
     const payload = (await response.json().catch(() => ({}))) as { ok?: boolean; message?: string };
@@ -103,14 +208,18 @@ export function QuoteForm({ preset }: { preset?: string }) {
       setError(payload.message || "Please check the highlighted fields.");
       return;
     }
+    window.dispatchEvent(new CustomEvent("generate-lead", { detail: { treatment, country, pageUrl } }));
     setDone(true);
   }
 
   if (done) {
     return (
       <div className="rounded-2xl border border-border bg-card p-8" role="status">
-        <h2>Your request is with our case desk</h2>
-        <p className="mt-3">Our case manager will share expert opinions and estimates within 48 hours.</p>
+        <h2>Thank you</h2>
+        <p className="mt-3">A TechDr coordinator will message you on WhatsApp. Your written estimate follows within 48 hours of complete reports.</p>
+        <WhatsAppLink className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-accent px-5 text-sm font-semibold text-accent-ink">
+          Chat on WhatsApp
+        </WhatsAppLink>
       </div>
     );
   }
@@ -118,43 +227,26 @@ export function QuoteForm({ preset }: { preset?: string }) {
   return (
     <form id="quote-form" onSubmit={onSubmit} className="rounded-2xl border border-border bg-card p-5 sm:p-6">
       {error ? <p className="mb-4 text-sm text-warning" role="alert">{error}</p> : null}
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label className="text-sm font-medium">Patient name
+      <div className="grid gap-4">
+        <label className="text-sm font-medium">Full name
           <input required name="name" minLength={2} maxLength={80} className={field} autoComplete="name" />
         </label>
-        <label className="text-sm font-medium">Country
-          <input required name="country" minLength={2} maxLength={80} className={field} autoComplete="country-name" />
+        <SearchSelect name="country" label="Country you live in" required value={country} options={countries} onChange={setCountry} />
+        <label className="text-sm font-medium">WhatsApp number with country code
+          <input required name="phone" minLength={6} maxLength={40} className={field} autoComplete="tel" inputMode="tel" />
         </label>
-        <label className="text-sm font-medium">Phone
-          <input required name="phone" minLength={6} maxLength={40} className={field} autoComplete="tel" placeholder="+234 …" />
+        <label className="text-sm font-medium">Email <span className="font-normal text-muted">(optional)</span>
+          <input type="email" name="email" maxLength={120} className={field} autoComplete="email" />
         </label>
-        <label className="text-sm font-medium">Email
-          <input required type="email" name="email" maxLength={120} className={field} autoComplete="email" />
+        <label className="text-sm font-medium">Tell us the problem or the treatment you need
+          <textarea required minLength={10} maxLength={2000} name="condition" className={`${field} min-h-28 py-2`} />
         </label>
-        <label className="flex min-h-11 items-center gap-2 text-sm sm:col-span-2">
-          <input type="checkbox" name="whatsapp" className="size-4" /> This number is on WhatsApp
-        </label>
-        <label className="text-sm font-medium sm:col-span-2">Treatment
-          <input required minLength={2} maxLength={140} className={field} list="treatments" name="treatment" value={treatment} onChange={(event) => setTreatment(event.target.value)} placeholder="Knee replacement, bypass, IVF…" />
-          <datalist id="treatments">{procedures.map((item) => <option key={item.slug} value={item.name} />)}</datalist>
-        </label>
-        <label className="text-sm font-medium sm:col-span-2">What should we know?
-          <textarea required minLength={10} maxLength={2000} name="condition" className={`${field} min-h-28 py-2`} placeholder="A sentence or two about the condition, reports you have, and when you hope to travel." />
-        </label>
-        <label className="text-sm font-medium">Preferred city <span className="font-normal text-muted">(optional)</span>
-          <select name="city" value={preferredCity} onChange={(event) => setPreferredCity(event.target.value)} className={field}>
-            <option value="">No preference</option>
-            {cities.map((city) => <option key={city.slug} value={city.name}>{city.name}</option>)}
-          </select>
-        </label>
-        <label className="text-sm font-medium">Travel month <span className="font-normal text-muted">(optional)</span>
-          <input type="month" name="travelDate" className={field} />
-        </label>
+        <SearchSelect name="treatment" label="Treatment (optional)" value={treatment} options={treatmentOptions} onChange={setTreatment} />
       </div>
 
       <div className="mt-4">
-        <p className="text-sm font-medium">Documents <span className="font-normal text-muted">(optional)</span></p>
-        <p className="mt-1 text-sm text-muted">Any file type. Add up to {QUOTE_MAX_FILES} files, 10 MB each.</p>
+        <p className="text-sm font-medium">Upload reports <span className="font-normal text-muted">(optional)</span></p>
+        <p className="mt-1 text-sm text-muted">PDF, JPG, PNG, DOCX or ZIP. Up to {QUOTE_MAX_FILES} files, 25 MB each. You can also send reports on WhatsApp later.</p>
         <button
           type="button"
           onClick={() => fileRef.current?.click()}
@@ -171,14 +263,14 @@ export function QuoteForm({ preset }: { preset?: string }) {
           className={`mt-2 flex min-h-28 w-full flex-col items-center justify-center rounded-2xl border border-dashed px-4 text-sm ${dragging ? "border-primary bg-surface" : "border-border bg-background"}`}
         >
           <span className="font-medium">Drop files here or browse</span>
-          <span className="mt-1 text-muted">PDF, scans, Word, photos, DICOM, zip, and anything else</span>
         </button>
         <input
           ref={fileRef}
           type="file"
           multiple
+          accept=".pdf,.jpg,.jpeg,.png,.docx,.zip,application/pdf,image/jpeg,image/png"
           className="sr-only"
-          aria-label="Upload documents"
+          aria-label="Upload reports"
           onChange={(event) => {
             addFiles(event.target.files);
             event.target.value = "";
@@ -215,7 +307,7 @@ export function QuoteForm({ preset }: { preset?: string }) {
       </p>
       <SpamCheck />
       <button disabled={pending} className="mt-5 min-h-11 rounded-full bg-accent px-5 text-sm font-semibold text-accent-ink disabled:opacity-60" type="submit">
-        {pending ? "Sending…" : "Get my free quote"}
+        {pending ? "Sending…" : "Get my free opinion"}
       </button>
     </form>
   );

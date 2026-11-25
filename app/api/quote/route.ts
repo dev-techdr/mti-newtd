@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import { createLead, rateLimited } from "@/lib/leads";
 
+function text(form: FormData, key: string) {
+  const value = form.get(key);
+  return typeof value === "string" ? value : "";
+}
+
 export async function POST(request: Request) {
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
   if (rateLimited(ip)) {
@@ -14,20 +19,21 @@ export async function POST(request: Request) {
   const files = form.getAll("reports").filter((item): item is File => item instanceof File && item.size > 0);
   const result = await createLead(
     {
-      name: form.get("name"),
-      country: form.get("country"),
-      phone: form.get("phone"),
-      whatsapp: form.get("whatsapp") === "on" || form.get("whatsapp") === "true",
-      email: form.get("email"),
-      treatment: form.get("treatment"),
-      condition: form.get("condition"),
-      city: form.get("city") || "",
-      travelDate: form.get("travelDate") || "",
-      attendants: form.get("attendants") || "",
-      budget: form.get("budget") || "",
-      consent: form.get("consent") === "on" || form.get("consent") === "true" ? true : false,
-      hp_field: form.get("hp_field") || "",
-      turnstileToken: form.get("cf-turnstile-response") || form.get("turnstileToken") || "",
+      name: text(form, "name"),
+      country: text(form, "country"),
+      phone: text(form, "phone"),
+      email: text(form, "email"),
+      treatment: text(form, "treatment"),
+      condition: text(form, "condition"),
+      consent: form.get("consent") === "on" || form.get("consent") === "true",
+      hp_field: text(form, "hp_field"),
+      turnstileToken: text(form, "cf-turnstile-response") || text(form, "turnstileToken"),
+      pageUrl: text(form, "pageUrl"),
+      utm_source: text(form, "utm_source"),
+      utm_medium: text(form, "utm_medium"),
+      utm_campaign: text(form, "utm_campaign"),
+      utm_content: text(form, "utm_content"),
+      utm_term: text(form, "utm_term"),
     },
     files,
   );
