@@ -144,7 +144,7 @@ export const decisionGuides: Record<string, DecisionGuide> = {
   icsi: guide("IVF with ICSI, or IVF alone?", [
     "ICSI injects one sperm into an egg. It is added for selected sperm problems, not as a default upgrade.",
     "The quote should say whether ICSI, the drugs and a freezing fee are included in this cycle step.",
-    "A pregnancy is not guaranteed. Age-banded information from the clinic is more useful than a package slogan. TechDr does not arrange surrogacy.",
+    "A pregnancy is not promised. Age-banded information from the clinic is more useful than a package slogan. TechDr does not arrange surrogacy.",
   ]),
   hysterectomy: guide("Is the uterus the cause, and must it be removed?", [
     "A hysterectomy is considered when bleeding, fibroids or a proven disease of the uterus has not responded to simpler care, or when cancer requires it.",

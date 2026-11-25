@@ -44,7 +44,7 @@ const indiaReasons: { icon: LucideIcon; label: string }[] = [
   { icon: Stamp, label: "Visa letter after you accept a plan" },
   { icon: Car, label: "Airport pickup and a hotel near the campus" },
   { icon: Languages, label: "Interpreters in six coordinator languages" },
-  { icon: ShieldBan, label: "No paid-donor or guaranteed-outcome cases" },
+  { icon: ShieldBan, label: "No paid-donor or promised-outcome cases" },
 ];
 
 const trustPoints = [

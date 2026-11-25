@@ -126,6 +126,7 @@ const mergedPaths: [string, string][] = [
   ["/cost/cauda-equina-syndrome", "/treatments/spine-surgery/cauda-equina-syndrome"],
   ["/cost/cauda-equina-syndrome-cost-in-india", "/treatments/spine-surgery/cauda-equina-syndrome"],
   ["/countries/india", "/why-india"],
+  ["/blog/is-techdr-the-best-medical-tourism-facilitator-india", "/blog/how-to-check-a-medical-tourism-facilitator-in-india"],
   ["/countries/india/visa-and-travel", "/medical-visa-india"],
 ];
 

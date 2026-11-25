@@ -66,7 +66,7 @@ async function CityPage({ params }: CityParams) {
         "@graph": [
           {
             "@type": "MedicalWebPage",
-            name: `Medical treatment in ${city.searchName}`,
+            name: `Medical treatment in ${city.searchName} for International patients`,
             url: absoluteUrl(locale, cityPath(city)),
             description: city.description,
             spatialCoverage: {
@@ -98,7 +98,7 @@ async function CityPage({ params }: CityParams) {
           <div className="relative mx-auto grid max-w-6xl items-start gap-8 px-4 py-12 lg:grid-cols-[minmax(0,1fr)_minmax(320px,460px)]">
             <div>
               <p className="text-sm font-semibold text-primary-ink">{city.airportCode} · India</p>
-              <h1 className="mt-2 max-w-3xl">Medical treatment in {city.searchName}</h1>
+              <h1 className="mt-2 max-w-3xl">Medical treatment in {city.searchName} for International patients</h1>
               {city.searchName !== city.name ? <p className="mt-3 text-muted">Hospital letters for this city use the name {city.name}.</p> : null}
               <div className="mt-6 max-w-3xl"><AnswerBox>{city.answer}</AnswerBox></div>
               <p className="mt-6 max-w-3xl">{city.overview}</p>
@@ -143,7 +143,7 @@ async function CityPage({ params }: CityParams) {
               <li key={item} className="rounded-2xl bg-surface px-4 py-3 text-sm">{item}</li>
             ))}
           </ul>
-          <p className="mt-4 text-sm text-muted">TechDr does not claim one city is the best in India. The campus in your written quote matters more than the skyline.</p>
+          <p className="mt-4 text-sm text-muted">TechDr does not rank one Indian city above another. The campus in your written quote matters more than the skyline.</p>
         </section>
 
         <section className="mx-auto max-w-6xl px-4 py-10">

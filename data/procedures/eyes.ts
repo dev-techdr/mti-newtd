@@ -12,7 +12,7 @@ export const otherProcedures: Procedure[] = [
     description:
       "One IVF cycle in India is typically USD 2,500–4,000 in 2026. Age, donor rules and what a cycle excludes matter as much as the starting price.",
     answer:
-      "One IVF cycle in India is typically estimated at USD 2,500–4,000 before add-ons such as donor eggs, PGT or freezing. You are usually in the city for about 18–21 days for a fresh cycle. Live birth is not guaranteed and depends heavily on age.",
+      "One IVF cycle in India is typically estimated at USD 2,500–4,000 before add-ons such as donor eggs, PGT or freezing. You are usually in the city for about 18–21 days for a fresh cycle. Live birth is not promised and depends heavily on age.",
     hospitalStay: "Day-care egg collection; no long admission in straightforward cycles",
     totalStay: "18–21 days for a fresh cycle",
     success:

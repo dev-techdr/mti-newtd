@@ -69,7 +69,7 @@ export const transplantProcedures: Procedure[] = [
     description:
       "Liver transplant in India is typically estimated at USD 28,000–40,000 in 2026. Living-donor rules, ICU time and exclusions decide whether that band applies.",
     answer:
-      "Liver transplant in India is typically estimated at USD 28,000–40,000 for a standard recipient package. ICU and ward time are often 2–4 weeks in hospital, with a longer stay in India. A legal living donor or a lawful deceased-donor allocation is required. Outcomes are not guaranteed.",
+      "Liver transplant in India is typically estimated at USD 28,000–40,000 for a standard recipient package. ICU and ward time are often 2–4 weeks in hospital, with a longer stay in India. A legal living donor or a lawful deceased-donor allocation is required. Outcomes are not promised.",
     hospitalStay: "2–4 weeks",
     totalStay: "6–12 weeks",
     success:

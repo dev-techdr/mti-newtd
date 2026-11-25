@@ -16,7 +16,7 @@ export const finalProcedures: Procedure[] = [
     hospitalStay: "2–5 days",
     totalStay: "10–14 days",
     success:
-      "TURP improves flow for most men with obstruction caused by benign enlargement, with a chance of needing further treatment years later. Cancer surgery outcomes depend on stage and grade. Neither is guaranteed.",
+      "TURP improves flow for most men with obstruction caused by benign enlargement, with a chance of needing further treatment years later. Cancer surgery outcomes depend on stage and grade. Neither is promised.",
     recovery: "A catheter for several days; heavy lifting waits a few weeks",
     anaesthesia: "Spinal or general anaesthesia",
     whatIs:
@@ -47,7 +47,7 @@ export const finalProcedures: Procedure[] = [
       { question: "Can I keep taking my flow tablets?", answer: "Bring them. The urologist will say which ones to stop. Do not stop blood thinners on your own." },
       { question: "Do I need a biopsy first?", answer: "If cancer is the question, yes, unless a previous biopsy is already adequate. Operating without tissue diagnosis is the wrong shortcut." },
       { question: "How long should I stay in India?", answer: "About 10–14 days is a fair plan for an uncomplicated case, longer if the catheter stays." },
-      { question: "Are erections guaranteed to return?", answer: "No. Age, nerve-sparing and the disease itself all matter. Tablets or other help can be discussed later. They are not in the surgical price." },
+      { question: "Are erections promised to return?", answer: "No. Age, nerve-sparing and the disease itself all matter. Tablets or other help can be discussed later. They are not in the surgical price." },
     ],
     related: ["kidney-transplant", "full-body-health-check"],
     articles: ["cancer-treatment-in-india", "how-to-choose-a-hospital-abroad"],
@@ -63,7 +63,7 @@ export const finalProcedures: Procedure[] = [
     name: "Rhinoplasty",
     card: "Rhinoplasty",
     description:
-      "Rhinoplasty in India is a planning range of about USD 1,800–3,500 in 2026. Function and appearance should both be in the written plan, with no guaranteed ‘perfect’ nose.",
+      "Rhinoplasty in India is a planning range of about USD 1,800–3,500 in 2026. Function and appearance should both be in the written plan, with no promised ‘perfect’ nose.",
     answer:
       "Rhinoplasty in India is often planned around USD 1,800–3,500 for a primary operation. It is a day case or one-night stay, with about 10–14 days before you would want to fly looking presentable. Swelling lasts months. This is a planning estimate, and revision surgery costs more.",
     hospitalStay: "Day care or 1 night",

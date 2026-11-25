@@ -165,7 +165,7 @@ export const heartProcedures: Procedure[] = [
       { question: "Can I manage warfarin from another country?", answer: "Yes, if a local clinic will check INR. Do not leave India without a written dose, a valve card and enough tablets for the first weeks." },
       { question: "What if the valve can be repaired?", answer: "Repair can be the better operation for some mitral valves. The surgeon should say why replacement was chosen instead." },
       { question: "Will I need teeth checked?", answer: "Often yes, before planned valve surgery, because mouth bacteria can infect a new valve. Budget a dental visit if your dentist finds a problem." },
-      { question: "Are results guaranteed?", answer: "No. Ask for the centre’s approach and how they handle stroke risk and infection. TechDr does not promise survival or a complication-free recovery." },
+      { question: "Are results promised?", answer: "No. Ask for the centre’s approach and how they handle stroke risk and infection. TechDr does not promise survival or a complication-free recovery." },
     ],
     related: ["heart-bypass-surgery", "angioplasty"],
     articles: ["heart-valve-replacement-cost-india", "how-to-choose-a-hospital-abroad"],

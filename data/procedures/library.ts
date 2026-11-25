@@ -313,7 +313,7 @@ const profiles: Record<Band, Profile> = {
     anaesthesia: "Sedation for egg collection. Many transfers and scans need none.",
     procedureType: "PercutaneousProcedure",
     recovery: "Bloating and spotting can follow stimulation or a transfer. Ovarian hyperstimulation is a reason to delay travel.",
-    success: "A pregnancy is not guaranteed. Age-banded live-birth rates are the figures worth reading.",
+    success: "A pregnancy is not promised. Age-banded live-birth rates are the figures worth reading.",
     note: "TechDr does not arrange surrogacy. Drugs and laboratory add-ons are extra until the quote lists them.",
     included: ["The step named in the quote", "The monitoring written into that step", "An English cycle summary"],
     excluded: ["Drugs unless listed", "Genetic testing, freezing and a later transfer unless listed", "Surrogacy, which TechDr does not arrange"],

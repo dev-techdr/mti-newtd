@@ -138,7 +138,7 @@ export const primaryProcedures: Procedure[] = [
       { question: "How long is the hospital stay?", answer: "Most primary hips leave hospital in 4–7 days. Plan about 2–3 weeks in India so the wound can be checked before a long flight." },
       { question: "Which surgical approach is better?", answer: "Anterior, lateral and posterior approaches can all work. The better choice is the one your surgeon performs regularly and that matches your anatomy. Ask how many of that approach they do." },
       { question: "Can I sit on a normal chair afterwards?", answer: "Yes, with the height and precautions your team sets. Very low seats are uncomfortable and, after some approaches, raise dislocation risk in the first weeks." },
-      { question: "Is ceramic better than metal and plastic?", answer: "Bearings have different wear and cost profiles. There is no single best surface for every age and activity. The quote should name the bearing." },
+      { question: "Is ceramic better than metal and plastic?", answer: "Bearings have different wear and cost profiles. There is no single right surface for every age and activity. The quote should name the bearing." },
       { question: "What result should I ask the centre about?", answer: "Ask the treating centre for its own audited figures. Bone quality, weight and the reason for surgery change the outlook. This page does not publish an unsourced survival percentage." },
       { question: "Do I need a walker at home?", answer: "Most people need a frame or crutches at first and a stick for several weeks. Buy or borrow them before you fly home." },
       { question: "When can I climb stairs?", answer: "Physiotherapists usually teach a step pattern within the first days. Full confidence on stairs often takes a few weeks." },
@@ -216,7 +216,7 @@ export const primaryProcedures: Procedure[] = [
     description:
       "Sleeve gastrectomy in India is typically USD 5,000–7,000 in 2026. Read who qualifies, what is excluded, and how diet and follow-up work after you fly home.",
     answer:
-      "Sleeve gastrectomy in India is usually estimated at USD 5,000–7,000, including the operation, a short hospital stay and standard in-hospital care. Most people stay 2–4 days in hospital and about 10–14 days in India. Weight-loss results vary and are not guaranteed.",
+      "Sleeve gastrectomy in India is usually estimated at USD 5,000–7,000, including the operation, a short hospital stay and standard in-hospital care. Most people stay 2–4 days in hospital and about 10–14 days in India. Weight-loss results vary and are not promised.",
     hospitalStay: "2–4 days",
     totalStay: "10–14 days",
     success:
@@ -249,7 +249,7 @@ export const primaryProcedures: Procedure[] = [
     whyIndia: ["Dietitian-led packages rather than surgery alone", "Short hospital stays for uncomplicated sleeves, which suits a two-week trip", "Clear exclusion of later body-contouring surgery so the first quote stays honest"],
     faqs: [
       { question: "How much does a gastric sleeve cost in India?", answer: "Indicative 2026 packages are USD 5,000–7,000. A bypass, a revision or a long ICU stay is not inside that band. Read what the quote excludes." },
-      { question: "Am I guaranteed a certain weight loss?", answer: "No. Teams can share typical ranges from published series. Your result depends on diet, activity, medicines and biology. TechDr does not promise a number of kilos." },
+      { question: "Am I promised a certain weight loss?", answer: "No. Teams can share typical ranges from published series. Your result depends on diet, activity, medicines and biology. TechDr does not promise a number of kilos." },
       { question: "How long should I stay in India?", answer: "Hospital stay is often 2–4 days. Plan 10–14 days in the country so you are drinking reliably before a long flight." },
       { question: "Will diabetes medicines stop immediately?", answer: "Some doses are reduced quickly and some are not. Only the physician managing your diabetes should change them. Bring a surplus of your current medicines." },
       { question: "Can I have a sleeve if I have reflux?", answer: "Severe reflux may make a sleeve a poor choice. The surgeon may suggest tests or a different operation. Do not hide heartburn to fit a package." },

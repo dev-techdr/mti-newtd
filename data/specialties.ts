@@ -100,7 +100,7 @@ export const specialties: Specialty[] = [
     description:
       "IVF in India for international patients: cycle costs around USD 2,500–4,000, realistic age-banded success, and what TechDr will not arrange.",
     answer:
-      "A self IVF cycle is typically estimated at USD 2,500–4,000 before medicines, ICSI and freezing. Stay about 18–21 days. Live birth is not guaranteed. TechDr does not arrange surrogacy.",
+      "A self IVF cycle is typically estimated at USD 2,500–4,000 before medicines, ICSI and freezing. Stay about 18–21 days. Live birth is not promised. TechDr does not arrange surrogacy.",
     intro:
       "Fertility treatment fails most often when add-ons and the law are vague. We ask clinics to itemise drugs and laboratory steps, and we will not suggest a surrogacy workaround. Donor routes depend on current Indian rules for your passport. Age-banded live-birth rates are the only success figures worth reading.",
     focus: ["Itemised cycle quotes", "No surrogacy", "Age-banded outcomes, not a single percentage"],
@@ -134,7 +134,7 @@ export const specialties: Specialty[] = [
     description:
       "Sleeve gastrectomy in India is typically USD 5,000–7,000. Read the diet, vitamin and reflux limits before you treat it as cosmetic.",
     answer:
-      "Sleeve gastrectomy is typically estimated at USD 5,000–7,000, with 2–4 days in hospital and 10–14 days in India. Weight loss is not guaranteed. Reflux and lifelong vitamins are part of the decision.",
+      "Sleeve gastrectomy is typically estimated at USD 5,000–7,000, with 2–4 days in hospital and 10–14 days in India. Weight loss is not promised. Reflux and lifelong vitamins are part of the decision.",
     intro:
       "A sleeve is a gastrointestinal operation. It is not a holiday and not a substitute for a diet you have never tried when surgery is not indicated. Surgeons look at BMI, diabetes and sleep apnoea. TechDr will not book a case the bariatric team has not accepted, and we do not promise a number of kilos.",
     focus: ["Candidacy before flights", "Dietitian follow-up in the quote", "Vitamins planned for home"],
@@ -154,9 +154,9 @@ export const specialties: Specialty[] = [
       "Cosmetic plans through TechDr start with hair transplant sessions around USD 1,000–2,500. The donor area sets the limit. Revision and unrealistic hairlines are turned down.",
     intro:
       "Cosmetic surgery is still surgery. Infection, bad scars and a result you dislike are possible. We ask for daylight photos and a graft ceiling so a donor area is not stripped to chase a filtered picture. Rhinoplasty sits with ENT because breathing and shape belong together.",
-    focus: ["Graft counts, not slogans", "No guaranteed celebrity result", "Healing time built into the trip"],
+    focus: ["Graft counts, not slogans", "No promised celebrity result", "Healing time built into the trip"],
     faqs: [
-      { question: "Can density be guaranteed?", answer: "No. Donor hair is finite." },
+      { question: "Can density be promised?", answer: "No. Donor hair is finite." },
       { question: "How long until hair grows?", answer: "Judge it at 9–12 months. Early shedding is normal." },
       { question: "Do you name celebrity surgeons?", answer: "No. We do not publish personal names." },
       { question: "Is rhinoplasty listed here?", answer: "The clinical guide sits under ENT, because airway and shape are one operation." },
@@ -256,7 +256,7 @@ export const specialties: Specialty[] = [
       "Primary rhinoplasty is often planned around USD 1,800–3,500, with 10–14 days before a flight you will be comfortable taking. Swelling lasts months. Revision costs more.",
     intro:
       "ENT and facial surgeons should talk about the airway even when you came for a profile. Septum-only surgery is cheaper and does less for the bridge. TechDr will not pass on a guarantee of a celebrity nose. Reference photos are a starting language, not a contract. Cochlear implant is a separate ear operation: the audiogram decides candidacy, and switch-on is planned before travel.",
-    focus: ["Function plus shape", "Splint removal before travel", "No guaranteed photo match"],
+    focus: ["Function plus shape", "Splint removal before travel", "No promised photo match"],
     faqs: [
       { question: "When is the final result visible?", answer: "Over months. Week two is bruising, not the outcome." },
       { question: "Is a septum operation the same?", answer: "No. Ask the quote to say septorhinoplasty if both are intended." },

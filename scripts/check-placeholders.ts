@@ -16,6 +16,10 @@ const patterns: { label: string; re: RegExp }[] = [
   { label: "XXX", re: /\bXXX\b/ },
   { label: "chart estimate", re: /chart estimate/i },
   { label: "What still needs a real client record", re: /What still needs a real client record/i },
+  { label: "best", re: /\bbest\b(?!-)/i },
+  { label: "No.1", re: /No\.1/i },
+  { label: "guaranteed", re: /\bguaranteed\b/i },
+  { label: "100%", re: /(?<![\w.[("'])100%/ },
 ];
 
 type Hit = { file: string; line: number; label: string; text: string };
@@ -26,6 +30,11 @@ function stripForScan(source: string, ext: string) {
   text = text.replace(/\splaceholder\s*=\s*(?:"[^"]*"|'[^']*'|\{[^}]*\}|[^\s>]+)/gi, " ");
   text = text.replace(/\bplaceholder\b(?=\s*[?:,}])/gi, " ");
   text = text.replace(/\/(?:TODO|TBD)\/[a-z]*/gi, " ");
+  text = text.replace(/\[[^\]]*\]\(([^)]+)\)/g, " ");
+  text = text.replace(/https?:\/\/\S+/g, " ");
+  text = text.replace(/\/[A-Za-z0-9_./?=&%-]+/g, " ");
+  text = text.replace(/className=(?:"[^"]*"|'[^']*'|\{[^}]*\})/g, " ");
+  text = text.replace(/offset="100%"/g, " ");
   if (ext === ".html" || ext === ".mdx" || ext === ".md" || ext === ".txt") {
     text = text.replace(/<[^>]+>/g, " ");
   }

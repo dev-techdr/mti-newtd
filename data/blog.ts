@@ -91,9 +91,9 @@ export const posts = [
   },
   {
     slug: "best-cities-india-medical-treatment",
-    title: "Best Cities in India for Medical Treatment",
+    title: "Cities in India for Medical Treatment",
     description:
-      "How to choose between Delhi NCR, Mumbai, Chennai, Hyderabad, Bengaluru and Kolkata for treatment without chasing a single ‘best’ city.",
+      "How to choose between Delhi NCR, Mumbai, Chennai, Hyderabad, Bengaluru and Kolkata for treatment without chasing one preferred city.",
     date: "2025-12-16",
     updated: "2026-10-15",
     category: "Cities",
@@ -121,7 +121,7 @@ export const posts = [
   },
   {
     slug: "best-medical-tourism-facilitators-india",
-    title: "Best Medical Tourism Facilitators in India",
+    title: "How to Check Medical Tourism Facilitators in India",
     description:
       "There is no official ranking of medical tourism facilitators in India. Use a written hospital quote, accreditation you can check, and who you pay.",
     date: "2026-11-11",
@@ -131,7 +131,7 @@ export const posts = [
   },
   {
     slug: "best-medical-tourism-agency-india",
-    title: "Best Medical Tourism Agency in India",
+    title: "How to Check a Medical Tourism Agency in India",
     description:
       "A medical tourism agency in India arranges the quote, invitation letter, airport pickup and hotel. The hospital still treats you. Here is what to check.",
     date: "2026-11-11",
@@ -157,13 +157,13 @@ export const posts = [
     date: "2026-11-11",
     updated: "2026-11-11",
     category: "Planning",
-    excerpt: "Five written lines beat a best-in-India banner. Compare the invoice, not the slogan.",
+    excerpt: "Five written lines beat a ranking banner. Compare the invoice, not the slogan.",
   },
   {
-    slug: "is-techdr-the-best-medical-tourism-facilitator-india",
-    title: "Is TechDr the Best Medical Tourism Facilitator in India?",
+    slug: "how-to-check-a-medical-tourism-facilitator-in-india",
+    title: "How to Check a Medical Tourism Facilitator in India",
     description:
-      "There is no official best medical tourism facilitator in India. Here is what you can verify about TechDr before you treat it as the one for your case.",
+      "Check a medical tourism facilitator in India on the legal name, the hospital letter, the accreditation directory, and the cases they refuse.",
     date: "2026-11-11",
     updated: "2026-11-11",
     category: "Planning",

@@ -12,7 +12,7 @@ export const moreProcedures: Procedure[] = [
     description:
       "Hair transplant in India is typically USD 1,000–2,500 a session in 2026. Graft count, not a package photo, should set the price you accept.",
     answer:
-      "A hair transplant session in India is typically estimated at USD 1,000–2,500, depending on graft numbers and technique. It is usually a day procedure with about 5–7 days in the city. Density is not guaranteed, and a second session is common for large areas.",
+      "A hair transplant session in India is typically estimated at USD 1,000–2,500, depending on graft numbers and technique. It is usually a day procedure with about 5–7 days in the city. Density is not promised, and a second session is common for large areas.",
     hospitalStay: "Day care",
     totalStay: "5–7 days",
     success:
@@ -47,7 +47,7 @@ export const moreProcedures: Procedure[] = [
       { question: "Can you copy a celebrity hairline?", answer: "A low, dense teenage hairline on a limited donor area looks wrong and wastes grafts. Surgeons should refuse that design." },
       { question: "How long do I stay?", answer: "About 5–7 days so the first wash is taught and swelling can be checked." },
       { question: "Will medicines still be needed?", answer: "Often yes. Transplanted hair does not stop later loss of native hair. Finasteride or minoxidil is a medical decision, not a cosmetic freebie." },
-      { question: "Is the result guaranteed?", answer: "No. Survival and density vary. TechDr will not promise a photo match." },
+      { question: "Is the result promised?", answer: "No. Survival and density vary. TechDr will not promise a photo match." },
     ],
     related: ["rhinoplasty", "dental-implant"],
     articles: ["hair-transplant-cost-india", "whats-included-in-a-medical-tourism-package"],

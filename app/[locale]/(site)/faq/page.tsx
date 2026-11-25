@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     path: "/faq",
     title: "Medical Travel FAQ | TechDr",
     description:
-      "Answers on cost, safety, visas, quotes and what TechDr will not arrange, including paid donation and guaranteed medical results.",
+      "Answers on cost, safety, visas, quotes and what TechDr will not arrange, including paid donation and promised medical results.",
   });
 }
 
