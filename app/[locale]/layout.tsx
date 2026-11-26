@@ -60,7 +60,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={rtl ? "rtl" : "ltr"}
-      className={`${jakarta.variable} ${inter.variable} ${rtl ? kufi.variable : ""} h-full`}
+      className={`${jakarta.variable} ${inter.variable} ${rtl ? kufi.variable : ""} min-h-full`}
     >
       <body className="min-h-full bg-background text-foreground antialiased">
         <script

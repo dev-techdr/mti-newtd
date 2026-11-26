@@ -1,6 +1,9 @@
+import { assistanceTopics, assistanceUpdated } from "@/data/assistance";
 import { absoluteUrl } from "@/lib/seo";
 import { specialties } from "@/data/specialties";
 import { coordinatorLanguages, legal, positioning, site, socialLinks } from "@/lib/site";
+
+const knowsAbout = [...specialties.map((item) => item.name), ...assistanceTopics];
 
 export type Crumb = { name: string; path: string };
 
@@ -114,7 +117,7 @@ export function siteGraph(locale: string) {
         vatID: legal.gstin,
         address,
         description: positioning,
-        knowsAbout: specialties.map((item) => item.name),
+        knowsAbout,
         ...(sameAs.length ? { sameAs } : {}),
       },
       {
@@ -132,7 +135,7 @@ export function siteGraph(locale: string) {
         description: positioning,
         currenciesAccepted: "USD",
         areaServed: { "@type": "Place", name: "Worldwide" },
-        knowsAbout: specialties.map((item) => item.name),
+        knowsAbout,
         contactPoint: {
           "@type": "ContactPoint",
           contactType: "patient support",
@@ -156,4 +159,37 @@ export function siteGraph(locale: string) {
       },
     ],
   };
+}
+
+export function assistanceGraph(input: {
+  url: string;
+  name: string;
+  description: string;
+  faqs: { question: string; answer: string }[];
+  areaServed?: string[];
+}) {
+  const service: Record<string, unknown> = {
+    "@type": "Service",
+    name: input.name,
+    serviceType: input.name,
+    url: input.url,
+    description: input.description,
+    provider: { "@id": `${site.url}/#organization` },
+  };
+  if (input.areaServed?.length) {
+    service.areaServed = input.areaServed.map((name) => ({ "@type": "Place", name }));
+  }
+  const graph: Record<string, unknown>[] = [
+    {
+      "@type": "MedicalWebPage",
+      url: input.url,
+      name: input.name,
+      description: input.description,
+      lastReviewed: assistanceUpdated,
+      publisher: { "@id": `${site.url}/#organization` },
+    },
+    service,
+  ];
+  if (input.faqs.length) graph.push(faqList(input.faqs));
+  return { "@context": "https://schema.org", "@graph": graph };
 }

@@ -50,6 +50,8 @@ export async function Footer() {
           <ul className="mt-3 space-y-2 text-sm text-background/80">
             <li><Link className={link} href="/how-it-works">{nav("how")}</Link></li>
             <li><Link className={link} href="/patient-services">{nav("services")}</Link></li>
+            <li><Link className={link} href="/medical-assistance">{nav("assistance")}</Link></li>
+            <li><Link className={link} href="/medical-assistance/repatriation-support">Repatriation of remains</Link></li>
             <li><Link className={link} href="/medical-visa-india">{nav("visa")}</Link></li>
             <li><Link className={link} href="/why-india">{nav("why")}</Link></li>
             <li><Link className={link} href="/patients-from">{nav("from")}</Link></li>

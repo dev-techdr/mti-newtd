@@ -1,3 +1,4 @@
+import { lastModified as assistanceUpdated } from "@/app/sitemaps/assistance/sitemap";
 import { lastModified as blogUpdated } from "@/app/sitemaps/blog/sitemap";
 import { lastModified as costsUpdated } from "@/app/sitemaps/costs/sitemap";
 import { lastModified as countriesUpdated } from "@/app/sitemaps/countries/sitemap";
@@ -20,6 +21,7 @@ const lastModified = {
   "/sitemaps/answers/sitemap.xml": answersUpdated,
   "/sitemaps/city-treatments/sitemap.xml": cityTreatmentSitemapLastModified,
   "/sitemaps/blog/sitemap.xml": blogUpdated,
+  "/sitemaps/assistance/sitemap.xml": assistanceUpdated,
 } satisfies Record<(typeof sitemapPaths)[number], string>;
 
 export function GET() {

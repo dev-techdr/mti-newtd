@@ -1,4 +1,4 @@
-# robots.txt — https://medicaltourism.techdr.in
+# robots.txt: https://medicaltourism.techdr.in
 # TechDr Medical Tourism
 # One rule set for every crawler. Named bots repeat the same Disallow lines,
 # because a bot that finds its own group ignores the * group.

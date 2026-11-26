@@ -52,9 +52,14 @@ export function proceduresBySpecialty(specialty: string) {
   return procedures.filter((item) => item.specialty === specialty);
 }
 
+const groupedGuides: Record<string, string[]> = {
+  neurology: ["neurology", "neurosurgery"],
+};
+
 export function guidesForSpecialty(specialty: string) {
-  const own = proceduresBySpecialty(specialty);
-  const catalogue = sectionEntries.filter((entry) => entry.specialty === specialty);
+  const names = groupedGuides[specialty] ?? [specialty];
+  const own = names.flatMap((name) => proceduresBySpecialty(name));
+  const catalogue = sectionEntries.filter((entry) => names.includes(entry.specialty));
   const leads = own.filter((item) => !catalogue.some((entry) => entry.slug === item.slug && sameGuideLabel(entry.label, item.name)));
   const cards = leads.map((procedure) => ({ key: procedure.slug, label: procedure.name, procedure }));
   const seen = new Set(cards.map((card) => `${card.procedure.slug}|${card.label.toLowerCase()}`));

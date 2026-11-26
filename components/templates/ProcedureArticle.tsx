@@ -1,3 +1,4 @@
+import { TreatmentAssistance } from "@/components/assistance/AssistanceLinks";
 import { PatientsFromLinks, RelatedAnswers } from "@/components/seo/PatientLinks";
 import { GuideArticle } from "@/components/templates/GuideArticle";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
@@ -44,6 +45,9 @@ export function ProcedureArticle({ locale, procedure }: { locale: string; proced
         {specialty ? <p className="text-sm font-semibold text-primary-ink">{specialty.name}</p> : null}
       </div>
       <GuideArticle locale={locale} model={model} />
+      <div className="mx-auto w-full max-w-6xl px-4">
+        <TreatmentAssistance specialty={procedure.specialty} />
+      </div>
       <PatientsFromLinks procedureSlug={procedure.slug} />
       <RelatedAnswers treatment={procedure.slug} />
     </>

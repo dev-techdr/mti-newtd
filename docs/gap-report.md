@@ -1,4 +1,4 @@
-# Gap report — why the site has 232 sitemap URLs
+# Gap report: why the site has 232 sitemap URLs
 
 Read-only diagnosis. Step 1 has not been started.
 

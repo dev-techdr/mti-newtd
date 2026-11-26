@@ -1,4 +1,4 @@
-# Phase 0 audit — TechDr Medical Tourism
+# Phase 0 audit: TechDr Medical Tourism
 
 Read-only audit of the Next.js app in this repository and of https://medicaltourism.techdr.in. No application code was changed. Phase 1 should not start until this report is approved.
 

@@ -110,7 +110,7 @@ export const primaryProcedures: Procedure[] = [
     recovery: "Walking with support in the first days; a walking stick often for 4–6 weeks",
     anaesthesia: "Spinal or general anaesthesia",
     whatIs:
-      "Hip replacement swaps the worn ball and socket for an artificial joint. It is used for advanced osteoarthritis, some fractures, and selected cases of avascular necrosis. The approach — posterior, lateral or anterior — changes the precautions you follow in the first weeks, not the fact that a surgeon must match the implant to your anatomy. TechDr’s role is to collect comparable written plans, not to recommend a brand of hip.",
+      "Hip replacement swaps the worn ball and socket for an artificial joint. It is used for advanced osteoarthritis, some fractures, and selected cases of avascular necrosis. The approach (posterior, lateral or anterior) changes the precautions you follow in the first weeks, not the fact that a surgeon must match the implant to your anatomy. TechDr’s role is to collect comparable written plans, not to recommend a brand of hip.",
     whoNeeds: [
       "Groin or thigh pain that persists at rest or at night",
       "X-ray or MRI evidence of joint destruction, collapse or advanced arthritis",
@@ -167,7 +167,7 @@ export const primaryProcedures: Procedure[] = [
     recovery: "Light walking within days; desk work often after 4–8 weeks if the surgeon agrees",
     anaesthesia: "General anaesthesia",
     whatIs:
-      "Fusion joins two or more vertebrae so a painful or unstable segment stops moving. Screws, rods and often a cage hold the bones while they heal. It is one option for selected slipped vertebrae, some deformities, and instability after a disc problem — not the default for ordinary muscle pain. A spine surgeon should explain why fusion, a decompression alone, or no operation is the safer path.",
+      "Fusion joins two or more vertebrae so a painful or unstable segment stops moving. Screws, rods and often a cage hold the bones while they heal. It is one option for selected slipped vertebrae, some deformities, and instability after a disc problem, not the default for ordinary muscle pain. A spine surgeon should explain why fusion, a decompression alone, or no operation is the safer path.",
     whoNeeds: [
       "Instability or spondylolisthesis with nerve pain that has not settled with a proper non-surgical plan",
       "Deformity or a fracture pattern that the surgeon judges unstable",
@@ -181,7 +181,7 @@ export const primaryProcedures: Procedure[] = [
     included: ["Surgeon, anaesthesia and a standard one-level implant set if the quote says so", "Hospital stay and inpatient mobilisation", "Standard in-hospital medicines"],
     excluded: ["Extra levels, navigation technology or a custom implant unless listed", "A spinal cord stimulator or long-term brace"],
     factors: ["Number of levels", "Lumbar versus cervical surgery", "Need for decompression or revision of old metal", "Bone quality and whether bone substitutes are used"],
-    preparation: ["Stop smoking if you smoke — fusion healing is poorer in smokers", "Bring the actual MRI, not only the report", "Tell the team about blood thinners and osteoporosis medicines"],
+    preparation: ["Stop smoking if you smoke. Fusion healing is poorer in smokers", "Bring the actual MRI, not only the report", "Tell the team about blood thinners and osteoporosis medicines"],
     extraDocuments: ["MRI of the relevant spine from the last six months", "Standing X-rays if you have a slip or deformity"],
     risks: ["Nerve injury, leak of spinal fluid and infection", "Implants can loosen or the bone may not fuse", "Pain can continue if the source was not the fused level"],
     timeline: [
@@ -238,7 +238,7 @@ export const primaryProcedures: Procedure[] = [
     included: ["Laparoscopic sleeve, anaesthesia and theatre", "Hospital stay and the first dietitian session", "Standard leak-prevention tests used by that hospital"],
     excluded: ["A gastric bypass or balloon", "Long-term vitamins, protein shakes and plastic surgery after weight loss", "Treatment of an incidental gallstone problem unless quoted"],
     factors: ["BMI and previous stomach surgery", "Need for ICU or treatment of sleep apnoea", "Single room and extra companion nights", "Tests for reflux done before surgery"],
-    preparation: ["Stop smoking. Many teams will not operate soon after smoking.", "Share a full list of diabetes medicines — doses change quickly after a sleeve", "Plan who will shop and cook the liquid diet when you get home"],
+    preparation: ["Stop smoking. Many teams will not operate soon after smoking.", "Share a full list of diabetes medicines. Doses change quickly after a sleeve", "Plan who will shop and cook the liquid diet when you get home"],
     extraDocuments: ["Recent BMI, HbA1c and a medicine list", "Sleep study if you use a CPAP machine", "Ultrasound of the abdomen if you have known gallstones"],
     risks: ["Leak, bleeding and clot are the early serious risks", "Reflux, vitamin deficiency and hair shedding can appear later", "Too little weight loss or regain if eating patterns do not change"],
     timeline: [

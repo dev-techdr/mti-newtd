@@ -128,7 +128,7 @@ export async function createLead(input: unknown, files: File[] = []) {
     const sent = await resend.emails.send({
       from: process.env.RESEND_FROM || "TechDr <onboarding@resend.dev>",
       to: site.email,
-      subject: `Quote: ${parsed.data.treatment || "Not sure"} — ${parsed.data.country}`,
+      subject: `Quote: ${parsed.data.treatment || "Not sure"}, ${parsed.data.country}`,
       text: Object.entries(payload)
         .filter(([key]) => key !== "files")
         .map(([key, value]) => `${key}: ${String(value ?? "")}`)

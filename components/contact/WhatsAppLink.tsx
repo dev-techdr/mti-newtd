@@ -20,6 +20,13 @@ export function topicFromPath(pathname: string) {
 
 export function messageFromPath(pathname: string) {
   const parts = pathname.split("/").filter(Boolean);
+  if (parts[0] === "medical-assistance" && parts[1] === "repatriation-support") {
+    return "Hello TechDr, I need to speak to the support team about bringing a family member home.";
+  }
+  if (parts[0] === "medical-assistance") {
+    const topic = parts[1]?.replace(/-/g, " ") || "medical assistance";
+    return whatsappMessage(topic);
+  }
   if (parts[0] === "patients-from" && parts[1]) {
     const name = countryName(parts[1]);
     if (name) return whatsappCountryMessage(name, topicFromPath(pathname));

@@ -30,7 +30,7 @@ export const moreProcedures: Procedure[] = [
     included: ["The graft band named in the quote", "Local anaesthesia and the design consultation", "First wash teaching"],
     excluded: ["A second session", "PRP or medicines unless listed", "Repair of a previous over-harvested donor area"],
     factors: ["Graft count", "FUE versus FUT", "Beard hair or scar repair", "Need for a two-day session"],
-    preparation: ["Stop smoking if you can — healing is poorer", "Share previous transplant photos, including the donor area", "Do not cut the donor hair to the skin before the team asks"],
+    preparation: ["Stop smoking if you can. Healing is poorer", "Share previous transplant photos, including the donor area", "Do not cut the donor hair to the skin before the team asks"],
     extraDocuments: ["Clear photos of hairline, crown and donor area in daylight", "A list of hair medicines you already take"],
     risks: ["Poor growth, unnatural hairline and donor depletion", "Infection, swelling of the forehead and temporary shock loss", "Numbness that can last months"],
     timeline: [
@@ -191,7 +191,7 @@ export const moreProcedures: Procedure[] = [
     included: ["Surgery, anaesthesia and the ICU days named in the quote", "In-hospital scans that the package lists", "Histopathology"],
     excluded: ["Radiotherapy, chemotherapy and radiosurgery", "Long rehabilitation", "A second operation for swelling or bleeding beyond the package terms"],
     factors: ["Location and size", "Awake mapping or neuro-navigation", "ICU days", "Need for a shunt or further tumour treatment"],
-    preparation: ["Send the MRI files, not only a printed film", "List seizures and the exact anti-seizure dose", "A companion must be available for consent if you may be drowsy", "Do not fly if you are acutely deteriorating — go to the nearest neurosurgical unit"],
+    preparation: ["Send the MRI files, not only a printed film", "List seizures and the exact anti-seizure dose", "A companion must be available for consent if you may be drowsy", "Do not fly if you are acutely deteriorating. Go to the nearest neurosurgical unit"],
     extraDocuments: ["MRI with contrast", "Any biopsy already done", "A list of seizures and steroids"],
     risks: ["Weakness, speech change, visual loss, seizures and infection", "Bleeding or swelling that needs a return to theatre", "The pathology may show a tumour that still needs radiotherapy or chemotherapy"],
     timeline: [

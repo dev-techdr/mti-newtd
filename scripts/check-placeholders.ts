@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { assistanceCopyIssues } from "../data/assistance";
 
 const builtOnly = process.argv.includes("--built");
 const roots = ["app", "components", "data", "content", "messages", "public", "lib"];
@@ -50,41 +51,87 @@ function scanText(file: string, text: string, hits: Hit[]) {
   });
 }
 
-function walk(dir: string, hits: Hit[]) {
+function walk(dir: string, hits: Hit[], terms: string[]) {
   if (!fs.existsSync(dir)) return;
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (skipDirs.has(entry.name)) continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      walk(full, hits);
+      walk(full, hits, terms);
       continue;
     }
     const ext = path.extname(entry.name);
     if (!extensions.has(ext)) continue;
-    scanText(full, stripForScan(fs.readFileSync(full, "utf8"), ext), hits);
+    const raw = fs.readFileSync(full, "utf8");
+    scanText(full, stripForScan(raw, ext), hits);
+    scanPartners(full, raw, terms, hits);
   }
 }
 
-function walkHtml(dir: string, hits: Hit[]) {
+function walkHtml(dir: string, hits: Hit[], terms: string[]) {
   if (!fs.existsSync(dir)) return;
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       if (entry.name === "node_modules" || entry.name === "cache") continue;
-      walkHtml(full, hits);
+      walkHtml(full, hits, terms);
       continue;
     }
     if (!entry.name.endsWith(".html")) continue;
-    scanText(full, stripForScan(fs.readFileSync(full, "utf8"), ".html"), hits);
+    const raw = fs.readFileSync(full, "utf8");
+    scanText(full, stripForScan(raw, ".html"), hits);
+    scanPartners(full, raw, terms, hits);
   }
 }
 
+function loadEnvFile(name: string) {
+  const full = path.join(process.cwd(), name);
+  if (!fs.existsSync(full)) return;
+  for (const line of fs.readFileSync(full, "utf8").split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const split = trimmed.indexOf("=");
+    if (split < 1) continue;
+    const key = trimmed.slice(0, split);
+    if (process.env[key]) continue;
+    process.env[key] = trimmed.slice(split + 1).replace(/^["']|["']$/g, "");
+  }
+}
+
+function partnerTerms() {
+  loadEnvFile(".env");
+  loadEnvFile(".env.local");
+  const fromEnv = (process.env.BANNED_PARTNER_TERMS || "")
+    .split(",")
+    .map((item) => item.trim())
+    .filter((item) => item.length >= 4);
+  const file = path.join(process.cwd(), "config/banned-partners.json");
+  const fromFile = fs.existsSync(file)
+    ? ((JSON.parse(fs.readFileSync(file, "utf8")) as { terms?: string[] }).terms ?? [])
+        .map((item) => item.trim())
+        .filter((item) => item.length >= 4)
+    : [];
+  return [...new Set([...fromEnv, ...fromFile])];
+}
+
+function scanPartners(file: string, raw: string, terms: string[], hits: Hit[]) {
+  const lines = raw.split("\n");
+  lines.forEach((line, index) => {
+    const found = terms.find((term) => line.toLowerCase().includes(term.toLowerCase()));
+    if (!found) return;
+    hits.push({ file, line: index + 1, label: "partner term", text: found });
+  });
+}
+
 const hits: Hit[] = [];
+const partners = partnerTerms();
+if (!partners.length) console.log("Partner-term list is empty. Set BANNED_PARTNER_TERMS or config/banned-partners.json.");
 if (builtOnly) {
-  walkHtml(path.join(process.cwd(), ".next"), hits);
-  walkHtml(path.join(process.cwd(), "out"), hits);
+  walkHtml(path.join(process.cwd(), ".next"), hits, partners);
+  walkHtml(path.join(process.cwd(), "out"), hits, partners);
 } else {
-  for (const root of roots) walk(path.join(process.cwd(), root), hits);
+  for (const issue of assistanceCopyIssues()) hits.push({ file: "data/assistance.ts", line: 1, label: "assistance copy", text: issue });
+  for (const root of roots) walk(path.join(process.cwd(), root), hits, partners);
 }
 
 if (hits.length) {

@@ -1,5 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 import { Banknote, Hotel, Languages, Moon, Plane, Smartphone, Stamp, Video, type LucideIcon } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { pageMetadata } from "@/lib/seo";
 
@@ -30,20 +31,36 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   return (
     <>
       <Breadcrumbs locale={locale} items={[{ name: "Patient services", path: "/patient-services" }]} />
-      <article className="mx-auto max-w-3xl px-4 py-10">
-        <h1>Patient services</h1>
-        <p className="mt-4">The clinical plan is the centre of the trip. These services exist so the clinical plan is not undone by a visa, a hotel on the wrong side of the city, or a consent form you could not read.</p>
-        {services.map(({ icon: Icon, title, text }) => (
-          <section key={title} className="mt-8">
-            <h2 className="flex items-center gap-3">
-              <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
-                <Icon className="size-5" aria-hidden />
-              </span>
-              {title}
-            </h2>
-            <p className="mt-2">{text}</p>
-          </section>
-        ))}
+      <article className="mx-auto w-full max-w-6xl px-4 py-10">
+        <h1 className="max-w-3xl text-balance">Patient services</h1>
+        <p className="mt-4 max-w-3xl">The clinical plan is the centre of the trip. These services exist so the clinical plan is not undone by a visa, a hotel on the wrong side of the city, or a consent form you could not read.</p>
+        <section className="mt-10">
+          <h2>Transfers and care where you stay</h2>
+          <p className="mt-3 max-w-3xl">A hospital plan does not include the ambulance or a nurse at the hotel unless the written quote says so. TechDr arranges ground transfers and home care separately, through licensed providers.</p>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <Link className="rounded-2xl border border-border bg-card p-5 hover:bg-surface" href="/medical-assistance/ground-ambulance">
+              <h3 className="!text-lg">Ground ambulance and transfers</h3>
+              <p className="mt-2 text-sm text-muted">Airport, hospital and hotel transfers through a licensed ambulance service.</p>
+            </Link>
+            <Link className="rounded-2xl border border-border bg-card p-5 hover:bg-surface" href="/medical-assistance/home-care">
+              <h3 className="!text-lg">Home care after treatment</h3>
+              <p className="mt-2 text-sm text-muted">Nursing or physiotherapy at a hotel or residence, where a provider is confirmed.</p>
+            </Link>
+          </div>
+        </section>
+        <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+          {services.map(({ icon: Icon, title, text }) => (
+            <li key={title} className="rounded-2xl border border-border bg-card p-5">
+              <h2 className="flex items-center gap-3 !text-xl">
+                <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
+                  <Icon className="size-5" aria-hidden />
+                </span>
+                {title}
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{text}</p>
+            </li>
+          ))}
+        </ul>
       </article>
     </>
   );

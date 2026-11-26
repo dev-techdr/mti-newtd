@@ -77,7 +77,7 @@ export const otherProcedures: Procedure[] = [
     recovery: "Visual settling over days to a few weeks; avoid rubbing and swimming early on",
     anaesthesia: "Local anaesthetic drops, sometimes with light sedation",
     whatIs:
-      "Cataract surgery removes the cloudy natural lens and replaces it with a clear intraocular lens. It is the common reason older adults ask TechDr about a short trip. The lens you pick — monofocal, toric for astigmatism, or multifocal — changes both cost and night-vision side effects. A surgeon should measure the eye and say which lens your retina can support.",
+      "Cataract surgery removes the cloudy natural lens and replaces it with a clear intraocular lens. It is the common reason older adults ask TechDr about a short trip. The lens you pick (monofocal, toric for astigmatism, or multifocal) changes both cost and night-vision side effects. A surgeon should measure the eye and say which lens your retina can support.",
     whoNeeds: ["Cloudy vision, glare or failing a driving or reading need that glasses no longer fix", "A surgeon’s confirmation that the cataract, not another eye disease, is the main limit"],
     types: [
       { title: "Monofocal lens", text: "Sharpest at one distance. This is the usual lens inside the USD 600–1,500 band." },
@@ -87,7 +87,7 @@ export const otherProcedures: Procedure[] = [
     included: ["Surgery on the quoted eye and a standard monofocal lens if that is what the quote names", "The first post-operative check", "Standard drops started in hospital"],
     excluded: ["The second eye unless listed", "Premium lenses", "Treatment of glaucoma, retina or a later laser polish (YAG)"],
     factors: ["Lens category", "One eye or two", "Dense or complicated cataract", "Need for sedation or an anaesthetist"],
-    preparation: ["Share a list of prostate drugs such as tamsulosin — they affect the iris during surgery", "Bring current glasses", "Arrange an escort on the day, because vision is blurred"],
+    preparation: ["Share a list of prostate drugs such as tamsulosin. They affect the iris during surgery", "Bring current glasses", "Arrange an escort on the day, because vision is blurred"],
     extraDocuments: ["Any recent eye scan or glasses prescription", "A note of eye injuries or previous laser"],
     risks: ["Infection, swelling and retinal detachment are uncommon but serious", "A residual need for glasses", "Glare with some premium lenses"],
     timeline: [

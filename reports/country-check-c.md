@@ -1,4 +1,4 @@
-# Wave C — check visa and route facts before indexing
+# Wave C: check visa and route facts before indexing
 
 Nothing in this wave is indexed. `status` stays `needs-human-check` until a person confirms the lines below. Local treatment prices are not required for a hub.
 

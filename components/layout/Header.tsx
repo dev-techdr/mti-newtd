@@ -7,6 +7,7 @@ import { Logo } from "@/components/brand/Logo";
 import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Link, usePathname } from "@/i18n/navigation";
+import { navAssistanceLinks } from "@/data/assistance-nav";
 import { cities, cityPath } from "@/data/cities";
 import { WhatsAppLink } from "@/components/contact/WhatsAppLink";
 import { telHref } from "@/lib/site";
@@ -34,6 +35,7 @@ export function Header() {
     { href: "/faq", label: t("faq") },
     { href: "/contact", label: t("contact") },
   ];
+  const assistanceLinks = navAssistanceLinks();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -65,13 +67,18 @@ export function Header() {
             <NavLink href="/treatments" pathname={pathname}>{t("treatments")}</NavLink>
             <Drop label={t("destinations")} href="/countries" pathname={pathname} items={cityLinks} />
             <Drop label={t("how")} href="/how-it-works" pathname={pathname} items={planLinks} />
+            <Drop label={t("assistance")} href="/medical-assistance" pathname={pathname} items={assistanceLinks} />
             <NavLink href="/blog" pathname={pathname}>{t("blog")}</NavLink>
           </nav>
           <div className="ms-auto flex items-center gap-2">
             <button type="button" className="inline-flex size-11 items-center justify-center rounded-full border border-border" onClick={toggleTheme} aria-label={t("theme")}>
               {dark ? <Sun className="size-5" /> : <Moon className="size-5" />}
             </button>
-            <Button href="/get-a-free-quote" className="hidden sm:inline-flex">{t("quote")}</Button>
+            {pathname.includes("/medical-assistance/repatriation-support") ? (
+              <Button href="/medical-assistance/request?service=repatriation-support" className="hidden sm:inline-flex">Speak to our support team</Button>
+            ) : (
+              <Button href="/get-a-free-quote" className="hidden sm:inline-flex">{t("quote")}</Button>
+            )}
             <Dialog.Root open={open} onOpenChange={setOpen}>
               <Dialog.Trigger className="inline-flex size-11 items-center justify-center rounded-full border border-border lg:hidden" aria-label={t("openMenu")}>
                 <Menu className="size-5" />
@@ -90,6 +97,10 @@ export function Header() {
                   ))}
                   <NavLink href="/how-it-works" pathname={pathname} onClick={() => setOpen(false)} className="mt-2 min-h-11 text-lg">{t("how")}</NavLink>
                   {planLinks.map((item) => (
+                    <NavLink key={item.href} href={item.href} pathname={pathname} onClick={() => setOpen(false)} className="min-h-11 text-lg">{item.label}</NavLink>
+                  ))}
+                  <p className="mt-2 text-xs font-semibold tracking-wide text-muted uppercase">{t("assistance")}</p>
+                  {assistanceLinks.map((item) => (
                     <NavLink key={item.href} href={item.href} pathname={pathname} onClick={() => setOpen(false)} className="min-h-11 text-lg">{item.label}</NavLink>
                   ))}
                   <NavLink href="/blog" pathname={pathname} onClick={() => setOpen(false)} className="min-h-11 text-lg">{t("blog")}</NavLink>

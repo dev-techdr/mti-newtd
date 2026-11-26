@@ -1,7 +1,8 @@
+import { assistancePrices, getAssistanceService } from "../data/assistance";
 import { countries, getCountry } from "../data/countries";
 import { procedures } from "../data/procedures";
 import { treatmentModel, countryModel } from "../lib/page-model";
-import { guideGraph, siteGraph } from "../lib/schema";
+import { assistanceGraph, guideGraph, siteGraph } from "../lib/schema";
 
 const banned = new Set(["HowTo", "HowToStep", "Review", "AggregateRating", "SpeakableSpecification"]);
 
@@ -58,5 +59,18 @@ check("nigeria", guideGraph({
   audience: "Nigeria",
 }));
 if (countries.length < 10) throw new Error("Wave 1 country narratives are incomplete");
+
+const air = getAssistanceService("air-ambulance");
+if (!air) throw new Error("Missing air ambulance page");
+const airGraph = assistanceGraph({
+  url: "https://medicaltourism.techdr.in/medical-assistance/air-ambulance",
+  name: air.h1,
+  description: air.description,
+  faqs: air.faqs,
+});
+check("air-ambulance", airGraph);
+if (!assistancePrices.length && JSON.stringify(airGraph).includes('"Offer"')) {
+  throw new Error("Assistance schema includes Offer without a verified price");
+}
 
 console.log("JSON-LD check passed.");

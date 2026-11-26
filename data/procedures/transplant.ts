@@ -147,7 +147,7 @@ export const transplantProcedures: Procedure[] = [
     ],
     included: ["Conditioning and the transplant admission described in the quote", "Standard in-hospital supportive care within the day cap", "Donor work-up only if that line is written"],
     excluded: ["Unrelated-donor registry fees unless listed", "Months of housing after discharge", "Treatment of relapse", "Travel if you are febrile or neutropenic"],
-    factors: ["Auto versus allo versus haploidentical", "Disease status — remission versus active disease", "Infections and ICU days", "Need for imported drugs or a second infusion"],
+    factors: ["Auto versus allo versus haploidentical", "Disease status: remission versus active disease", "Infections and ICU days", "Need for imported drugs or a second infusion"],
     preparation: ["Send actual biopsy reports and recent scans", "Ask about fertility preservation before conditioning", "Budget a caregiver who can stay the whole admission", "Confirm isolation-room rules for visitors"],
     extraDocuments: ["Pathology and genetic reports", "HLA typing if already done", "Infection screen and a full treatment history"],
     risks: ["Serious infection while blood counts are zero", "Graft-versus-host disease after a donor transplant", "Organ injury from conditioning drugs, bleeding and, for some diseases, relapse"],

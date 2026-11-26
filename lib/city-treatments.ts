@@ -1,3 +1,4 @@
+import { assistanceLlmsSection } from "@/data/assistance";
 import { posts } from "@/data/blog";
 import { cityComboIndexable } from "@/data/city-unique";
 import { cities, cityPath, treatmentCities, type City } from "@/data/cities";
@@ -153,6 +154,8 @@ ${cityList}
 ## Treatments
 
 ${treatments}
+
+${assistanceLlmsSection()}
 
 ## Guides
 

@@ -24,7 +24,7 @@ export const heartProcedures: Procedure[] = [
     whoNeeds: [
       "Angiogram evidence of left-main or multi-vessel disease where the heart team recommends surgery",
       "Symptoms that continue despite medicines, when stenting is not the better option",
-      "Selected emergencies — these need a local hospital first, not a planned flight",
+      "Selected emergencies. These need a local hospital first, not a planned flight",
     ],
     types: [
       { title: "Conventional on-pump CABG", text: "A heart-lung machine supports circulation while the grafts are sewn. This remains a common method." },

@@ -554,7 +554,7 @@ for (const row of libraryRows) {
           : ["is-medical-treatment-in-india-safe", "flying-home-after-surgery"];
 
   const caudaAnswer =
-    "Cauda equina syndrome is a surgical emergency. If you have new loss of bladder or bowel control or numbness in the groin, go to the nearest emergency department now — do not wait to travel. Rehabilitation for cauda equina syndrome is planned only after that local operation, and only once a surgeon says travel is safe.";
+    "Cauda equina syndrome is a surgical emergency. If you have new loss of bladder or bowel control or numbness in the groin, go to the nearest emergency department now. Do not wait to travel. Rehabilitation for cauda equina syndrome is planned only after that local operation, and only once a surgeon says travel is safe.";
 
   libraryProcedures.push({
     slug: base,

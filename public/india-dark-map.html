@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>India — Interactive Dark City Explorer</title>
+<title>India: Interactive Dark City Explorer</title>
 <style>
   :root{
     --bg:#04060c; --land:#0d1323; --land-dim:#090d18; --land-lit:#1e3360;
@@ -284,7 +284,7 @@
 <!-- hover card -->
 <div class="hover-card glass" id="hover">
   <div class="label" id="hLabel">Explore</div>
-  <div class="name" id="hName">—</div>
+  <div class="name" id="hName"></div>
   <div class="sub" id="hSub">Hover over the map</div>
   <div class="legend">
     <span><i style="background:var(--gold)"></i>National capital</span>
@@ -296,9 +296,9 @@
 
 <!-- status bar -->
 <div class="statusbar glass">
-  <span class="coords" id="coords">—</span>
+  <span class="coords" id="coords"></span>
   <span class="sep coords"></span>
-  <div class="scalebar"><div class="bar" id="sbar"></div><span id="slabel">—</span></div>
+  <div class="scalebar"><div class="bar" id="sbar"></div><span id="slabel"></span></div>
 </div>
 
 <div class="tip" id="tip"></div>
@@ -335,15 +335,15 @@ const STATES = [{"name":"Andaman and Nicobar Islands","path":"m 537.188,685.4414
 /* [name, state, lat, lon, type, fact]
    type: national | capital | city | town   (towns appear when you zoom in) */
 const CITIES = [
-  ["New Delhi","Delhi",28.61,77.21,"national","Seat of the Government of India — Parliament, Rashtrapati Bhavan and India Gate."],
+  ["New Delhi","Delhi",28.61,77.21,"national","Seat of the Government of India: Parliament, Rashtrapati Bhavan and India Gate."],
   ["Mumbai","Maharashtra",19.08,72.88,"capital","India's financial capital and the home of the Hindi film industry."],
   ["Kolkata","West Bengal",22.57,88.36,"capital","Capital of British India until 1911; known for its literature, art and the Howrah Bridge."],
   ["Chennai","Tamil Nadu",13.08,80.27,"capital","Gateway to South India, home to Marina Beach, one of the longest urban beaches in the world."],
-  ["Bengaluru","Karnataka",12.97,77.59,"capital","Known as India's Silicon Valley — the country's leading IT hub."],
+  ["Bengaluru","Karnataka",12.97,77.59,"capital","Known as India's Silicon Valley, the country's leading IT hub."],
   ["Hyderabad","Telangana",17.39,78.49,"capital","The City of Pearls, famous for the Charminar and its biryani."],
   ["Ahmedabad","Gujarat",23.02,72.57,"city","India's first UNESCO World Heritage City, on the banks of the Sabarmati."],
   ["Pune","Maharashtra",18.52,73.86,"city","Called the 'Oxford of the East' for its many universities."],
-  ["Jaipur","Rajasthan",26.91,75.79,"capital","The Pink City — Hawa Mahal, Amber Fort and the Jantar Mantar observatory."],
+  ["Jaipur","Rajasthan",26.91,75.79,"capital","The Pink City: Hawa Mahal, Amber Fort and the Jantar Mantar observatory."],
   ["Lucknow","Uttar Pradesh",26.85,80.95,"capital","The City of Nawabs, known for Awadhi cuisine and chikankari embroidery."],
   ["Varanasi","Uttar Pradesh",25.32,82.99,"city","One of the oldest continuously inhabited cities in the world, on the Ganges ghats."],
   ["Agra","Uttar Pradesh",27.18,78.01,"city","Home of the Taj Mahal and Agra Fort."],
@@ -351,7 +351,7 @@ const CITIES = [
   ["Bhopal","Madhya Pradesh",23.26,77.41,"capital","The City of Lakes, with the Upper and Lower Lakes at its heart."],
   ["Indore","Madhya Pradesh",22.72,75.86,"city","Repeatedly ranked India's cleanest city; famous for its street food."],
   ["Nagpur","Maharashtra",21.15,79.09,"city","The Orange City, home to the Zero Mile Stone near India's geographic centre."],
-  ["Surat","Gujarat",21.17,72.83,"city","The Diamond City — a global hub for cutting and polishing diamonds."],
+  ["Surat","Gujarat",21.17,72.83,"city","The Diamond City, a global hub for cutting and polishing diamonds."],
   ["Chandigarh","Chandigarh",30.73,76.78,"capital","A planned city designed by Le Corbusier; shared capital of Punjab and Haryana."],
   ["Amritsar","Punjab",31.63,74.87,"city","Home of the Harmandir Sahib (Golden Temple)."],
   ["Srinagar","Jammu & Kashmir",34.08,74.80,"capital","Summer capital of J&K, famous for Dal Lake and its houseboats."],
@@ -491,7 +491,7 @@ cities.forEach((c,i)=>c.halo.animate(
   {duration:2400+(i%7)*300,iterations:Infinity,delay:(i%20)*110}));
 
 /* =====================================================================
-   VIEW (camera) — center + width in map units, height follows screen aspect
+   VIEW (camera): center + width in map units, height follows screen aspect
    ===================================================================== */
 let view={cx:306,cy:348,w:800};
 let SW=innerWidth, SH=innerHeight;
@@ -662,7 +662,7 @@ const delhi=cities[0];
 
 function renderCityPanel(c){
   const near=nearestTo(c,6), maxKm=near[near.length-1].km;
-  const kmDelhi = c===delhi ? "—" : fmtKm(haversine(c,delhi));
+  const kmDelhi = c===delhi ? "Same city" : fmtKm(haversine(c,delhi));
   const sameState = cities.filter(o=>o.state===c.state && o!==c);
   const idx=tier1.indexOf(c);
   openPanel(`
@@ -742,7 +742,7 @@ function setMeasure(on){
   toast(on?"Measure mode: click two cities":"Measure mode off");
 }
 function measureClick(c){
-  if(!measureA){ measureA=c; c.g.classList.add("mark"); toast(`From ${c.name} — now click another city`); return; }
+  if(!measureA){ measureA=c; c.g.classList.add("mark"); toast(`From ${c.name}. Now click another city`); return; }
   if(c===measureA) return;
   const a=measureA; a.g.classList.remove("mark"); measureA=null;
   const km=haversine(a,c), {d,mid}=arcD(a,c);
@@ -1018,7 +1018,7 @@ function frame(now){
   if(show){ setHover(TYPE_NAME[show.type], show.name, show.state); }
   else if(hoverState){ setHover("State / UT", hoverState.name, (hoverState.cities.length?`${hoverState.cities.length} place${hoverState.cities.length===1?"":"s"} · `:"")+"click to zoom"); }
   else if(selected){ setHover("Selected", selected.name, selected.state); }
-  else setHover("Explore","—","Hover over the map");
+  else setHover("Explore","","Hover over the map");
 
   // per-city proximity animation
   const labelBaseT1 = smooth(1.9,2.6,z)*.85, labelBaseT2 = smooth(3.4,4.4,z)*.8;
@@ -1058,7 +1058,7 @@ function setHover(l,n,s){
   const h=$("hover");
   if(h._k===l+n+s) return; h._k=l+n+s;
   $("hLabel").textContent=l; $("hName").textContent=n; $("hSub").textContent=s;
-  h.classList.toggle("active",n!=="—");
+  h.classList.toggle("active",n!=="");
 }
 
 /* =====================================================================

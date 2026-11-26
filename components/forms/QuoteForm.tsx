@@ -8,7 +8,7 @@ import { QUOTE_MAX_FILES, quoteFileError } from "@/lib/quote-files";
 
 const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 const field = "mt-1.5 min-h-11 w-full rounded-xl border border-border bg-background px-3 text-base";
-const notSure = "Not sure — please advise";
+const notSure = "Not sure, please advise";
 const utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"] as const;
 
 function SpamCheck() {
@@ -117,7 +117,7 @@ export function QuoteForm({
 }) {
   const fileRef = useRef<HTMLInputElement>(null);
   const countries = countryNames;
-  const treatmentOptions = useMemo(() => [notSure, ...treatments.map((item) => item.name)], [treatments]);
+  const treatmentOptions = useMemo(() => [notSure, "Medical assistance", ...treatments.map((item) => item.name)], [treatments]);
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
   const [pending, setPending] = useState(false);
@@ -133,6 +133,7 @@ export function QuoteForm({
     const countryMatch = named ? countries.find((item) => item.toLowerCase() === named.toLowerCase()) : "";
     const frame = requestAnimationFrame(() => {
       if (found) setTreatment(found.name);
+      if (params.get("service") === "medical-assistance") setTreatment("Medical assistance");
       if (countryMatch) setCountry(countryMatch);
     });
     return () => cancelAnimationFrame(frame);

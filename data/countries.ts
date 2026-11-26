@@ -29,7 +29,7 @@ export const countries: CountryPage[] = [
     language:
       "Coordination is in English. If a parent is more comfortable in another language, ask for an interpreter before you travel rather than on the morning of consent.",
     money:
-      "Cards are widely used in private hospitals, but Nigerian cards are sometimes declined abroad. Tell your bank, carry a backup card, and keep some USD for the first day. India asks travellers to declare foreign currency notes above the customs threshold — check the current CBIC figure before you pack cash. Do not move money through informal brokers.",
+      "Cards are widely used in private hospitals, but Nigerian cards are sometimes declined abroad. Tell your bank, carry a backup card, and keep some USD for the first day. India asks travellers to declare foreign currency notes above the customs threshold. Check the current CBIC figure before you pack cash. Do not move money through informal brokers.",
     treatments:
       "This page does not rank treatments. Enquiry records for Nigeria are not on the file. Send the reports and we will say if a trip is even appropriate.",
     culture:
@@ -110,7 +110,7 @@ export const countries: CountryPage[] = [
     language:
       "Arabic for coordination and consent explanations, English for the medical record. Both can be in the file. Tell us which dialect your parents are most comfortable with if they will sign.",
     money:
-      "USD is familiar to many Iraqi families. Hospitals still want a traceable payment. Declare cash above the Indian customs threshold. Sanctions and bank checks sometimes delay transfers — start that conversation early, not the day before surgery.",
+      "USD is familiar to many Iraqi families. Hospitals still want a traceable payment. Declare cash above the Indian customs threshold. Sanctions and bank checks sometimes delay transfers. Start that conversation early, not the day before surgery.",
     treatments:
       "This page does not rank treatments. War injuries and complex reconstructions need the imaging, not a summary. If a patient is unstable, we will say not to fly.",
     culture:
@@ -137,7 +137,7 @@ export const countries: CountryPage[] = [
     language:
       "Arabic and English. Discharge summaries are in English so a doctor in Muscat can continue care. Ask for an Arabic explanation before you sign consent.",
     money:
-      "Omani cards generally work in private hospitals. Tell the bank. USD is unnecessary if the card is reliable, but a small backup is sensible. Keep invoices for reimbursement if a sponsor or insurer has agreed to consider them — TechDr does not bill insurers directly unless that is contracted.",
+      "Omani cards generally work in private hospitals. Tell the bank. USD is unnecessary if the card is reliable, but a small backup is sensible. Keep invoices for reimbursement if a sponsor or insurer has agreed to consider them. TechDr does not bill insurers directly unless that is contracted.",
     treatments:
       "This page does not rank treatments and does not state a flight time. A weekend is realistic for a health check and unrealistic for a joint replacement.",
     culture:
@@ -164,11 +164,11 @@ export const countries: CountryPage[] = [
     language:
       "Russian and English are coordinator languages. Uzbek is not. Medical records are issued in English. Say at the start if the person signing consent needs Uzbek rather than Russian.",
     money:
-      "USD cash is common in travel plans from Uzbekistan. Indian hospitals prefer a documented payment. Declare amounts above the customs threshold. Cards work more often than people expect — still carry a second method.",
+      "USD cash is common in travel plans from Uzbekistan. Indian hospitals prefer a documented payment. Declare amounts above the customs threshold. Cards work more often than people expect. Still carry a second method.",
     treatments:
       "This page does not rank treatments. Bring imaging on disk. A translated epicrisis without the images is not enough for a surgeon.",
     culture:
-      "Halal food can be requested. The climate shock from a Uzbek winter to an Indian summer is real — say if you are travelling with an older parent who does not tolerate heat.",
+      "Halal food can be requested. The climate shock from a Uzbek winter to an Indian summer is real. Say if you are travelling with an older parent who does not tolerate heat.",
     faqs: [
       { question: "Is Delhi the right city from Tashkent?", answer: "It is the right airport. The hospital might still be in another city. We will say which, and why." },
       { question: "Do you work in Russian?", answer: "Yes. The case manager can run the file in Russian." },

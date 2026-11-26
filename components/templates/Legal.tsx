@@ -20,6 +20,7 @@ const pages = {
       "Personal data on this website is controlled by Gorityala Abhista Sai, a sole proprietorship trading as TechDr and operating the medical tourism brand Medical Tours India.",
       "TechDr Medical Tourism collects only what a case needs: your name, contact details, country, the treatment you ask about, and the reports you upload. The lawful reason is to reply to your enquiry and, if you continue, to coordinate a hospital opinion.",
       "Reports are sent to the case desk by email or webhook configured by TechDr, and then to the partner hospital that will actually review them. We do not sell medical files.",
+      "A medical assistance request is handled the same way. The summary you upload is used to arrange a licensed operator, clinician or provider, and can be shared with an insurer if you ask us to.",
       "You can ask for a copy of your case file, a correction, or deletion by emailing medicaltourism@techdr.in. Deletion is limited where a hospital must keep a clinical record of care it has already given.",
       "The site is hosted for a global audience. Transfers follow the provider’s terms. Do not send reports you are not willing to have reviewed by a hospital in India.",
     ],
@@ -35,6 +36,7 @@ const pages = {
       "You must not use the site to seek paid organ donation, false visa documents, or a guarantee of cure. We will close those enquiries.",
       "You are responsible for the accuracy of the reports you send. We are responsible for passing them on as received and for labelling estimates as estimates.",
       "Advertisements on Google and Meta are invitations to enquire. They are not an offer of surgery, not a fixed price, and not a promise of an outcome. The medical disclaimer applies to those ads and to the pages they open.",
+      "Medical assistance, including air ambulance coordination, ground transfers, medical escorts, teleconsultation arrangements, home care, hospital assistance abroad, family travel support and repatriation of remains, is a coordination service. Air ambulance flights are operated by licensed air ambulance operators. Ground ambulance transfers are provided by licensed ambulance services. Country-specific permits, slots and clearances are the operator's responsibility. TechDr does not own the aircraft, the vehicles or the clinical teams. A price is given per case. Cancellation and any refund follow the operator's written confirmation for that booking. TechDr does not publish a refund rule of its own until that confirmation exists. Paying a deposit does not start a transfer until the operator accepts the booking.",
     ],
   },
   "medical-disclaimer": {

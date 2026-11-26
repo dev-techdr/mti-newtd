@@ -34,7 +34,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           {active.map((item) => (
             <li key={item.slug}>
               <Link className="font-medium text-primary-ink underline" href={destinationHref(item)}>{item.name}</Link>
-              <span className="text-muted"> — partner care is coordinated here.</span>
+              <span className="text-muted"> Partner care is coordinated here.</span>
             </li>
           ))}
         </ul>

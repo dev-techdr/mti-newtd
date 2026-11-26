@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import { AnswerBox, Byline } from "@/components/seo/AnswerBox";
 import { FaqList } from "@/components/ui/accordion";
@@ -10,17 +11,22 @@ export function GuideArticle({
   locale,
   model,
   eyebrow,
+  mark,
 }: {
   locale: string;
   model: PageModel;
   eyebrow?: string;
+  mark?: ReactNode;
 }) {
   return (
     <PriceText>
     <article className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 lg:grid-cols-[1fr_280px]">
       <div>
         {eyebrow ? <p className="text-sm font-semibold text-primary-ink">{eyebrow}</p> : null}
-        <h1 className="mt-2 max-w-3xl">{model.h1}</h1>
+        <div className="mt-2 flex items-center gap-4">
+          {mark}
+          <h1 className="max-w-3xl">{model.h1}</h1>
+        </div>
         {model.alsoKnownAs.length ? (
           <p className="mt-3 text-muted">Also known as {model.alsoKnownAs.join(", ")}.</p>
         ) : null}
@@ -36,7 +42,7 @@ export function GuideArticle({
         {model.facts.length ? (
           <section className="mt-10">
             <h2>What are the key facts?</h2>
-            <div className="mt-4 overflow-x-auto">
+            <div className="mt-4 overflow-x-auto overflow-y-clip">
               <table className="data-table">
                 <caption>Key facts for {model.h1}</caption>
                 <tbody>
@@ -69,7 +75,7 @@ export function GuideArticle({
         ))}
 
         {model.comparison ? (
-          <section className="mt-10 overflow-x-auto">
+          <section className="mt-10 overflow-x-auto overflow-y-clip">
             <h2>How do the published ranges compare?</h2>
             <table className="data-table mt-4">
               <caption>{model.comparison.caption}</caption>
@@ -98,7 +104,7 @@ export function GuideArticle({
           <section className="mt-10">
             <h2>What does an itemised quote look like?</h2>
             <p className="mt-3">{model.sampleQuote.note}</p>
-            <div className="mt-4 overflow-x-auto">
+            <div className="mt-4 overflow-x-auto overflow-y-clip">
               <table className="data-table">
                 <caption>Anonymised sample lines</caption>
                 <thead>
@@ -201,7 +207,7 @@ export function GuideArticle({
         ) : null}
         <Byline locale={locale} updated={model.updated} note={model.reviewNote} />
       </div>
-      <aside className="h-max lg:sticky lg:top-24">
+      <aside className="h-max self-start lg:sticky lg:top-24">
         {model.price ? (
           <CostMark size="panel" value={model.price.value} unit={model.price.unit} note={model.price.note}>
             {model.showQuote && model.quoteHref ? (

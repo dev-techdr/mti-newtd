@@ -1,6 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import { PageSuspense } from "@/components/ui/PageFallback";
 import { notFound } from "next/navigation";
+import { TreatmentAssistance } from "@/components/assistance/AssistanceLinks";
 import { Link } from "@/i18n/navigation";
 import { AnswerBox, Byline } from "@/components/seo/AnswerBox";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
@@ -165,6 +166,7 @@ async function SpecialtyPage({ params }: SpecialtyParams) {
           </section>
         ) : null}
 
+        <TreatmentAssistance specialty={specialty.slug} />
         <div className="mt-12 grid items-start gap-8 md:grid-cols-[minmax(0,1fr)_260px]">
           <section>
             <h2>Questions about this specialty</h2>

@@ -61,6 +61,10 @@ html {
   scroll-behavior: smooth;
 }
 
+html:where(.lenis) {
+  scroll-behavior: auto !important;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

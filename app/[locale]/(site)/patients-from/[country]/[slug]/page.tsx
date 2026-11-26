@@ -10,8 +10,7 @@ import { getCost, moneyRange } from "@/data/costs";
 import { getCountry } from "@/data/countries";
 import { fareLine, fareTreatmentAnswer, fareTreatmentPairs } from "@/data/patients/fare-treatments";
 import { fareSource, indiaFareFor, type IndiaFare } from "@/data/patients/india-fares";
-import { builtCountryChildPaths, isCityIndexable, isTreatmentIndexable } from "@/data/patients/publish";
-import { getSourceCity } from "@/data/patients/load";
+import { builtCountryChildPaths } from "@/data/patients/publish";
 import { costPath, getProcedure, isLibraryProcedure, procedurePath, type Procedure } from "@/data/procedures";
 import { routing } from "@/i18n/routing";
 import { cityCorridorModel, treatmentCorridorModel } from "@/lib/patient-pages";
@@ -53,14 +52,13 @@ export async function generateMetadata({ params }: ChildParams) {
   const corridor = corridorFor(country, slug);
   if (corridor && getCountry(country)) {
     const model = corridor.kind === "treatment" ? treatmentCorridorModel(country, slug) : cityCorridorModel(country, slug);
-    const city = getSourceCity(country, slug);
     const title = `${model.h1} | TechDr`;
     return pageMetadata({
       locale,
       path,
       title: title.length > 60 ? model.h1.slice(0, 60) : title,
       description: model.quickAnswer,
-      index: corridor.kind === "treatment" ? isTreatmentIndexable(country, slug) : Boolean(city && isCityIndexable(city)),
+      index: false,
     });
   }
   const fare = fareFor(country, slug);
@@ -158,57 +156,39 @@ function FarePage({
           { name: procedure.card, path },
         ]}
       />
-      <article className="mx-auto max-w-3xl px-4 py-10">
-        <h1>
-          {procedure.name} for patients from {fare.name}
-        </h1>
-        <div className="mt-6">
+      <article className="mx-auto w-full max-w-6xl px-4 py-10">
+        <h1 className="max-w-3xl text-balance">{procedure.name} for patients from {fare.name}</h1>
+        <div className="mt-6 max-w-3xl">
           <AnswerBox>{fareTreatmentAnswer(fare, procedure)}</AnswerBox>
         </div>
-        <table className="mt-8 w-full text-sm">
-          <caption className="mb-2 text-start font-semibold">Figures on file</caption>
-          <tbody>
-            <tr>
-              <th scope="row" className="py-2 pe-4 text-start">
-                India planning range
-              </th>
-              <td>{india}</td>
-            </tr>
-            <tr>
-              <th scope="row" className="py-2 pe-4 text-start">
-                Hospital stay
-              </th>
-              <td>{procedure.hospitalStay}</td>
-            </tr>
-            <tr>
-              <th scope="row" className="py-2 pe-4 text-start">
-                Time in India
-              </th>
-              <td>{procedure.totalStay}</td>
-            </tr>
-            <tr>
-              <th scope="row" className="py-2 pe-4 text-start">
-                Economy fare from {fare.name}
-              </th>
-              <td>
-                {fareLine(fare)}. {fareSource(fare)}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <p className="mt-6">
-          <Link className="text-primary-ink underline" href={procedurePath(procedure)}>
-            India guide
-          </Link>
-          {" · "}
-          <Link className="text-primary-ink underline" href={costPath(procedure.costId)}>
-            Cost in India
-          </Link>
-          {" · "}
-          <Link className="text-primary-ink underline" href={`/patients-from/${countrySlug}`}>
-            All treatments from {fare.name}
-          </Link>
-        </p>
+        <div className="mt-8 max-w-3xl overflow-x-auto overflow-y-clip rounded-2xl border border-border">
+          <table className="data-table">
+            <caption>Figures on file</caption>
+            <tbody>
+              <tr>
+                <th scope="row">India planning range</th>
+                <td>{india}</td>
+              </tr>
+              <tr>
+                <th scope="row">Hospital stay</th>
+                <td>{procedure.hospitalStay}</td>
+              </tr>
+              <tr>
+                <th scope="row">Time in India</th>
+                <td>{procedure.totalStay}</td>
+              </tr>
+              <tr>
+                <th scope="row">Economy fare from {fare.name}</th>
+                <td>{fareLine(fare)}. {fareSource(fare)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ul className="mt-6 flex max-w-3xl flex-wrap gap-2">
+          <li><Link className="inline-flex min-h-11 items-center rounded-full border border-border px-4 text-sm font-medium text-primary-ink hover:bg-surface" href={procedurePath(procedure)}>India guide</Link></li>
+          <li><Link className="inline-flex min-h-11 items-center rounded-full border border-border px-4 text-sm font-medium text-primary-ink hover:bg-surface" href={costPath(procedure.costId)}>Cost in India</Link></li>
+          <li><Link className="inline-flex min-h-11 items-center rounded-full border border-border px-4 text-sm font-medium text-primary-ink hover:bg-surface" href={`/patients-from/${countrySlug}`}>All treatments from {fare.name}</Link></li>
+        </ul>
       </article>
     </>
   );

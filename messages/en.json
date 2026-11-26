@@ -21,6 +21,7 @@
     "language": "Language",
     "theme": "Switch colour theme",
     "from": "Patients from",
+    "assistance": "Medical assistance",
     "allDestinations": "All destinations"
   },
   "localeNotice": "",

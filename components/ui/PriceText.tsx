@@ -4,7 +4,7 @@ const som = "so\u02BBm";
 const amount = String.raw`(?:\$|₦|৳|؋|﷼|KSh|TSh|Br|ر\.ع\.|ع\.د|${som})\s?\d{1,3}(?:,\d{3})*`;
 const usd = String.raw`USD\s+\d{1,3}(?:,\d{3})*\+?`;
 const PRICE = new RegExp(
-  `(${usd}(?:\\s*[–—−-]\\s*(?:USD\\s+)?\\d{1,3}(?:,\\d{3})*\\+?)?|${amount}(?:\\s*[–—−-]\\s*${amount})?)`,
+  `(${usd}(?:\\s*[–−-]\\s*(?:USD\\s+)?\\d{1,3}(?:,\\d{3})*\\+?)?|${amount}(?:\\s*[–−-]\\s*${amount})?)`,
   "g",
 );
 

@@ -10,7 +10,7 @@ export const finalProcedures: Procedure[] = [
     name: "Prostate surgery",
     card: "Prostate surgery",
     description:
-      "Prostate surgery in India is a planning range of about USD 3,500–7,000 in 2026. TURP and prostatectomy are different operations — the quote must say which.",
+      "Prostate surgery in India is a planning range of about USD 3,500–7,000 in 2026. TURP and prostatectomy are different operations. The quote must say which.",
     answer:
       "Prostate surgery in India is often planned around USD 3,500–7,000, but TURP for a benign blockage and radical prostatectomy for cancer are not the same operation. Hospital stay is often 2–5 days, with about 10–14 days in India. This is a planning range and must be confirmed in writing.",
     hospitalStay: "2–5 days",

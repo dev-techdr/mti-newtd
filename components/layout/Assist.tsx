@@ -11,6 +11,7 @@ export function Assist() {
   const t = useTranslations();
   const pathname = usePathname();
   const wa = whatsappHref(messageFromPath(pathname));
+  const repatriation = pathname.includes("/medical-assistance/repatriation-support");
   const cookies = useSyncExternalStore(subscribeConsent, consentSnapshot, () => "unknown" as const);
 
   function choose(value: "accepted" | "rejected") {
@@ -23,15 +24,20 @@ export function Assist() {
       <a href={wa} className="pulse fixed end-4 bottom-24 z-40 size-14 shadow-lg md:bottom-6" aria-label={t("nav.whatsapp")}>
         <img src="/images/icons/social.svg" alt="" width={56} height={56} className="size-14" />
       </a>
-      {pathname === "/get-a-free-quote" ? null : (
+      {pathname === "/get-a-free-quote" || repatriation ? null : (
         <Link href="/get-a-free-quote" className="fixed end-4 bottom-40 z-40 hidden min-h-11 items-center rounded-full bg-accent px-4 text-sm font-semibold text-accent-ink md:inline-flex">
           {t("nav.quote")}
         </Link>
       )}
+      {repatriation ? (
+        <Link href="/medical-assistance/request?service=repatriation-support" className="fixed end-4 bottom-40 z-40 hidden min-h-11 items-center rounded-full bg-accent px-4 text-sm font-semibold text-accent-ink md:inline-flex">
+          Speak to our support team
+        </Link>
+      ) : null}
       <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-border bg-background md:hidden" aria-label="Quick contact">
         <a className="flex min-h-14 items-center justify-center text-sm font-medium" href={telHref()}>{t("mobile.call")}</a>
         <a className="flex min-h-14 items-center justify-center bg-accent text-sm font-semibold text-accent-ink" href={wa}>Chat on WhatsApp</a>
-        <Link className="flex min-h-14 items-center justify-center text-sm font-medium" href="/get-a-free-quote">Get a free quote</Link>
+        <Link className="flex min-h-14 items-center justify-center text-sm font-medium" href={repatriation ? "/medical-assistance/request?service=repatriation-support" : "/get-a-free-quote"}>{repatriation ? "Speak to our support team" : "Get a free quote"}</Link>
       </nav>
       {cookies === "unknown" ? (
         <div className="fixed inset-x-3 bottom-20 z-40 rounded-2xl border border-border bg-card p-4 shadow-lg md:bottom-6 md:end-auto md:start-4 md:max-w-sm" role="dialog" aria-label="Cookies">
@@ -56,9 +62,9 @@ function consentSnapshot() {
   return localStorage.getItem("cookie-consent") ? "set" : "unknown";
 }
 
-type LeadEvent = "generate_lead" | "whatsapp_click" | "call_click";
+type LeadEvent = "generate_lead" | "whatsapp_click" | "call_click" | "assistance_request" | "emergency_call_click";
 
-function campaignParams(extra: { treatment?: string; country?: string } = {}) {
+function campaignParams(extra: { treatment?: string; country?: string; service?: string } = {}) {
   const params = new URLSearchParams(window.location.search);
   const stored = JSON.parse(sessionStorage.getItem("utm") || "{}") as Record<string, string>;
   return {
@@ -67,6 +73,7 @@ function campaignParams(extra: { treatment?: string; country?: string } = {}) {
     country: extra.country || "",
     utm_source: stored.utm_source || params.get("utm_source") || "",
     utm_campaign: stored.utm_campaign || params.get("utm_campaign") || "",
+    service: extra.service || "",
   };
 }
 
@@ -80,7 +87,7 @@ function rememberCampaign() {
   sessionStorage.setItem("utm", JSON.stringify(stored));
 }
 
-function sendEvent(name: LeadEvent, extra: { treatment?: string; country?: string } = {}) {
+function sendEvent(name: LeadEvent, extra: { treatment?: string; country?: string; service?: string } = {}) {
   const payload = campaignParams(extra);
   const win = window as Window & {
     dataLayer?: unknown[];
@@ -101,9 +108,9 @@ function sendEvent(name: LeadEvent, extra: { treatment?: string; country?: strin
   if (name === "generate_lead") win.fbq?.("track", "Lead", payload);
 }
 
-const queued: { name: LeadEvent; extra: { treatment?: string; country?: string } }[] = [];
+const queued: { name: LeadEvent; extra: { treatment?: string; country?: string; service?: string } }[] = [];
 
-function track(name: LeadEvent, extra: { treatment?: string; country?: string } = {}) {
+function track(name: LeadEvent, extra: { treatment?: string; country?: string; service?: string } = {}) {
   if (typeof window === "undefined") return;
   if (localStorage.getItem("cookie-consent") !== "accepted") {
     queued.push({ name, extra });
@@ -128,19 +135,29 @@ function Analytics() {
       const detail = (event as CustomEvent<{ treatment?: string; country?: string }>).detail ?? {};
       track("generate_lead", detail);
     };
+    const onAssistance = (event: Event) => {
+      const detail = (event as CustomEvent<{ service?: string }>).detail ?? {};
+      track("assistance_request", { service: detail.service || "" });
+    };
     const onClick = (event: MouseEvent) => {
       const anchor = (event.target as Element | null)?.closest("a");
       if (!anchor) return;
+      if (anchor.dataset.track === "emergency_call") {
+        track("emergency_call_click", { service: anchor.dataset.service || "" });
+        return;
+      }
       const href = anchor.getAttribute("href") || "";
       if (href.includes("wa.me")) track("whatsapp_click");
       if (href.startsWith("tel:")) track("call_click");
     };
     window.addEventListener("analytics-consent", sync);
     window.addEventListener("generate-lead", onLead);
+    window.addEventListener("assistance-request", onAssistance);
     document.addEventListener("click", onClick);
     return () => {
       window.removeEventListener("analytics-consent", sync);
       window.removeEventListener("generate-lead", onLead);
+      window.removeEventListener("assistance-request", onAssistance);
       document.removeEventListener("click", onClick);
     };
   }, []);

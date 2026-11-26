@@ -66,16 +66,16 @@ export function whatsappCountryMessage(countryName: string, topic = "treatment")
   return `Hello TechDr, I am from ${countryName} and need help with ${subject}.`;
 }
 
-export function whatsappHref(text = whatsappMessage(), number = site.whatsapp) {
+export function whatsappHref(text = whatsappMessage(), number: string = site.whatsapp) {
   const digits = (number || site.whatsapp).replace(/\D/g, "");
   return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
 }
 
-export function onePhone(number = site.phone) {
+export function onePhone(number: string = site.phone) {
   return number.split(/[,|;]/).map((item) => item.trim()).find(Boolean) ?? "";
 }
 
-export function telHref(number = site.phone) {
+export function telHref(number: string = site.phone) {
   const single = onePhone(number);
   const digits = single.replace(/\D/g, "");
   if (!digits) return "/contact";

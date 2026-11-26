@@ -130,11 +130,11 @@ export function inrBand(min: number, max?: number | null, plus?: boolean) {
 }
 
 export function oneWayLabel(fare: IndiaFare) {
-  if (fare.oneWayFromINR == null) return fare.lowestAroundINR ? `Lowest around ${formatInr(fare.lowestAroundINR)}` : "—";
+  if (fare.oneWayFromINR == null) return fare.lowestAroundINR ? `Lowest around ${formatInr(fare.lowestAroundINR)}` : "Not listed";
   return inrBand(fare.oneWayFromINR, fare.oneWayToINR, fare.oneWayPlus);
 }
 
 export function returnLabel(fare: IndiaFare) {
-  if (fare.returnFromINR == null) return "—";
+  if (fare.returnFromINR == null) return "Not listed";
   return inrBand(fare.returnFromINR, fare.returnToINR, fare.returnPlus);
 }

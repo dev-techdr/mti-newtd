@@ -14,6 +14,7 @@ export const sitemapPaths = [
   "/sitemaps/answers/sitemap.xml",
   "/sitemaps/city-treatments/sitemap.xml",
   "/sitemaps/blog/sitemap.xml",
+  "/sitemaps/assistance/sitemap.xml",
 ] as const;
 
 export function latestDate(dates: readonly string[]) {

@@ -34,6 +34,9 @@ yarn-error.log*
 .env*
 !.env.example
 
+# Partner names for the white-label check. Do not commit.
+/config/banned-partners.json
+
 # vercel
 .vercel
 
